@@ -1385,13 +1385,13 @@ document.getElementById('scroll-to-map-btn').addEventListener('click', () => {
   }
 });
 
-// Scroll to Destinations from Walk Reveal
+// Scroll to Featured Properties from Walk Reveal
 const walkExploreBtn = document.getElementById('walk-explore-btn');
 if (walkExploreBtn) {
   walkExploreBtn.addEventListener('click', () => {
-    const destSec = document.getElementById('scene-destinations');
-    if (destSec) {
-      destSec.scrollIntoView({ behavior: 'smooth' });
+    const featuredSec = document.getElementById('scene-featured');
+    if (featuredSec) {
+      featuredSec.scrollIntoView({ behavior: 'smooth' });
     }
   });
 }

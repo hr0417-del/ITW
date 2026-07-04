@@ -3918,3 +3918,13 @@ p {
   opacity: 1;
 }
 
+@media (max-width: 768px) {
+  .walk-reveal-title {
+    font-size: 2.5rem;
+  }
+  .walk-reveal-body {
+    font-size: 1.35rem;
+    line-height: 1.5;
+  }
+}
+

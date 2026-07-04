@@ -1,0 +1,627 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ITW | Into The Wild - The Art of Experiential Travel</title>
+  <meta name="description" content="An immersive cinematic journey to premium mountain retreats. Experience quiet luxury, editorial hospitality, and the soul of the Himalayas.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+
+  <!-- Premium Header (Fixed navigation overlay) -->
+  <header class="main-header">
+    <div class="header-logo-container" id="header-logo-btn">
+      <svg viewBox="0 0 60 70" class="header-logo-svg" aria-hidden="true">
+        <path d="M 0,70 L 0,0 L 60,0 L 60,70 L 50,60 L 50,10 L 10,10 L 10,60 Z" fill="#B8793B" />
+      </svg>
+      <div class="header-logo-text">
+        <span class="logo-title">ITW</span>
+        <span class="logo-subtitle">Into The Wild</span>
+        <span class="logo-tagline">The Art of Experiential Travel</span>
+      </div>
+    </div>
+    <nav class="header-nav">
+      <a href="#scene-featured" class="nav-item">Properties</a>
+      <a href="#scene-destinations" class="nav-item">Destinations</a>
+      <a href="#scene-experiences" class="nav-item">Experiences</a>
+      <a href="#scene-partner" class="nav-item">Partner</a>
+    </nav>
+    <div class="header-actions">
+      <!-- Audio Controller -->
+      <button class="audio-toggle" id="audio-toggle-btn" aria-label="Toggle Sound" title="Toggle Sound">
+        <svg class="icon-mute" viewBox="0 0 24 24" width="20" height="20">
+          <path fill="currentColor" d="M3.63 3.63L2.05 5.2l4.5 4.5H3v5h4l5 5V4.41L7.8 8.61l-4.17-4.17zM16.5 12c0-1.77-1.02-3.29-2.5-4.03v2.21l2.45 2.45c.03-.21.05-.42.05-.63zm2.5 0c0 .94-.2 1.82-.54 2.64l1.51 1.51C20.63 14.91 21 13.5 21 12c0-4.28-2.99-7.86-7-8.77v2.06c2.89.86 5 3.54 5 6.71zM12 4L9.91 6.09 12 8.18V4z"/>
+        </svg>
+        <svg class="icon-sound hidden" viewBox="0 0 24 24" width="20" height="20">
+          <path fill="currentColor" d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/>
+        </svg>
+      </button>
+      <button class="inquire-btn" id="inquire-btn">Inquire</button>
+    </div>
+  </header>
+
+  <!-- SCENE 1: CINEMATIC LOADER -->
+  <section class="loader-overlay" id="scene-loader">
+    <div class="loader-bg-overlay"></div>
+    <div class="loader-content">
+      <p class="loader-text" id="loader-line-1">Every destination has a story.</p>
+      <p class="loader-text hidden" id="loader-line-2">Some stories change you.</p>
+      <div class="logo-box hidden" id="loader-logo-box">
+        <svg viewBox="0 0 60 70" class="loader-logo-svg" id="loader-logo-path-svg">
+          <defs>
+            <linearGradient id="loaderGoldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#B8793B" />
+              <stop offset="50%" stop-color="#D8D2C4" />
+              <stop offset="100%" stop-color="#B8793B" />
+            </linearGradient>
+          </defs>
+          <path d="M 0,70 L 0,0 L 60,0 L 60,70 L 50,60 L 50,10 L 10,10 L 10,60 Z" fill="url(#loaderGoldGrad)" />
+        </svg>
+        <h1 class="loader-logo">ITW</h1>
+        <p class="loader-subtitle">INTO THE WILD</p>
+        <p class="loader-tagline">The Art of Experiential Travel</p>
+        <button class="enter-btn" id="enter-btn">ENTER THE PORTAL</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- SCENE 2: HERO STICKY PORTAL PUSH -->
+  <div class="scene-hero-track" id="scene-hero-track">
+    <div class="hero-sticky-container" id="hero-sticky-container">
+      
+      <!-- Intro Looping Video (Room with Portal) -->
+      <div class="hero-video-wrap intro-wrap" id="intro-video-wrap">
+        <video class="hero-cinematic-video" autoplay loop muted playsinline id="intro-video-element">
+          <source src="./portal-intro.mp4" type="video/mp4">
+        </video>
+        <div class="video-overlay-tint"></div>
+      </div>
+
+      <!-- Walk Transition Video (Pushing through Portal) -->
+      <div class="hero-video-wrap walk-wrap" id="walk-video-wrap" style="opacity: 0;">
+        <video class="hero-cinematic-video" muted playsinline preload="auto" id="walk-video-element">
+          <source src="./portal-walk.mp4" type="video/mp4">
+        </video>
+        <div class="video-overlay-tint"></div>
+      </div>
+
+      <!-- Hero Text Content (Editorial Layout matching updated copy) -->
+      <div class="hero-text-overlay" id="hero-text-overlay">
+        <h2 class="hero-headline">
+          <span class="hl-top">GO INTO THE WILD</span>
+        </h2>
+        <div class="hero-description-block">
+          <p class="desc-line">The Art of Experiential Travel.</p>
+          <p class="desc-line margin-top">Curated destinations. Extraordinary experiences.</p>
+        </div>
+        <div class="hero-cta-box">
+          <button class="begin-journey-btn" id="scroll-to-map-btn">
+            <span class="btn-shine"></span>
+            <span class="btn-text">DISCOVER WHAT LIES BEYOND</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Subtle Scroll Indicator -->
+      <div class="hero-scroll-indicator" id="hero-scroll-indicator">
+        <span class="indicator-label">SCROLL TO ENTER</span>
+        <div class="indicator-line-wrapper">
+          <div class="indicator-line"></div>
+        </div>
+      </div>
+
+    </div>
+
+  <!-- SCENE 2.5: WALK REVEAL -->
+  <section class="scene" id="scene-walk-reveal">
+    <div class="walk-bg-video-container">
+      <video class="walk-bg-video" autoplay loop muted playsinline id="reveal-video-element">
+        <source src="./portal-walk.mp4" type="video/mp4">
+      </video>
+      <div class="walk-video-overlay-tint"></div>
+    </div>
+    
+    <div class="walk-reveal-content">
+      <p class="walk-reveal-body animate-on-scroll">
+        From curated stays and mountain adventures to destination workshops and unforgettable celebrations, every ITW experience is designed to leave you with stories worth telling.
+      </p>
+      <div class="walk-reveal-cta animate-on-scroll">
+        <button class="begin-journey-btn" id="walk-explore-btn">
+          <span class="btn-shine"></span>
+          <span class="btn-text">EXPLORE EXPERIENCES</span>
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- SCENE 3: FEATURED PROPERTIES -->
+  <section class="scene" id="scene-featured">
+    <div class="section-portal-frame">
+      <svg viewBox="0 0 1920 1080" preserveAspectRatio="xMidYMid slice" class="section-portal-svg">
+        <path d="M 760,1080 L 760,260 L 1160,260 L 1160,1080 L 1100,1020 L 1100,320 L 820,320 L 820,1020 Z" fill="none" stroke="#B8793B" stroke-width="1.5" opacity="0.15" />
+      </svg>
+    </div>
+    <div class="scene-header animate-on-scroll">
+      <span class="scene-subtitle">CURATED SELECTION</span>
+      <h3 class="scene-title">FEATURED PROPERTIES</h3>
+      <p class="scene-desc">A handpicked showcase of our most immersive mountain sanctuaries.</p>
+    </div>
+    
+    <div class="featured-properties-grid">
+      <!-- Card 1 -->
+      <div class="property-card animate-on-scroll" data-slug="mountain-huts">
+        <div class="property-image-box">
+          <img class="property-img" src="/ITW/ITW MOUNTAIN HUTS VIRATKHAI.png" alt="ITW Mountain Huts" loading="lazy">
+          <div class="property-badge">Mountain Huts</div>
+        </div>
+        <div class="property-content">
+          <span class="property-location">Viratkhai, Chakrata, Uttarakhand</span>
+          <h4 class="property-name">ITW Mountain Huts</h4>
+          <p class="property-desc">Simple luxury huts nested in the serene woods of Viratkhai near Chakrata, offering panoramic Himalayan valley views and deep quietude.</p>
+          <p class="property-price">Starting at ₹6,500 / night</p>
+          <button class="view-property-btn" data-slug="mountain-huts">View Property</button>
+        </div>
+      </div>
+
+      <!-- Card 2 -->
+      <div class="property-card animate-on-scroll" data-slug="camp-huts">
+        <div class="property-image-box">
+          <img class="property-img" src="/ITW/ITW Huts & Camp Viratkhai.png" alt="ITW Camp & Huts" loading="lazy">
+          <div class="property-badge">Camp & Huts</div>
+        </div>
+        <div class="property-content">
+          <span class="property-location">Viratkhai, Chakrata, Uttarakhand</span>
+          <h4 class="property-name">ITW Camp & Huts</h4>
+          <p class="property-desc">Cozy alpine camps and wooden huts built to withstand the elements while providing pure comfort on high ridges.</p>
+          <p class="property-price">Starting at ₹5,900 / night</p>
+          <button class="view-property-btn" data-slug="camp-huts">View Property</button>
+        </div>
+      </div>
+
+      <!-- Card 3 -->
+      <div class="property-card animate-on-scroll" data-slug="luxury-farm-stay">
+        <div class="property-image-box">
+          <img class="property-img" src="/ITW/ITW LUXURY FARM STAY.png" alt="ITW Luxury Farm Stay" loading="lazy">
+          <div class="property-badge">Farm Stay</div>
+        </div>
+        <div class="property-content">
+          <span class="property-location">Horrawala, Dehradun, Uttarakhand</span>
+          <h4 class="property-name">ITW Luxury Farm Stay</h4>
+          <p class="property-desc">Private luxury farm stay featuring an exclusive villa, swimming pool, landscaped gardens, and peaceful countryside surroundings.</p>
+          <p class="property-price">Starting at ₹7,500 / night</p>
+          <button class="view-property-btn" data-slug="luxury-farm-stay">View Property</button>
+        </div>
+      </div>
+
+      <!-- Card 4 -->
+      <div class="property-card animate-on-scroll" data-slug="camp-cottages">
+        <div class="property-image-box">
+          <img class="property-img" src="/ITW/ITW Camp & Cottages Jispa.png" alt="ITW Camp & Cottages" loading="lazy">
+          <div class="property-badge">Camp & Cottages</div>
+        </div>
+        <div class="property-content">
+          <span class="property-location">Jispa, Himachal Pradesh</span>
+          <h4 class="property-name">ITW Camp & Cottages</h4>
+          <p class="property-desc">Cozy mountain cottages and premium luxury camps surrounded by the majestic Himalayas on the Manali–Leh Highway.</p>
+          <p class="property-price">Starting at ₹8,200 / night</p>
+          <button class="view-property-btn" data-slug="camp-cottages">View Property</button>
+        </div>
+      </div>
+
+      <!-- Card 5 -->
+      <div class="property-card animate-on-scroll" data-slug="mountain-homestay">
+        <div class="property-image-box">
+          <img class="property-img" src="/ITW/ITW Mountain Homestay Keylong.png" alt="ITW Mountain Homestay" loading="lazy">
+          <div class="property-badge">Homestay</div>
+        </div>
+        <div class="property-content">
+          <span class="property-location">Keylong, Himachal Pradesh</span>
+          <h4 class="property-name">ITW Mountain Homestay</h4>
+          <p class="property-desc">Authentic Himalayan homestay offering warm hospitality, traditional cuisine, and breathtaking mountain views.</p>
+          <p class="property-price">Starting at ₹5,800 / night</p>
+          <button class="view-property-btn" data-slug="mountain-homestay">View Property</button>
+        </div>
+      </div>
+
+      <!-- Card 6 -->
+      <div class="property-card animate-on-scroll" data-slug="forest-cottages">
+        <div class="property-image-box">
+          <img class="property-img" src="https://images.unsplash.com/photo-1542401886-65d6c61db217?auto=format&fit=crop&w=800&q=80" alt="ITW Forest Cottages" loading="lazy">
+          <div class="property-badge">Forest Cottages</div>
+        </div>
+        <div class="property-content">
+          <span class="property-location">Jibhi, Himachal Pradesh</span>
+          <h4 class="property-name">ITW Forest Cottages</h4>
+          <p class="property-desc">Beautiful duplex cottages nested among cedar forests, perfect for peaceful mountain escapes.</p>
+          <p class="property-price">Starting at ₹8,000 / night</p>
+          <button class="view-property-btn" data-slug="forest-cottages">View Property</button>
+        </div>
+      </div>
+
+      <!-- Card 7 -->
+      <div class="property-card animate-on-scroll" data-slug="luxury-tree-house">
+        <div class="property-image-box">
+          <img class="property-img" src="https://images.unsplash.com/photo-1448375240586-882707db888b?auto=format&fit=crop&w=800&q=80" alt="ITW Luxury Tree House" loading="lazy">
+          <div class="property-badge">Luxury Tree House</div>
+        </div>
+        <div class="property-content">
+          <span class="property-location">Jibhi, Himachal Pradesh</span>
+          <h4 class="property-name">ITW Luxury Tree House</h4>
+          <p class="property-desc">Luxury tree house featuring a private jacuzzi, elegant interiors, and panoramic forest views.</p>
+          <p class="property-price">Starting at ₹11,500 / night</p>
+          <button class="view-property-btn" data-slug="luxury-tree-house">View Property</button>
+        </div>
+      </div>
+
+      <!-- Card 8 -->
+      <div class="property-card animate-on-scroll" data-slug="frontier-camp">
+        <div class="property-image-box">
+          <img class="property-img" src="/ITW/ITW Frontier Camp.png" alt="ITW Frontier Camp" loading="lazy">
+          <div class="property-badge">Luxury Camp</div>
+        </div>
+        <div class="property-content">
+          <span class="property-location">Tyakshi, Turtuk, Ladakh</span>
+          <h4 class="property-name">ITW Frontier Camp</h4>
+          <p class="property-desc">Premium Himalayan luxury camping surrounded by dramatic mountain landscapes and the untouched beauty of Ladakh.</p>
+          <p class="property-price">Starting at ₹7,800 / night</p>
+          <button class="view-property-btn" data-slug="frontier-camp">View Property</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SCENE 4: DESTINATIONS -->
+  <section class="scene" id="scene-destinations">
+    <div class="section-portal-frame">
+      <svg viewBox="0 0 1920 1080" preserveAspectRatio="xMidYMid slice" class="section-portal-svg">
+        <path d="M 760,1080 L 760,260 L 1160,260 L 1160,1080 L 1100,1020 L 1100,320 L 820,320 L 820,1020 Z" fill="none" stroke="#B8793B" stroke-width="1.5" opacity="0.15" />
+      </svg>
+    </div>
+    <div class="scene-header animate-on-scroll">
+      <span class="scene-subtitle">REGIONS OF TRANSITION</span>
+      <h3 class="scene-title">DESTINATIONS</h3>
+      <p class="scene-desc">Immerse yourself in three distinct geographical signatures of the Himalayas.</p>
+    </div>
+
+    <div class="destinations-grid">
+      <!-- Himachal -->
+      <div class="destination-card animate-on-scroll" style="background-image: linear-gradient(to bottom, rgba(18, 23, 20, 0.1) 0%, rgba(18, 23, 20, 0.85) 100%), url('https://images.unsplash.com/photo-1475924156734-496f6cac6ec1?auto=format&fit=crop&w=800&q=80');">
+        <div class="destination-card-content">
+          <span class="dest-count">4 Properties</span>
+          <h4 class="dest-name">Himachal Pradesh</h4>
+          <p class="dest-card-desc">Where towering pines flank rushing rivers and winding mountain pathways lead to forgotten valley sanctuaries.</p>
+          <button class="explore-dest-btn" data-dest="Himachal Pradesh">Explore Destination</button>
+        </div>
+      </div>
+
+      <!-- Uttarakhand -->
+      <div class="destination-card animate-on-scroll" style="background-image: linear-gradient(to bottom, rgba(18, 23, 20, 0.1) 0%, rgba(18, 23, 20, 0.85) 100%), url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=800&q=80');">
+        <div class="destination-card-content">
+          <span class="dest-count">3 Properties</span>
+          <h4 class="dest-name">Uttarakhand</h4>
+          <p class="dest-card-desc">Oak and rhododendron forests looking out over majestic mountain ridges shrouded in deep morning mist.</p>
+          <button class="explore-dest-btn" data-dest="Uttarakhand">Explore Destination</button>
+        </div>
+      </div>
+
+      <!-- Ladakh -->
+      <div class="destination-card animate-on-scroll" style="background-image: linear-gradient(to bottom, rgba(18, 23, 20, 0.1) 0%, rgba(18, 23, 20, 0.85) 100%), url('https://images.unsplash.com/photo-1454496522488-7a8e488e8606?auto=format&fit=crop&w=800&q=80');">
+        <div class="destination-card-content">
+          <span class="dest-count">1 Property</span>
+          <h4 class="dest-name">Ladakh</h4>
+          <p class="dest-card-desc">High-altitude desert plateaus, towering granite spires, ancient rivers, and silent border outposts.</p>
+          <button class="explore-dest-btn" data-dest="Ladakh">Explore Destination</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SCENE 5: ALL PROPERTIES -->
+  <section class="scene" id="scene-all-properties">
+    <div class="section-portal-frame">
+      <svg viewBox="0 0 1920 1080" preserveAspectRatio="xMidYMid slice" class="section-portal-svg">
+        <path d="M 760,1080 L 760,260 L 1160,260 L 1160,1080 L 1100,1020 L 1100,320 L 820,320 L 820,1020 Z" fill="none" stroke="#B8793B" stroke-width="1.5" opacity="0.15" />
+      </svg>
+    </div>
+    <div class="scene-header animate-on-scroll">
+      <span class="scene-subtitle">THE FULL ARCHIVE</span>
+      <h3 class="scene-title">ALL PROPERTIES</h3>
+      <p class="scene-desc">Every ITW property holds a unique relationship with still mountain landscapes.</p>
+    </div>
+
+    <!-- Minimal Filter Tabs -->
+    <div class="properties-filter-bar animate-on-scroll">
+      <button class="filter-tab active" data-filter="all">○ All sanctuaries</button>
+      <button class="filter-tab" data-filter="Himachal Pradesh">○ Himachal Pradesh</button>
+      <button class="filter-tab" data-filter="Uttarakhand">○ Uttarakhand</button>
+      <button class="filter-tab" data-filter="Ladakh">○ Ladakh</button>
+    </div>
+
+    <div class="all-properties-grid" id="all-properties-grid-container">
+      <!-- Rendered dynamically by script to ensure synchronization with Property database, 
+           but fallback static list keeps SEO intact -->
+      <div class="all-property-card-fallback" data-dest="Uttarakhand">
+        <!-- SEO Fallback -->
+      </div>
+    </div>
+  </section>
+
+  <!-- SCENE 6: EXPERIENCES -->
+  <section class="scene" id="scene-experiences">
+    <div class="section-portal-frame">
+      <svg viewBox="0 0 1920 1080" preserveAspectRatio="xMidYMid slice" class="section-portal-svg">
+        <path d="M 760,1080 L 760,260 L 1160,260 L 1160,1080 L 1100,1020 L 1100,320 L 820,320 L 820,1020 Z" fill="none" stroke="#B8793B" stroke-width="1.5" opacity="0.15" />
+      </svg>
+    </div>
+    <div class="scene-header animate-on-scroll">
+      <span class="scene-subtitle">BEYOND THE ROOM</span>
+      <h3 class="scene-title">EXPERIENCES</h3>
+      <p class="scene-desc">Earthy, slow-paced engagements designed to root you in local soils.</p>
+    </div>
+
+    <div class="experiences-minimal-grid animate-on-scroll">
+      <!-- Stay -->
+      <div class="experience-icon-item">
+        <div class="exp-icon-box">
+          <svg viewBox="0 0 24 24" class="exp-svg" fill="none" stroke="currentColor" stroke-width="1.5">
+            <path d="M3 9.5L12 4l9 5.5v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-9z" />
+            <path d="M9 20V12h6v8" />
+          </svg>
+        </div>
+        <h5 class="exp-label">Stay</h5>
+      </div>
+
+      <!-- Treks -->
+      <div class="experience-icon-item">
+        <div class="exp-icon-box">
+          <svg viewBox="0 0 24 24" class="exp-svg" fill="none" stroke="currentColor" stroke-width="1.5">
+            <path d="M17 18h2a2 2 0 0 0 2-2v-3a8 8 0 0 0-16 0v3a2 2 0 0 0 2 2h2" />
+            <path d="M12 2v20M8 5h8" />
+          </svg>
+        </div>
+        <h5 class="exp-label">Treks</h5>
+      </div>
+
+      <!-- Hikes -->
+      <div class="experience-icon-item">
+        <div class="exp-icon-box">
+          <svg viewBox="0 0 24 24" class="exp-svg" fill="none" stroke="currentColor" stroke-width="1.5">
+            <path d="M4 22L9 9l5 7 6-14" />
+          </svg>
+        </div>
+        <h5 class="exp-label">Hikes</h5>
+      </div>
+
+      <!-- Camping -->
+      <div class="experience-icon-item">
+        <div class="exp-icon-box">
+          <svg viewBox="0 0 24 24" class="exp-svg" fill="none" stroke="currentColor" stroke-width="1.5">
+            <path d="M12 2L2 22h20L12 2z" />
+            <path d="M12 2v20M7 22l5-8 5 8" />
+          </svg>
+        </div>
+        <h5 class="exp-label">Camping</h5>
+      </div>
+
+      <!-- Learning -->
+      <div class="experience-icon-item">
+        <div class="exp-icon-box">
+          <svg viewBox="0 0 24 24" class="exp-svg" fill="none" stroke="currentColor" stroke-width="1.5">
+            <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2V3zM22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7V3z" />
+          </svg>
+        </div>
+        <h5 class="exp-label">Learning</h5>
+      </div>
+
+      <!-- Celebrations -->
+      <div class="experience-icon-item">
+        <div class="exp-icon-box">
+          <svg viewBox="0 0 24 24" class="exp-svg" fill="none" stroke="currentColor" stroke-width="1.5">
+            <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6" />
+          </svg>
+        </div>
+        <h5 class="exp-label">Celebrations</h5>
+      </div>
+
+      <!-- Local Experiences -->
+      <div class="experience-icon-item">
+        <div class="exp-icon-box">
+          <svg viewBox="0 0 24 24" class="exp-svg" fill="none" stroke="currentColor" stroke-width="1.5">
+            <circle cx="12" cy="12" r="10" />
+            <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10M12 2a15.3 15.3 0 0 0-4 10 15.3 15.3 0 0 0 4 10" />
+            <path d="M2 12h20" />
+          </svg>
+        </div>
+        <h5 class="exp-label">Local Experiences</h5>
+      </div>
+    </div>
+  </section>
+
+  <!-- SCENE 7: PARTNER WITH ITW -->
+  <section class="scene" id="scene-partner">
+    <div class="section-portal-frame">
+      <svg viewBox="0 0 1920 1080" preserveAspectRatio="xMidYMid slice" class="section-portal-svg">
+        <path d="M 760,1080 L 760,260 L 1160,260 L 1160,1080 L 1100,1020 L 1100,320 L 820,320 L 820,1020 Z" fill="none" stroke="#B8793B" stroke-width="1.5" opacity="0.15" />
+      </svg>
+    </div>
+    <div class="scene-header animate-on-scroll">
+      <span class="scene-subtitle">COLLECTIVE HORIZONS</span>
+      <h3 class="scene-title">PARTNER WITH ITW</h3>
+      <p class="scene-desc">Do you own land or built property in the Himalayas? Co-create a sanctuary with us.</p>
+    </div>
+
+    <div class="partner-form-container animate-on-scroll">
+      <form class="partner-form" id="partner-collab-form">
+        <div class="partner-form-row">
+          <div class="partner-form-group">
+            <label for="partner-name" class="partner-label">Full Name</label>
+            <input type="text" id="partner-name" class="partner-input" placeholder="Arjun Sen" required>
+          </div>
+          <div class="partner-form-group">
+            <label for="partner-email" class="partner-label">Email Address</label>
+            <input type="email" id="partner-email" class="partner-input" placeholder="arjun@example.com" required>
+          </div>
+        </div>
+        <div class="partner-form-row">
+          <div class="partner-form-group">
+            <label for="partner-loc" class="partner-label">Land/Property Location</label>
+            <input type="text" id="partner-loc" class="partner-input" placeholder="E.g., Jibhi, Lahaul, Chakrata" required>
+          </div>
+          <div class="partner-form-group">
+            <label for="partner-size" class="partner-label">Property Size / Description</label>
+            <input type="text" id="partner-size" class="partner-input" placeholder="E.g., 2 Acres, 4-bedroom slate cottage" required>
+          </div>
+        </div>
+        <div class="partner-form-group full-width">
+          <label for="partner-msg" class="partner-label">Your Vision</label>
+          <textarea id="partner-msg" class="partner-textarea" placeholder="Tell us about the site and your vision for this partnership..." rows="4" required></textarea>
+        </div>
+        <button type="submit" class="partner-submit-btn">Submit Collaboration Proposal</button>
+      </form>
+      <div class="partner-success-msg hidden" id="partner-success">
+        <h4 class="success-title">Proposal Submitted</h4>
+        <p class="success-text">Thank you. Our partnership development team will contact you to discuss your site.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- SCENE 8: FOOTER / FINAL -->
+  <footer class="scene" id="scene-final">
+    <canvas id="snow-canvas" class="snow-canvas"></canvas>
+    <div class="section-portal-frame">
+      <svg viewBox="0 0 1920 1080" preserveAspectRatio="xMidYMid slice" class="section-portal-svg">
+        <path d="M 760,1080 L 760,260 L 1160,260 L 1160,1080 L 1100,1020 L 1100,320 L 820,320 L 820,1020 Z" fill="none" stroke="#B8793B" stroke-width="1.5" opacity="0.15" />
+      </svg>
+    </div>
+    
+    <div class="final-container">
+      <div class="final-logo-block">
+        <h2 class="final-logo">ITW</h2>
+        <p class="final-subtitle">INTO THE WILD</p>
+        <p class="final-tagline">The Art of Experiential Travel</p>
+      </div>
+
+      <div class="final-navigation">
+        <div class="final-nav-col">
+          <span class="final-nav-header">Sanctuaries</span>
+          <a href="#scene-featured" class="final-nav-link">Featured Properties</a>
+          <a href="#scene-destinations" class="final-nav-link">Destinations</a>
+          <a href="#scene-all-properties" class="final-nav-link">All Properties</a>
+        </div>
+        <div class="final-nav-col">
+          <span class="final-nav-header">Collaborate</span>
+          <a href="#scene-partner" class="final-nav-link">Partner With ITW</a>
+          <a href="mailto:partner@intothewild.in" class="final-nav-link">Land Affiliation</a>
+          <a href="#" class="final-nav-link">Careers</a>
+        </div>
+        <div class="final-nav-col">
+          <span class="final-nav-header">Legal</span>
+          <a href="#" class="final-nav-link">Privacy Policy</a>
+          <a href="#" class="final-nav-link">Terms of Stay</a>
+          <a href="#" class="final-nav-link">Booking Policies</a>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p class="copyright-text">© 2026 Into The Wild (ITW) Resorts Private Limited. All rights reserved.</p>
+        <p class="footer-designation">Designed for stillness.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- PERSISTENT FLOATING BOOKING PILL -->
+  <div class="booking-pill-container" id="booking-pill-trigger">
+    <div class="pill-glow"></div>
+    <div class="pill-text-wrap">
+      <span class="pill-text">BOOK YOUR STAY</span>
+    </div>
+  </div>
+
+  <!-- PROPERTY DETAIL OVERLAY DRAWER (SPA LANDING PAGES) -->
+  <div class="property-detail-overlay" id="property-detail-overlay">
+    <button class="close-overlay-btn" id="close-property-overlay" aria-label="Close Property Details">
+      <svg viewBox="0 0 24 24" width="28" height="28">
+        <path fill="currentColor" d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/>
+      </svg>
+    </button>
+    <div class="property-detail-scroll-content" id="property-detail-scroll-content">
+      <!-- Dynamic property markup loaded here -->
+    </div>
+  </div>
+
+  <!-- Step-by-step Fullscreen Booking Overlay Portal -->
+  <div class="booking-portal-overlay" id="booking-portal-overlay">
+    <button class="close-overlay-btn" id="close-booking-overlay" aria-label="Close Booking Portal">
+      <svg viewBox="0 0 24 24" width="28" height="28">
+        <path fill="currentColor" d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/>
+      </svg>
+    </button>
+    
+    <div class="booking-portal-content" id="booking-portal-wizard">
+      <!-- Dynamic booking step-by-step content loaded here -->
+    </div>
+  </div>
+
+  <!-- GLASSMORPHIC INQUIRY MODAL (DRAWER) -->
+  <div class="inquiry-drawer-overlay" id="inquiry-drawer">
+    <div class="inquiry-drawer glass-card">
+      <button class="close-drawer-btn" id="close-drawer-btn" aria-label="Close Inquiry Drawer">
+        <svg viewBox="0 0 24 24" width="24" height="24">
+          <path fill="currentColor" d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/>
+        </svg>
+      </button>
+      
+      <div class="drawer-header">
+        <h3 class="drawer-title">BEGIN A JOURNEY</h3>
+        <p class="drawer-desc">Leave details below. An experience curator will reach out to co-create your path.</p>
+      </div>
+
+      <form class="inquiry-form" id="inquiry-form">
+        <div class="form-group">
+          <label for="guest-name" class="form-label">Full Name</label>
+          <input type="text" id="guest-name" class="form-input" placeholder="E.g., Arjun Sen" required>
+        </div>
+
+        <div class="form-group">
+          <label for="guest-email" class="form-label">Email Address</label>
+          <input type="email" id="guest-email" class="form-input" placeholder="E.g., arjun@example.com" required>
+        </div>
+
+        <div class="form-group">
+          <label for="destination-select" class="form-label">Select Destination</label>
+          <select id="destination-select" class="form-select">
+            <option value="any">General Inquiry</option>
+            <option value="jibhi">Jibhi (Tirthan Valley)</option>
+            <option value="jispa">Jispa (Lahaul Valley)</option>
+            <option value="keylong">Keylong (Monastery Ridge)</option>
+            <option value="chakrata">Chakrata (Oak Sanctuary)</option>
+            <option value="dehradun">Dehradun (Foothills)</option>
+            <option value="turtuk">Turtuk (Ladakh Border)</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="guest-notes" class="form-label">What brings you here?</label>
+          <textarea id="guest-notes" class="form-textarea" placeholder="Share your vision of this journey..." rows="4"></textarea>
+        </div>
+
+        <button type="submit" class="submit-inquiry-btn">Submit Inquiry</button>
+      </form>
+    </div>
+  <!-- Lightbox Overlay -->
+  <div id="gallery-lightbox" class="lightbox-overlay hidden">
+    <button id="close-lightbox" class="close-lightbox-btn" aria-label="Close Lightbox">
+      <svg viewBox="0 0 24 24" width="36" height="36">
+        <path fill="currentColor" d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/>
+      </svg>
+    </button>
+    <img id="lightbox-img" class="lightbox-img" src="" alt="Enlarged view">
+  </div>
+
+  <script type="module" src="./main.js"></script>
+</body>
+</html>

@@ -347,9 +347,9 @@ const propertiesDb = {
     loc: "Viratkhai, Chakrata",
     cat: "Mountain Huts",
     price: "₹6,500",
-    img: "/ITW/ITW MOUNTAIN HUTS VIRATKHAI.png",
+    img: "/ITW/itw_mountain_huts_viratkhai.png",
     gallery: [
-      "/ITW/ITW MOUNTAIN HUTS VIRATKHAI.png"
+      "/ITW/itw_mountain_huts_viratkhai.png"
     ],
     quote: "Wake up above the clouds, inside an ancient oak woodland.",
     about: "Simple luxury huts nested in the serene woods of Viratkhai near Chakrata. Built using local stone and wood, these huts offer panoramic Himalayan valley views and deep quietude.",
@@ -363,7 +363,7 @@ const propertiesDb = {
         occupancy: "2 Guests",
         inclusions: "Gourmet Breakfast, Forest walk",
         price: "₹6,500",
-        img: "/ITW/ITW MOUNTAIN HUTS VIRATKHAI.png"
+        img: "/ITW/itw_mountain_huts_viratkhai.png"
       }
     ]
   },
@@ -373,9 +373,9 @@ const propertiesDb = {
     loc: "Viratkhai, Chakrata",
     cat: "Camp & Huts",
     price: "₹5,900",
-    img: "/ITW/ITW Huts & Camp Viratkhai.png",
+    img: "/ITW/itw_huts_camp_viratkhai.png",
     gallery: [
-      "/ITW/ITW Huts & Camp Viratkhai.png"
+      "/ITW/itw_huts_camp_viratkhai.png"
     ],
     quote: "Dwell under the stars, surrounded by high altitude ridges.",
     about: "Cozy alpine camps and wooden huts built to withstand the elements while providing pure comfort. Ideal for adventure seekers scaling the high ridges of Chakrata.",
@@ -389,7 +389,7 @@ const propertiesDb = {
         occupancy: "2 Guests",
         inclusions: "All meals included, Guided sunset trek",
         price: "₹5,900",
-        img: "/ITW/ITW Huts & Camp Viratkhai.png"
+        img: "/ITW/itw_huts_camp_viratkhai.png"
       }
     ]
   },
@@ -399,9 +399,9 @@ const propertiesDb = {
     loc: "Horrawala, Dehradun",
     cat: "Farm Stay",
     price: "₹7,500",
-    img: "/ITW/ITW LUXURY FARM STAY.png",
+    img: "/ITW/itw_luxury_farm_stay.png",
     gallery: [
-      "/ITW/ITW LUXURY FARM STAY.png"
+      "/ITW/itw_luxury_farm_stay.png"
     ],
     quote: "Dwell inside organic litchi groves and silent foothills.",
     about: "Private luxury farm stay featuring an exclusive villa, swimming pool, landscaped gardens, and peaceful countryside surroundings.",
@@ -415,14 +415,14 @@ const propertiesDb = {
         occupancy: "2 Guests",
         inclusions: "Gourmet Breakfast, Farm tour & harvest experience",
         price: "₹7,500",
-        img: "/ITW/ITW LUXURY FARM STAY.png"
+        img: "/ITW/itw_luxury_farm_stay.png"
       },
       {
         name: "Exclusive Orchard Villa",
         occupancy: "4 Guests",
         inclusions: "All meals included, Private butler, Orchard harvest walk",
         price: "₹18,000",
-        img: "/ITW/ITW LUXURY FARM STAY.png"
+        img: "/ITW/itw_luxury_farm_stay.png"
       }
     ]
   },
@@ -432,9 +432,9 @@ const propertiesDb = {
     loc: "Jispa",
     cat: "Camp & Cottages",
     price: "₹8,200",
-    img: "/ITW/ITW Camp & Cottages Jispa.png",
+    img: "/ITW/itw_camp_cottages_jispa.png",
     gallery: [
-      "/ITW/ITW Camp & Cottages Jispa.png"
+      "/ITW/itw_camp_cottages_jispa.png"
     ],
     quote: "Breathe in glacier air on the edge of the Bhaga River.",
     about: "Cozy mountain cottages and premium luxury camps surrounded by the majestic Himalayas on the Manali–Leh Highway.",
@@ -448,14 +448,14 @@ const propertiesDb = {
         occupancy: "2 Adults",
         inclusions: "Gourmet Breakfast, Riverbed nature walk",
         price: "₹9,500",
-        img: "/ITW/ITW Camp & Cottages Jispa.png"
+        img: "/ITW/itw_camp_cottages_jispa.png"
       },
       {
         name: "Premium Swiss Camp",
         occupancy: "2 Adults",
         inclusions: "Breakfast & Dinner included, Stargazing deck access",
         price: "₹8,200",
-        img: "/ITW/ITW Camp & Cottages Jispa.png"
+        img: "/ITW/itw_camp_cottages_jispa.png"
       }
     ]
   },
@@ -465,9 +465,9 @@ const propertiesDb = {
     loc: "Keylong",
     cat: "Homestay",
     price: "₹5,800",
-    img: "/ITW/ITW Mountain Homestay Keylong.png",
+    img: "/ITW/itw_mountain_homestay_keylong.png",
     gallery: [
-      "/ITW/ITW Mountain Homestay Keylong.png"
+      "/ITW/itw_mountain_homestay_keylong.png"
     ],
     quote: "Experience traditional Lahauli life and monastic calm.",
     about: "Authentic Himalayan homestay offering warm hospitality, traditional cuisine, and breathtaking mountain views.",
@@ -481,7 +481,7 @@ const propertiesDb = {
         occupancy: "2 Adults",
         inclusions: "Traditional family-cooked breakfast & dinner included",
         price: "₹5,800",
-        img: "/ITW/ITW Mountain Homestay Keylong.png"
+        img: "/ITW/itw_mountain_homestay_keylong.png"
       }
     ]
   },
@@ -545,9 +545,9 @@ const propertiesDb = {
     loc: "Tyakshi, Turtuk",
     cat: "Luxury Camp",
     price: "₹7,800",
-    img: "/ITW/ITW Frontier Camp.png",
+    img: "/ITW/itw_frontier_camp.png",
     gallery: [
-      "/ITW/ITW Frontier Camp.png"
+      "/ITW/itw_frontier_camp.png"
     ],
     quote: "Sleep on the edge of Turtuk, under the Karakoram stars.",
     about: "Premium Himalayan luxury camping surrounded by dramatic mountain landscapes and the untouched beauty of Ladakh.",
@@ -561,7 +561,7 @@ const propertiesDb = {
         occupancy: "2 Guests",
         inclusions: "Traditional Buffet Breakfast & Dinner, Guided border trail stroll",
         price: "₹7,800",
-        img: "/ITW/ITW Frontier Camp.png"
+        img: "/ITW/itw_frontier_camp.png"
       }
     ]
   }

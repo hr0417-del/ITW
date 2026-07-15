@@ -1410,43 +1410,94 @@ const weatherCache = {};
 
 // Fallbacks for offline / API failures
 const weatherFallbacks = {
-  "luxury-farm-stay": { temp: 28, icon: "☀️", desc: "Clear Sky" },
-  "camp-cottages": { temp: 14, icon: "🌤️", desc: "Partly Cloudy" },
-  "mountain-homestay": { temp: 15, icon: "🌤️", desc: "Partly Cloudy" },
-  "forest-cottages": { temp: 18, icon: "🌤️", desc: "Partly Cloudy" },
-  "luxury-tree-house": { temp: 18, icon: "🌤️", desc: "Partly Cloudy" },
-  "frontier-camp": { temp: 16, icon: "☀️", desc: "Clear Sky" },
-  "mountain-huts": { temp: 17, icon: "🌤️", desc: "Partly Cloudy" },
-  "camp-huts": { temp: 17, icon: "🌤️", desc: "Partly Cloudy" }
+  "luxury-farm-stay": { temp: 28, code: 0 },
+  "camp-cottages": { temp: 14, code: 2 },
+  "mountain-homestay": { temp: 15, code: 2 },
+  "forest-cottages": { temp: 18, code: 2 },
+  "luxury-tree-house": { temp: 18, code: 2 },
+  "frontier-camp": { temp: 16, code: 0 },
+  "mountain-huts": { temp: 17, code: 2 },
+  "camp-huts": { temp: 17, code: 2 }
 };
 
 function getWeatherIconAndDesc(code) {
+  const sunSvg = `
+    <svg class="weather-svg sun" viewBox="0 0 24 24">
+      <circle cx="12" cy="12" r="5" class="anim-sun-center" />
+      <path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42" class="anim-sun-rays" />
+    </svg>
+  `;
+  const cloudSvg = `
+    <svg class="weather-svg cloud anim-cloud" viewBox="0 0 24 24">
+      <path d="M18 10h-1.26A8 8 0 1 0 9 20h9a5 5 0 0 0 0-10z" />
+    </svg>
+  `;
+  const rainSvg = `
+    <svg class="weather-svg rain anim-cloud" viewBox="0 0 24 24">
+      <path d="M18 10h-1.26A8 8 0 1 0 9 20h9a5 5 0 0 0 0-10z" />
+      <path d="M12 16v3" class="anim-rain-drop-1" />
+      <path d="M9 15v3" class="anim-rain-drop-2" />
+      <path d="M15 15v3" class="anim-rain-drop-3" />
+    </svg>
+  `;
+  const snowSvg = `
+    <svg class="weather-svg snow anim-cloud" viewBox="0 0 24 24">
+      <path d="M18 10h-1.26A8 8 0 1 0 9 20h9a5 5 0 0 0 0-10z" />
+      <circle cx="12" cy="17" r="1" class="anim-snow-flake-1" fill="currentColor" stroke="none" />
+      <circle cx="9" cy="16" r="1" class="anim-snow-flake-2" fill="currentColor" stroke="none" />
+      <circle cx="15" cy="16" r="1" class="anim-snow-flake-3" fill="currentColor" stroke="none" />
+    </svg>
+  `;
+  const thunderSvg = `
+    <svg class="weather-svg rain anim-cloud" viewBox="0 0 24 24">
+      <path d="M18 10h-1.26A8 8 0 1 0 9 20h9a5 5 0 0 0 0-10z" />
+      <path d="M13 13l-3 3h4l-3 4" stroke="#e0b97e" fill="none" />
+    </svg>
+  `;
+  const fogSvg = `
+    <svg class="weather-svg cloud" viewBox="0 0 24 24">
+      <path d="M18 10h-1.26A8 8 0 1 0 9 20h9a5 5 0 0 0 0-10z" class="anim-cloud" />
+      <path d="M5 22h14M7 19h10" />
+    </svg>
+  `;
+
   switch (code) {
-    case 0: return { icon: "☀️", desc: "Clear Sky" };
+    case 0: 
+      return { icon: sunSvg, desc: "Clear Sky", category: "clear" };
     case 1:
     case 2:
-    case 3: return { icon: "🌤️", desc: "Partly Cloudy" };
+    case 3: 
+      return { icon: cloudSvg, desc: "Partly Cloudy", category: "cloudy" };
     case 45:
-    case 48: return { icon: "🌫️", desc: "Foggy" };
+    case 48: 
+      return { icon: fogSvg, desc: "Foggy", category: "cloudy" };
     case 51:
     case 53:
-    case 55: return { icon: "🌧️", desc: "Drizzle" };
+    case 55: 
+      return { icon: rainSvg, desc: "Drizzle", category: "rain" };
     case 61:
     case 63:
-    case 65: return { icon: "🌧️", desc: "Rain" };
+    case 65: 
+      return { icon: rainSvg, desc: "Rain", category: "rain" };
     case 71:
     case 73:
-    case 75: return { icon: "🌨️", desc: "Snowfall" };
-    case 77: return { icon: "🌨️", desc: "Snow grains" };
+    case 75: 
+      return { icon: snowSvg, desc: "Snowfall", category: "snow" };
+    case 77: 
+      return { icon: snowSvg, desc: "Snow grains", category: "snow" };
     case 80:
     case 81:
-    case 82: return { icon: "🌦️", desc: "Rain Showers" };
+    case 82: 
+      return { icon: rainSvg, desc: "Rain Showers", category: "rain" };
     case 85:
-    case 86: return { icon: "🌨️", desc: "Snow Showers" };
+    case 86: 
+      return { icon: snowSvg, desc: "Snow Showers", category: "snow" };
     case 95:
     case 96:
-    case 99: return { icon: "⛈️", desc: "Thunderstorm" };
-    default: return { icon: "🌤️", desc: "Mild" };
+    case 99: 
+      return { icon: thunderSvg, desc: "Thunderstorm", category: "rain" };
+    default: 
+      return { icon: cloudSvg, desc: "Mild", category: "cloudy" };
   }
 }
 
@@ -1470,14 +1521,16 @@ async function getWeatherForProperty(slug, lat, lon) {
     const code = json.current_weather.weathercode;
     const cond = getWeatherIconAndDesc(code);
     
-    const result = { temp, icon: cond.icon, desc: cond.desc };
+    const result = { temp, icon: cond.icon, desc: cond.desc, category: cond.category };
     weatherCache[slug] = result;
     return result;
   } catch (err) {
     console.warn(`Weather API failed for ${slug}, using fallback:`, err.message);
-    const fb = weatherFallbacks[slug] || { temp: 18, icon: "🌤️", desc: "Partly Cloudy" };
-    weatherCache[slug] = fb;
-    return fb;
+    const fb = weatherFallbacks[slug] || { temp: 18, code: 2 };
+    const cond = getWeatherIconAndDesc(fb.code);
+    const result = { temp: fb.temp, icon: cond.icon, desc: cond.desc, category: cond.category };
+    weatherCache[slug] = result;
+    return result;
   }
 }
 
@@ -1505,6 +1558,174 @@ function injectWeatherToCards() {
     }
   });
 }
+
+// ==========================================================================
+// WEATHER THEME ENGINE (CANVAS PARACLES RENDERING LOOP)
+// ==========================================================================
+class WeatherThemeEngine {
+  constructor(canvas) {
+    this.canvas = canvas;
+    this.ctx = canvas.getContext('2d');
+    this.particles = [];
+    this.animationFrameId = null;
+    this.type = 'clear'; // clear, cloudy, rain, snow
+    this.active = false;
+    
+    this.resize = this.resize.bind(this);
+    window.addEventListener('resize', this.resize);
+  }
+  
+  start(type) {
+    this.type = type;
+    this.active = true;
+    this.resize();
+    this.particles = [];
+    this.initParticles();
+    
+    if (this.animationFrameId) {
+      cancelAnimationFrame(this.animationFrameId);
+    }
+    this.animate();
+  }
+  
+  stop() {
+    this.active = false;
+    if (this.animationFrameId) {
+      cancelAnimationFrame(this.animationFrameId);
+      this.animationFrameId = null;
+    }
+    window.removeEventListener('resize', this.resize);
+  }
+  
+  resize() {
+    const parent = this.canvas.parentElement;
+    if (parent) {
+      this.canvas.width = parent.clientWidth;
+      this.canvas.height = parent.clientHeight;
+    }
+  }
+  
+  initParticles() {
+    const count = this.type === 'rain' ? 80 : (this.type === 'snow' ? 50 : 12);
+    for (let i = 0; i < count; i++) {
+      this.particles.push(this.createParticle(true));
+    }
+  }
+  
+  createParticle(randomY = false) {
+    const w = this.canvas.width;
+    const h = this.canvas.height;
+    const y = randomY ? Math.random() * h : -20;
+    
+    if (this.type === 'rain') {
+      return {
+        x: Math.random() * w,
+        y: y,
+        vy: 8 + Math.random() * 6,
+        length: 15 + Math.random() * 15,
+        opacity: 0.15 + Math.random() * 0.2
+      };
+    } else if (this.type === 'snow') {
+      return {
+        x: Math.random() * w,
+        y: y,
+        vy: 0.8 + Math.random() * 1.2,
+        vx: (Math.random() - 0.5) * 0.5,
+        r: 1.5 + Math.random() * 2.5,
+        opacity: 0.2 + Math.random() * 0.4
+      };
+    } else if (this.type === 'cloudy') {
+      return {
+        x: Math.random() * w,
+        y: Math.random() * h,
+        vx: 0.1 + Math.random() * 0.15,
+        r: 60 + Math.random() * 60,
+        opacity: 0.04 + Math.random() * 0.06
+      };
+    } else {
+      // Clear/Sunny light spots
+      return {
+        x: Math.random() * w,
+        y: Math.random() * h,
+        vx: (Math.random() - 0.5) * 0.08,
+        vy: (Math.random() - 0.5) * 0.08,
+        r: 120 + Math.random() * 120,
+        opacity: 0.03 + Math.random() * 0.04,
+        pulseSpeed: 0.005 + Math.random() * 0.008,
+        pulseVal: Math.random() * Math.PI
+      };
+    }
+  }
+  
+  animate() {
+    if (!this.active) return;
+    this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+    
+    const w = this.canvas.width;
+    const h = this.canvas.height;
+    
+    this.particles.forEach((p, idx) => {
+      if (this.type === 'rain') {
+        p.y += p.vy;
+        if (p.y > h) {
+          this.particles[idx] = this.createParticle(false);
+        }
+        this.ctx.strokeStyle = `rgba(184, 180, 170, ${p.opacity})`;
+        this.ctx.lineWidth = 1;
+        this.ctx.beginPath();
+        this.ctx.moveTo(p.x, p.y);
+        this.ctx.lineTo(p.x - 1, p.y + p.length);
+        this.ctx.stroke();
+      } else if (this.type === 'snow') {
+        p.y += p.vy;
+        p.x += p.vx;
+        if (p.y > h || p.x < 0 || p.x > w) {
+          this.particles[idx] = this.createParticle(false);
+        }
+        this.ctx.fillStyle = `rgba(247, 243, 236, ${p.opacity})`;
+        this.ctx.beginPath();
+        this.ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+        this.ctx.fill();
+      } else if (this.type === 'cloudy') {
+        p.x += p.vx;
+        if (p.x - p.r > w) {
+          p.x = -p.r;
+        }
+        const grad = this.ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, p.r);
+        grad.addColorStop(0, `rgba(247, 243, 236, ${p.opacity})`);
+        grad.addColorStop(1, 'rgba(247, 243, 236, 0)');
+        this.ctx.fillStyle = grad;
+        this.ctx.beginPath();
+        this.ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+        this.ctx.fill();
+      } else {
+        p.x += p.vx;
+        p.y += p.vy;
+        p.pulseVal += p.pulseSpeed;
+        const currentOpacity = p.opacity * (0.8 + Math.sin(p.pulseVal) * 0.2);
+        
+        if (p.x - p.r > w || p.x + p.r < 0 || p.y - p.r > h || p.y + p.r < 0) {
+          this.particles[idx] = this.createParticle(false);
+          this.particles[idx].x = Math.random() * w;
+          this.particles[idx].y = Math.random() * h;
+        }
+        
+        const grad = this.ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, p.r);
+        grad.addColorStop(0, `rgba(224, 185, 126, ${currentOpacity})`);
+        grad.addColorStop(1, 'rgba(224, 185, 126, 0)');
+        this.ctx.fillStyle = grad;
+        this.ctx.beginPath();
+        this.ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+        this.ctx.fill();
+      }
+    });
+    
+    this.animationFrameId = requestAnimationFrame(this.animate.bind(this));
+  }
+}
+
+// Global engine reference
+let activeWeatherEngine = null;
 
 // Call on load
 if (document.readyState === 'loading') {

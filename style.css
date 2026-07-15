@@ -2461,6 +2461,7 @@ p {
 
 .property-card,
 .all-property-card {
+  cursor: pointer;
   background: rgba(30, 36, 32, 0.45);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);

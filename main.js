@@ -346,7 +346,6 @@ const propertiesDb = {
     dest: "Uttarakhand",
     loc: "Horrawala, Dehradun",
     cat: "Farm Stay",
-    price: "₹12,500",
     img: "./ITW/itw_luxury_farm_stay.png",
     gallery: [
       "./ITW/itw_luxury_farm_stay.png"
@@ -367,7 +366,6 @@ const propertiesDb = {
         name: "Luxury Foothills Villa",
         occupancy: "4 Guests",
         inclusions: "Exclusive Villa Use, Organic Breakfast, Farm Tour",
-        price: "₹12,500",
         img: "./ITW/itw_luxury_farm_stay.png"
       }
     ]
@@ -377,7 +375,6 @@ const propertiesDb = {
     dest: "Himachal Pradesh",
     loc: "Jispa",
     cat: "Camp & Cottages",
-    price: "₹8,200",
     img: "./ITW/itw_camp_cottages_jispa.png",
     gallery: [
       "./ITW/itw_camp_cottages_jispa.png"
@@ -398,7 +395,6 @@ const propertiesDb = {
         name: "Glacial River Cottage",
         occupancy: "2 Guests",
         inclusions: "Gourmet Dinner & Breakfast, Riverside Walk Guided Tour",
-        price: "₹8,200",
         img: "./ITW/itw_camp_cottages_jispa.png"
       }
     ]
@@ -408,7 +404,6 @@ const propertiesDb = {
     dest: "Himachal Pradesh",
     loc: "Keylong",
     cat: "Homestay",
-    price: "₹5,800",
     img: "./ITW/itw_mountain_homestay_keylong.png",
     gallery: [
       "./ITW/itw_mountain_homestay_keylong.png"
@@ -429,7 +424,6 @@ const propertiesDb = {
         name: "Monastery View Room",
         occupancy: "2 Guests",
         inclusions: "Traditional Home Breakfast, Guided Monastery Stroll",
-        price: "₹5,800",
         img: "./ITW/itw_mountain_homestay_keylong.png"
       }
     ]
@@ -439,7 +433,6 @@ const propertiesDb = {
     dest: "Himachal Pradesh",
     loc: "Jibhi",
     cat: "Forest Cottages",
-    price: "₹8,000",
     img: "https://images.unsplash.com/photo-1542401886-65d6c61db217?auto=format&fit=crop&w=1200&q=80",
     gallery: [
       "https://images.unsplash.com/photo-1542401886-65d6c61db217?auto=format&fit=crop&w=1200&q=80"
@@ -460,7 +453,6 @@ const propertiesDb = {
         name: "Duplex Cedar Cottage",
         occupancy: "3 Guests",
         inclusions: "Gourmet Breakfast, Forest Trail Guide",
-        price: "₹8,000",
         img: "https://images.unsplash.com/photo-1542401886-65d6c61db217?auto=format&fit=crop&w=1200&q=80"
       }
     ]
@@ -470,7 +462,6 @@ const propertiesDb = {
     dest: "Himachal Pradesh",
     loc: "Jibhi",
     cat: "Luxury Tree House",
-    price: "₹11,500",
     img: "https://images.unsplash.com/photo-1448375240586-882707db888b?auto=format&fit=crop&w=1200&q=80",
     gallery: [
       "https://images.unsplash.com/photo-1448375240586-882707db888b?auto=format&fit=crop&w=1200&q=80"
@@ -491,7 +482,6 @@ const propertiesDb = {
         name: "Canopy Jacuzzi Suite",
         occupancy: "2 Guests",
         inclusions: "Continental Breakfast, Private BBQ Setup on Deck",
-        price: "₹11,500",
         img: "https://images.unsplash.com/photo-1448375240586-882707db888b?auto=format&fit=crop&w=1200&q=80"
       }
     ]
@@ -501,7 +491,6 @@ const propertiesDb = {
     dest: "Ladakh",
     loc: "Tyakshi, Turtuk",
     cat: "Luxury Camp",
-    price: "₹7,800",
     img: "./ITW/itw_frontier_camp.png",
     gallery: [
       "./ITW/itw_frontier_camp.png"
@@ -522,7 +511,6 @@ const propertiesDb = {
         name: "Frontier Glamping Dome",
         occupancy: "2 Guests",
         inclusions: "Traditional Buffet Breakfast & Dinner, Guided border trail stroll",
-        price: "₹7,800",
         img: "./ITW/itw_frontier_camp.png"
       }
     ]
@@ -532,7 +520,6 @@ const propertiesDb = {
     dest: "Uttarakhand",
     loc: "Viratkhai",
     cat: "Mountain Huts",
-    price: "₹6,500",
     img: "./ITW/itw_mountain_huts_viratkhai.png",
     gallery: [
       "./ITW/itw_mountain_huts_viratkhai.png"
@@ -553,7 +540,6 @@ const propertiesDb = {
         name: "Deodar Valley Hut",
         occupancy: "2 Guests",
         inclusions: "Gourmet Breakfast, Forest walk",
-        price: "₹6,500",
         img: "./ITW/itw_mountain_huts_viratkhai.png"
       }
     ]
@@ -563,7 +549,6 @@ const propertiesDb = {
     dest: "Uttarakhand",
     loc: "Viratkhai",
     cat: "Camp & Huts",
-    price: "₹5,900",
     img: "./ITW/itw_huts_camp_viratkhai.png",
     gallery: [
       "./ITW/itw_huts_camp_viratkhai.png"
@@ -584,7 +569,6 @@ const propertiesDb = {
         name: "Ridge Camp Hut",
         occupancy: "2 Guests",
         inclusions: "All meals included, Guided sunset trek",
-        price: "₹5,900",
         img: "./ITW/itw_huts_camp_viratkhai.png"
       }
     ]
@@ -688,8 +672,8 @@ function openPropertyOverlay(slug) {
                   ${room.inclusions.split(',').map(inc => `<li class="room-inc-item">${inc.trim()}</li>`).join('')}
                 </ul>
                 <div class="room-price-box">
-                  <span class="room-price-label">Price per night</span>
-                  <span class="room-price-val">${room.price}</span>
+                  <span class="room-price-label">Pricing</span>
+                  <span class="room-price-val" style="font-size: 0.95rem; letter-spacing: 0.05em; text-transform: uppercase; color: var(--color-copper);">By Enquiry</span>
                 </div>
               </div>
             </div>
@@ -1018,7 +1002,7 @@ function renderBookingStep() {
   else if (step === 2) {
     // Choose Property
     const destinationProperties = Object.keys(propertiesDb).filter(slug => {
-      return propertiesDb[slug].dest === bookingState.dest && propertiesDb[slug].price !== "Coming Soon";
+      return propertiesDb[slug].dest === bookingState.dest;
     });
     
     stepContent = `
@@ -1028,7 +1012,7 @@ function renderBookingStep() {
         ${destinationProperties.map(slug => `
           <div class="choice-item ${bookingState.propertySlug === slug ? 'selected' : ''}" data-val="${slug}">
             <span class="choice-label">${propertiesDb[slug].name}</span>
-            <span class="choice-meta">${propertiesDb[slug].loc} • ${propertiesDb[slug].price}</span>
+            <span class="choice-meta">${propertiesDb[slug].loc}</span>
           </div>
         `).join('')}
       </div>
@@ -1094,7 +1078,7 @@ function renderBookingStep() {
         ${propData.rooms.map(room => `
           <div class="choice-item ${bookingState.roomType === room.name ? 'selected' : ''}" data-val="${room.name}">
             <span class="choice-label">${room.name}</span>
-            <span class="choice-meta">${room.price}</span>
+            <span class="choice-meta">Pricing: By Enquiry</span>
           </div>
         `).join('')}
       </div>
@@ -1133,10 +1117,10 @@ function renderBookingStep() {
                 <span class="result-inclusions">Includes: ${room.inclusions}</span>
                 <div class="result-price-cta-row">
                   <div class="result-price-wrap">
-                    <span class="result-price-label">Per Night</span>
-                    <span class="result-price-val">${room.price}</span>
+                    <span class="result-price-label">Pricing</span>
+                    <span class="result-price-val" style="font-size: 0.95rem; letter-spacing: 0.05em; text-transform: uppercase; color: var(--color-copper);">By Enquiry</span>
                   </div>
-                  <button class="result-cta-btn" data-room="${room.name}" data-price="${room.price}">Book via WhatsApp</button>
+                  <button class="result-cta-btn" data-room="${room.name}">Get Bespoke Quote</button>
                 </div>
               </div>
             </div>

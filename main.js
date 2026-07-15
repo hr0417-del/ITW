@@ -862,7 +862,15 @@ function openPropertyOverlay(slug) {
     getWeatherForProperty(slug, data.lat, data.lon).then(weather => {
       const weatherValEl = document.getElementById('details-weather-val');
       if (weatherValEl) {
-        weatherValEl.innerHTML = ` &bull; <span style="color: var(--color-stone);">${weather.temp}&deg;C</span> ${weather.icon} <span style="opacity: 0.6; font-size: 0.9rem; font-family: var(--font-sans); letter-spacing: 0.05em; text-transform: uppercase; margin-left: 0.25rem;">(${weather.desc})</span>`;
+        weatherValEl.innerHTML = ` &bull; <span class="weather-status-dot ${weather.category}"></span><span style="color: var(--color-stone);">${weather.temp}&deg;C</span> <span style="opacity: 0.6; font-size: 0.9rem; font-family: var(--font-sans); letter-spacing: 0.05em; text-transform: uppercase; margin-left: 0.25rem;">${weather.desc}</span>`;
+      }
+      // Start full-page weather canvas
+      const canvas = document.getElementById('prop-weather-canvas');
+      if (canvas) {
+        if (activeWeatherEngine) { activeWeatherEngine.stop(); }
+        activeWeatherEngine = new WeatherThemeEngine(canvas);
+        activeWeatherEngine.start(weather.category || 'clear');
+        canvas.classList.add('active');
       }
     });
   }
@@ -871,6 +879,14 @@ function openPropertyOverlay(slug) {
 function closePropertyOverlay() {
   propertyOverlay.classList.remove('active');
   document.body.style.overflow = ""; // Restore scroll
+  
+  // Stop weather engine
+  const canvas = document.getElementById('prop-weather-canvas');
+  if (canvas) { canvas.classList.remove('active'); }
+  if (activeWeatherEngine) {
+    activeWeatherEngine.stop();
+    activeWeatherEngine = null;
+  }
   
   // Clear hash
   window.history.pushState(null, null, " ");
@@ -1421,83 +1437,43 @@ const weatherFallbacks = {
 };
 
 function getWeatherIconAndDesc(code) {
-  const sunSvg = `
-    <svg class="weather-svg sun" viewBox="0 0 24 24">
-      <circle cx="12" cy="12" r="5" class="anim-sun-center" />
-      <path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42" class="anim-sun-rays" />
-    </svg>
-  `;
-  const cloudSvg = `
-    <svg class="weather-svg cloud anim-cloud" viewBox="0 0 24 24">
-      <path d="M18 10h-1.26A8 8 0 1 0 9 20h9a5 5 0 0 0 0-10z" />
-    </svg>
-  `;
-  const rainSvg = `
-    <svg class="weather-svg rain anim-cloud" viewBox="0 0 24 24">
-      <path d="M18 10h-1.26A8 8 0 1 0 9 20h9a5 5 0 0 0 0-10z" />
-      <path d="M12 16v3" class="anim-rain-drop-1" />
-      <path d="M9 15v3" class="anim-rain-drop-2" />
-      <path d="M15 15v3" class="anim-rain-drop-3" />
-    </svg>
-  `;
-  const snowSvg = `
-    <svg class="weather-svg snow anim-cloud" viewBox="0 0 24 24">
-      <path d="M18 10h-1.26A8 8 0 1 0 9 20h9a5 5 0 0 0 0-10z" />
-      <circle cx="12" cy="17" r="1" class="anim-snow-flake-1" fill="currentColor" stroke="none" />
-      <circle cx="9" cy="16" r="1" class="anim-snow-flake-2" fill="currentColor" stroke="none" />
-      <circle cx="15" cy="16" r="1" class="anim-snow-flake-3" fill="currentColor" stroke="none" />
-    </svg>
-  `;
-  const thunderSvg = `
-    <svg class="weather-svg rain anim-cloud" viewBox="0 0 24 24">
-      <path d="M18 10h-1.26A8 8 0 1 0 9 20h9a5 5 0 0 0 0-10z" />
-      <path d="M13 13l-3 3h4l-3 4" stroke="#e0b97e" fill="none" />
-    </svg>
-  `;
-  const fogSvg = `
-    <svg class="weather-svg cloud" viewBox="0 0 24 24">
-      <path d="M18 10h-1.26A8 8 0 1 0 9 20h9a5 5 0 0 0 0-10z" class="anim-cloud" />
-      <path d="M5 22h14M7 19h10" />
-    </svg>
-  `;
-
   switch (code) {
     case 0: 
-      return { icon: sunSvg, desc: "Clear Sky", category: "clear" };
+      return { icon: `<span class="weather-status-dot clear"></span>`, desc: "Clear Sky", category: "clear" };
     case 1:
     case 2:
     case 3: 
-      return { icon: cloudSvg, desc: "Partly Cloudy", category: "cloudy" };
+      return { icon: `<span class="weather-status-dot cloudy"></span>`, desc: "Partly Cloudy", category: "cloudy" };
     case 45:
     case 48: 
-      return { icon: fogSvg, desc: "Foggy", category: "cloudy" };
+      return { icon: `<span class="weather-status-dot cloudy"></span>`, desc: "Foggy", category: "cloudy" };
     case 51:
     case 53:
     case 55: 
-      return { icon: rainSvg, desc: "Drizzle", category: "rain" };
+      return { icon: `<span class="weather-status-dot rain"></span>`, desc: "Drizzle", category: "rain" };
     case 61:
     case 63:
     case 65: 
-      return { icon: rainSvg, desc: "Rain", category: "rain" };
+      return { icon: `<span class="weather-status-dot rain"></span>`, desc: "Rain", category: "rain" };
     case 71:
     case 73:
     case 75: 
-      return { icon: snowSvg, desc: "Snowfall", category: "snow" };
+      return { icon: `<span class="weather-status-dot snow"></span>`, desc: "Snowfall", category: "snow" };
     case 77: 
-      return { icon: snowSvg, desc: "Snow grains", category: "snow" };
+      return { icon: `<span class="weather-status-dot snow"></span>`, desc: "Snow grains", category: "snow" };
     case 80:
     case 81:
     case 82: 
-      return { icon: rainSvg, desc: "Rain Showers", category: "rain" };
+      return { icon: `<span class="weather-status-dot rain"></span>`, desc: "Rain Showers", category: "rain" };
     case 85:
     case 86: 
-      return { icon: snowSvg, desc: "Snow Showers", category: "snow" };
+      return { icon: `<span class="weather-status-dot snow"></span>`, desc: "Snow Showers", category: "snow" };
     case 95:
     case 96:
     case 99: 
-      return { icon: thunderSvg, desc: "Thunderstorm", category: "rain" };
+      return { icon: `<span class="weather-status-dot rain"></span>`, desc: "Thunderstorm", category: "rain" };
     default: 
-      return { icon: cloudSvg, desc: "Mild", category: "cloudy" };
+      return { icon: `<span class="weather-status-dot cloudy"></span>`, desc: "Mild", category: "cloudy" };
   }
 }
 
@@ -1552,7 +1528,7 @@ function injectWeatherToCards() {
               locEl.after(weatherBadge);
             }
           }
-          weatherBadge.innerHTML = ` &bull; <span class="weather-temp">${weather.temp}&deg;C</span> <span class="weather-icon" title="${weather.desc}">${weather.icon}</span>`;
+          weatherBadge.innerHTML = `${weather.icon} <span class="weather-temp">${weather.temp}&deg;C</span> <span style="opacity:0.55;font-size:0.7rem;text-transform:uppercase;letter-spacing:0.06em;margin-left:0.15rem;">${weather.desc}</span>`;
         }
       });
     }
@@ -1560,32 +1536,34 @@ function injectWeatherToCards() {
 }
 
 // ==========================================================================
-// WEATHER THEME ENGINE (CANVAS PARACLES RENDERING LOOP)
+// WEATHER THEME ENGINE — REALISTIC FULL-VIEWPORT PARTICLE SYSTEM
 // ==========================================================================
 class WeatherThemeEngine {
   constructor(canvas) {
     this.canvas = canvas;
     this.ctx = canvas.getContext('2d');
     this.particles = [];
+    this.fogLayers = [];
     this.animationFrameId = null;
-    this.type = 'clear'; // clear, cloudy, rain, snow
+    this.type = 'clear';
     this.active = false;
+    this.time = 0;
     
-    this.resize = this.resize.bind(this);
-    window.addEventListener('resize', this.resize);
+    this._resize = this._resize.bind(this);
+    this._animate = this._animate.bind(this);
+    window.addEventListener('resize', this._resize);
   }
   
   start(type) {
     this.type = type;
     this.active = true;
-    this.resize();
+    this.time = 0;
+    this._resize();
     this.particles = [];
-    this.initParticles();
-    
-    if (this.animationFrameId) {
-      cancelAnimationFrame(this.animationFrameId);
-    }
-    this.animate();
+    this.fogLayers = [];
+    this._initParticles();
+    if (this.animationFrameId) cancelAnimationFrame(this.animationFrameId);
+    this._animate();
   }
   
   stop() {
@@ -1594,133 +1572,279 @@ class WeatherThemeEngine {
       cancelAnimationFrame(this.animationFrameId);
       this.animationFrameId = null;
     }
-    window.removeEventListener('resize', this.resize);
+    this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+    window.removeEventListener('resize', this._resize);
   }
   
-  resize() {
-    const parent = this.canvas.parentElement;
-    if (parent) {
-      this.canvas.width = parent.clientWidth;
-      this.canvas.height = parent.clientHeight;
-    }
+  _resize() {
+    this.canvas.width = window.innerWidth;
+    this.canvas.height = window.innerHeight;
   }
   
-  initParticles() {
-    const count = this.type === 'rain' ? 80 : (this.type === 'snow' ? 50 : 12);
-    for (let i = 0; i < count; i++) {
-      this.particles.push(this.createParticle(true));
-    }
-  }
-  
-  createParticle(randomY = false) {
+  _initParticles() {
     const w = this.canvas.width;
     const h = this.canvas.height;
-    const y = randomY ? Math.random() * h : -20;
     
     if (this.type === 'rain') {
-      return {
-        x: Math.random() * w,
-        y: y,
-        vy: 8 + Math.random() * 6,
-        length: 15 + Math.random() * 15,
-        opacity: 0.15 + Math.random() * 0.2
-      };
+      // 200 realistic rain streaks
+      for (let i = 0; i < 200; i++) {
+        this.particles.push(this._makeRain(w, h, true));
+      }
     } else if (this.type === 'snow') {
-      return {
-        x: Math.random() * w,
-        y: y,
-        vy: 0.8 + Math.random() * 1.2,
-        vx: (Math.random() - 0.5) * 0.5,
-        r: 1.5 + Math.random() * 2.5,
-        opacity: 0.2 + Math.random() * 0.4
-      };
+      // 120 snowflakes of varying sizes
+      for (let i = 0; i < 120; i++) {
+        this.particles.push(this._makeSnow(w, h, true));
+      }
     } else if (this.type === 'cloudy') {
-      return {
-        x: Math.random() * w,
-        y: Math.random() * h,
-        vx: 0.1 + Math.random() * 0.15,
-        r: 60 + Math.random() * 60,
-        opacity: 0.04 + Math.random() * 0.06
-      };
+      // 18 large volumetric fog/mist patches
+      for (let i = 0; i < 18; i++) {
+        this.fogLayers.push(this._makeFog(w, h));
+      }
     } else {
-      // Clear/Sunny light spots
-      return {
-        x: Math.random() * w,
-        y: Math.random() * h,
-        vx: (Math.random() - 0.5) * 0.08,
-        vy: (Math.random() - 0.5) * 0.08,
-        r: 120 + Math.random() * 120,
-        opacity: 0.03 + Math.random() * 0.04,
-        pulseSpeed: 0.005 + Math.random() * 0.008,
-        pulseVal: Math.random() * Math.PI
-      };
+      // clear — 10 soft golden lens flares + 6 light shafts
+      for (let i = 0; i < 10; i++) {
+        this.particles.push(this._makeSunGlow(w, h));
+      }
+      for (let i = 0; i < 6; i++) {
+        this.fogLayers.push(this._makeLightShaft(w, h));
+      }
     }
   }
   
-  animate() {
+  // --- RAIN ---
+  _makeRain(w, h, randomY) {
+    const windAngle = 0.12; // slight angle
+    return {
+      x: Math.random() * (w + 100) - 50,
+      y: randomY ? Math.random() * h : -Math.random() * 60,
+      speed: 14 + Math.random() * 10,
+      length: 18 + Math.random() * 28,
+      thickness: 0.6 + Math.random() * 0.8,
+      opacity: 0.08 + Math.random() * 0.18,
+      wind: windAngle
+    };
+  }
+  
+  // --- SNOW ---
+  _makeSnow(w, h, randomY) {
+    return {
+      x: Math.random() * w,
+      y: randomY ? Math.random() * h : -(Math.random() * 40),
+      r: 1 + Math.random() * 3.5,
+      vy: 0.3 + Math.random() * 1.0,
+      vx: (Math.random() - 0.5) * 0.4,
+      wobbleAmp: 0.3 + Math.random() * 0.8,
+      wobbleFreq: 0.01 + Math.random() * 0.02,
+      wobblePhase: Math.random() * Math.PI * 2,
+      opacity: 0.15 + Math.random() * 0.45,
+      rotation: Math.random() * Math.PI * 2,
+      rotSpeed: (Math.random() - 0.5) * 0.02
+    };
+  }
+  
+  // --- CLOUDY / FOG ---
+  _makeFog(w, h) {
+    return {
+      x: Math.random() * w * 1.4 - w * 0.2,
+      y: Math.random() * h,
+      r: 100 + Math.random() * 200,
+      vx: 0.08 + Math.random() * 0.18,
+      opacity: 0.02 + Math.random() * 0.05,
+      pulsePhase: Math.random() * Math.PI * 2,
+      pulseSpeed: 0.003 + Math.random() * 0.006
+    };
+  }
+  
+  // --- CLEAR / SUNNY ---
+  _makeSunGlow(w, h) {
+    return {
+      x: Math.random() * w,
+      y: Math.random() * h,
+      r: 80 + Math.random() * 200,
+      vx: (Math.random() - 0.5) * 0.06,
+      vy: (Math.random() - 0.5) * 0.04,
+      opacity: 0.02 + Math.random() * 0.04,
+      pulsePhase: Math.random() * Math.PI * 2,
+      pulseSpeed: 0.003 + Math.random() * 0.007
+    };
+  }
+  
+  _makeLightShaft(w, h) {
+    return {
+      x: Math.random() * w,
+      width: 30 + Math.random() * 80,
+      opacity: 0.012 + Math.random() * 0.025,
+      angle: -0.15 + Math.random() * 0.3,
+      pulsePhase: Math.random() * Math.PI * 2,
+      pulseSpeed: 0.002 + Math.random() * 0.004,
+      drift: (Math.random() - 0.5) * 0.05
+    };
+  }
+  
+  // --- MAIN ANIMATION LOOP ---
+  _animate() {
     if (!this.active) return;
-    this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
-    
+    const ctx = this.ctx;
     const w = this.canvas.width;
     const h = this.canvas.height;
+    this.time++;
     
-    this.particles.forEach((p, idx) => {
-      if (this.type === 'rain') {
-        p.y += p.vy;
-        if (p.y > h) {
-          this.particles[idx] = this.createParticle(false);
-        }
-        this.ctx.strokeStyle = `rgba(184, 180, 170, ${p.opacity})`;
-        this.ctx.lineWidth = 1;
-        this.ctx.beginPath();
-        this.ctx.moveTo(p.x, p.y);
-        this.ctx.lineTo(p.x - 1, p.y + p.length);
-        this.ctx.stroke();
-      } else if (this.type === 'snow') {
-        p.y += p.vy;
-        p.x += p.vx;
-        if (p.y > h || p.x < 0 || p.x > w) {
-          this.particles[idx] = this.createParticle(false);
-        }
-        this.ctx.fillStyle = `rgba(247, 243, 236, ${p.opacity})`;
-        this.ctx.beginPath();
-        this.ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-        this.ctx.fill();
-      } else if (this.type === 'cloudy') {
-        p.x += p.vx;
-        if (p.x - p.r > w) {
-          p.x = -p.r;
-        }
-        const grad = this.ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, p.r);
-        grad.addColorStop(0, `rgba(247, 243, 236, ${p.opacity})`);
-        grad.addColorStop(1, 'rgba(247, 243, 236, 0)');
-        this.ctx.fillStyle = grad;
-        this.ctx.beginPath();
-        this.ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-        this.ctx.fill();
-      } else {
-        p.x += p.vx;
-        p.y += p.vy;
-        p.pulseVal += p.pulseSpeed;
-        const currentOpacity = p.opacity * (0.8 + Math.sin(p.pulseVal) * 0.2);
-        
-        if (p.x - p.r > w || p.x + p.r < 0 || p.y - p.r > h || p.y + p.r < 0) {
-          this.particles[idx] = this.createParticle(false);
-          this.particles[idx].x = Math.random() * w;
-          this.particles[idx].y = Math.random() * h;
-        }
-        
-        const grad = this.ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, p.r);
-        grad.addColorStop(0, `rgba(224, 185, 126, ${currentOpacity})`);
-        grad.addColorStop(1, 'rgba(224, 185, 126, 0)');
-        this.ctx.fillStyle = grad;
-        this.ctx.beginPath();
-        this.ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-        this.ctx.fill();
+    ctx.clearRect(0, 0, w, h);
+    
+    if (this.type === 'rain') {
+      this._drawRain(ctx, w, h);
+    } else if (this.type === 'snow') {
+      this._drawSnow(ctx, w, h);
+    } else if (this.type === 'cloudy') {
+      this._drawFog(ctx, w, h);
+    } else {
+      this._drawSunny(ctx, w, h);
+    }
+    
+    this.animationFrameId = requestAnimationFrame(this._animate);
+  }
+  
+  _drawRain(ctx, w, h) {
+    ctx.lineCap = 'round';
+    this.particles.forEach((p, i) => {
+      p.y += p.speed;
+      p.x += p.speed * p.wind;
+      
+      if (p.y > h + 20) {
+        this.particles[i] = this._makeRain(w, h, false);
+        return;
       }
+      
+      const endX = p.x + p.length * p.wind;
+      const endY = p.y + p.length;
+      
+      ctx.strokeStyle = `rgba(180, 195, 210, ${p.opacity})`;
+      ctx.lineWidth = p.thickness;
+      ctx.beginPath();
+      ctx.moveTo(p.x, p.y);
+      ctx.lineTo(endX, endY);
+      ctx.stroke();
     });
     
-    this.animationFrameId = requestAnimationFrame(this.animate.bind(this));
+    // Subtle ambient mist at bottom
+    const mistGrad = ctx.createLinearGradient(0, h * 0.85, 0, h);
+    mistGrad.addColorStop(0, 'rgba(180, 195, 210, 0)');
+    mistGrad.addColorStop(1, `rgba(180, 195, 210, ${0.03 + Math.sin(this.time * 0.01) * 0.015})`);
+    ctx.fillStyle = mistGrad;
+    ctx.fillRect(0, h * 0.85, w, h * 0.15);
+  }
+  
+  _drawSnow(ctx, w, h) {
+    this.particles.forEach((p, i) => {
+      p.y += p.vy;
+      p.wobblePhase += p.wobbleFreq;
+      p.x += p.vx + Math.sin(p.wobblePhase) * p.wobbleAmp;
+      p.rotation += p.rotSpeed;
+      
+      if (p.y > h + 10 || p.x < -20 || p.x > w + 20) {
+        this.particles[i] = this._makeSnow(w, h, false);
+        return;
+      }
+      
+      ctx.save();
+      ctx.translate(p.x, p.y);
+      ctx.rotate(p.rotation);
+      
+      // Soft glowing snowflake
+      const grad = ctx.createRadialGradient(0, 0, 0, 0, 0, p.r * 2.5);
+      grad.addColorStop(0, `rgba(240, 238, 232, ${p.opacity})`);
+      grad.addColorStop(0.4, `rgba(240, 238, 232, ${p.opacity * 0.5})`);
+      grad.addColorStop(1, 'rgba(240, 238, 232, 0)');
+      ctx.fillStyle = grad;
+      ctx.beginPath();
+      ctx.arc(0, 0, p.r * 2.5, 0, Math.PI * 2);
+      ctx.fill();
+      
+      // Solid core
+      ctx.fillStyle = `rgba(255, 255, 255, ${p.opacity * 0.9})`;
+      ctx.beginPath();
+      ctx.arc(0, 0, p.r, 0, Math.PI * 2);
+      ctx.fill();
+      
+      ctx.restore();
+    });
+  }
+  
+  _drawFog(ctx, w, h) {
+    this.fogLayers.forEach(f => {
+      f.x += f.vx;
+      f.pulsePhase += f.pulseSpeed;
+      const currentOpacity = f.opacity * (0.7 + Math.sin(f.pulsePhase) * 0.3);
+      
+      if (f.x - f.r > w + 50) {
+        f.x = -f.r - 50;
+      }
+      
+      const grad = ctx.createRadialGradient(f.x, f.y, 0, f.x, f.y, f.r);
+      grad.addColorStop(0, `rgba(200, 200, 195, ${currentOpacity})`);
+      grad.addColorStop(0.5, `rgba(200, 200, 195, ${currentOpacity * 0.4})`);
+      grad.addColorStop(1, 'rgba(200, 200, 195, 0)');
+      ctx.fillStyle = grad;
+      ctx.beginPath();
+      ctx.arc(f.x, f.y, f.r, 0, Math.PI * 2);
+      ctx.fill();
+    });
+    
+    // Horizontal mist bands
+    const bandY = h * (0.3 + Math.sin(this.time * 0.004) * 0.1);
+    const bandGrad = ctx.createLinearGradient(0, bandY - 60, 0, bandY + 60);
+    bandGrad.addColorStop(0, 'rgba(200, 200, 195, 0)');
+    bandGrad.addColorStop(0.5, `rgba(200, 200, 195, ${0.025 + Math.sin(this.time * 0.006) * 0.01})`);
+    bandGrad.addColorStop(1, 'rgba(200, 200, 195, 0)');
+    ctx.fillStyle = bandGrad;
+    ctx.fillRect(0, bandY - 60, w, 120);
+  }
+  
+  _drawSunny(ctx, w, h) {
+    // Light shafts
+    this.fogLayers.forEach(shaft => {
+      shaft.x += shaft.drift;
+      shaft.pulsePhase += shaft.pulseSpeed;
+      const currentOpacity = shaft.opacity * (0.6 + Math.sin(shaft.pulsePhase) * 0.4);
+      
+      if (shaft.x > w + 100) shaft.x = -100;
+      if (shaft.x < -100) shaft.x = w + 100;
+      
+      ctx.save();
+      ctx.translate(shaft.x, 0);
+      ctx.rotate(shaft.angle);
+      
+      const shaftGrad = ctx.createLinearGradient(-shaft.width / 2, 0, shaft.width / 2, 0);
+      shaftGrad.addColorStop(0, 'rgba(224, 185, 126, 0)');
+      shaftGrad.addColorStop(0.5, `rgba(224, 185, 126, ${currentOpacity})`);
+      shaftGrad.addColorStop(1, 'rgba(224, 185, 126, 0)');
+      ctx.fillStyle = shaftGrad;
+      ctx.fillRect(-shaft.width / 2, -20, shaft.width, h + 40);
+      
+      ctx.restore();
+    });
+    
+    // Golden lens flares
+    this.particles.forEach((p, i) => {
+      p.x += p.vx;
+      p.y += p.vy;
+      p.pulsePhase += p.pulseSpeed;
+      const currentOpacity = p.opacity * (0.5 + Math.sin(p.pulsePhase) * 0.5);
+      
+      if (p.x < -p.r || p.x > w + p.r || p.y < -p.r || p.y > h + p.r) {
+        this.particles[i] = this._makeSunGlow(w, h);
+        return;
+      }
+      
+      const grad = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, p.r);
+      grad.addColorStop(0, `rgba(224, 185, 126, ${currentOpacity})`);
+      grad.addColorStop(0.3, `rgba(224, 185, 126, ${currentOpacity * 0.4})`);
+      grad.addColorStop(1, 'rgba(224, 185, 126, 0)');
+      ctx.fillStyle = grad;
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+      ctx.fill();
+    });
   }
 }
 

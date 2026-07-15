@@ -3994,3 +3994,140 @@ p {
   }
 }
 
+/* ==========================================================================
+   ITW V3 CUSTOM VISUAL STYLES
+   ========================================================================== */
+
+/* Why ITW Grid Styling */
+.why-itw-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2.5rem;
+  width: 100%;
+  max-width: 1200px;
+  margin: 3.5rem auto 0;
+  padding: 0 2rem;
+}
+
+.why-card {
+  background: rgba(30, 36, 32, 0.45);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(247, 243, 236, 0.07);
+  border-radius: 4px;
+  padding: 3.5rem 2.5rem;
+  text-align: center;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.03);
+  transition: transform 0.6s cubic-bezier(0.25, 1, 0.3, 1), border-color 0.6s cubic-bezier(0.25, 1, 0.3, 1);
+}
+
+.why-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(184, 121, 59, 0.25);
+}
+
+.why-title {
+  font-family: var(--font-serif);
+  font-size: 1.8rem;
+  color: var(--color-stone);
+  margin-bottom: 1rem;
+  font-weight: 400;
+}
+
+.why-body {
+  font-family: var(--font-sans);
+  font-size: 0.95rem;
+  color: var(--color-stone);
+  opacity: 0.7;
+  line-height: 1.6;
+}
+
+/* Dynamic Details Customize Section */
+.prop-customize-section {
+  padding: 5rem 8vw;
+  background: rgba(18, 23, 20, 0.2);
+  border-bottom: 1px solid rgba(247, 243, 236, 0.03);
+}
+
+.prop-customize-title {
+  font-family: var(--font-serif);
+  font-size: 2.2rem;
+  color: var(--color-stone);
+  margin-bottom: 0.75rem;
+  font-weight: 400;
+}
+
+.prop-customize-desc {
+  font-family: var(--font-sans);
+  font-size: 1rem;
+  color: var(--color-stone);
+  opacity: 0.65;
+  margin-bottom: 2.5rem;
+}
+
+.prop-services-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+  width: 100%;
+}
+
+.service-item {
+  display: flex;
+  align-items: center;
+  font-family: var(--font-sans);
+  font-size: 1rem;
+  color: var(--color-stone);
+  background: rgba(30, 36, 32, 0.25);
+  border: 1px solid rgba(247, 243, 236, 0.04);
+  padding: 1rem 1.5rem;
+  border-radius: 4px;
+}
+
+/* Dynamic Details Reviews Section */
+.prop-reviews-section {
+  padding: 5rem 8vw;
+  background: rgba(12, 16, 14, 0.3);
+  border-bottom: 1px solid rgba(247, 243, 236, 0.03);
+}
+
+.prop-reviews-title {
+  font-family: var(--font-serif);
+  font-size: 2.2rem;
+  color: var(--color-stone);
+  margin-bottom: 2.5rem;
+  font-weight: 400;
+}
+
+.prop-reviews-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  width: 100%;
+}
+
+/* Responsive Overrides */
+@media (max-width: 900px) {
+  .why-itw-grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+  .prop-services-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+  .prop-reviews-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 600px) {
+  .prop-services-grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+  .prop-customize-section,
+  .prop-reviews-section {
+    padding: 4rem 2rem;
+  }
+}
+

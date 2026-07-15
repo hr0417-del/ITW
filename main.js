@@ -341,87 +341,33 @@ audioToggleBtn.addEventListener('click', () => {
 // DATA: PROPERTY DATABASE
 // ==========================================================================
 const propertiesDb = {
-  "mountain-huts": {
-    name: "ITW Mountain Huts",
-    dest: "Uttarakhand",
-    loc: "Viratkhai, Chakrata",
-    cat: "Mountain Huts",
-    price: "₹6,500",
-    img: "./ITW/itw_mountain_huts_viratkhai.png",
-    gallery: [
-      "./ITW/itw_mountain_huts_viratkhai.png"
-    ],
-    quote: "Wake up above the clouds, inside an ancient oak woodland.",
-    about: "Simple luxury huts nested in the serene woods of Viratkhai near Chakrata. Built using local stone and wood, these huts offer panoramic Himalayan valley views and deep quietude.",
-    amenities: ["Wood Fireplace", "Stargazing Deck", "Local Garhwali Buffet", "Hot Showers", "Wi-Fi Access", "Nature Trails"],
-    experiences: ["Oak Forest Trails", "Valley Birding", "Charcoal Bukhari Evenings", "Millet Bread Baking"],
-    nearby: ["Tiger Falls", "Chakrata Market", "Budher Caves"],
-    locationDesc: "Viratkhai, Chakrata, Uttarakhand. Perched at 8,100 feet on the boundary ridge.",
-    rooms: [
-      {
-        name: "Deodar Valley Hut",
-        occupancy: "2 Guests",
-        inclusions: "Gourmet Breakfast, Forest walk",
-        price: "₹6,500",
-        img: "./ITW/itw_mountain_huts_viratkhai.png"
-      }
-    ]
-  },
-  "camp-huts": {
-    name: "ITW Camp & Huts",
-    dest: "Uttarakhand",
-    loc: "Viratkhai, Chakrata",
-    cat: "Camp & Huts",
-    price: "₹5,900",
-    img: "./ITW/itw_huts_camp_viratkhai.png",
-    gallery: [
-      "./ITW/itw_huts_camp_viratkhai.png"
-    ],
-    quote: "Dwell under the stars, surrounded by high altitude ridges.",
-    about: "Cozy alpine camps and wooden huts built to withstand the elements while providing pure comfort. Ideal for adventure seekers scaling the high ridges of Chakrata.",
-    amenities: ["Insulated Camps", "Woodfire Pit", "Hot Herbal Teas", "Warm Bedding", "Cozy Mud Room"],
-    experiences: ["Ridge Treks", "Milking Local Cows", "Stargazing Circles"],
-    nearby: ["Tiger Falls", "Kanasar Forest Lodge", "Deoban Views"],
-    locationDesc: "Viratkhai, Chakrata, Uttarakhand. Surrounded by deodar and rhododendron woods.",
-    rooms: [
-      {
-        name: "Ridge Camp Hut",
-        occupancy: "2 Guests",
-        inclusions: "All meals included, Guided sunset trek",
-        price: "₹5,900",
-        img: "./ITW/itw_huts_camp_viratkhai.png"
-      }
-    ]
-  },
   "luxury-farm-stay": {
     name: "ITW Luxury Farm Stay",
     dest: "Uttarakhand",
     loc: "Horrawala, Dehradun",
     cat: "Farm Stay",
-    price: "₹7,500",
+    price: "₹12,500",
     img: "./ITW/itw_luxury_farm_stay.png",
     gallery: [
       "./ITW/itw_luxury_farm_stay.png"
     ],
-    quote: "Dwell inside organic litchi groves and silent foothills.",
-    about: "Private luxury farm stay featuring an exclusive villa, swimming pool, landscaped gardens, and peaceful countryside surroundings.",
-    amenities: ["Private Villa", "Swimming Pool", "Landscaped Gardens", "Organic Kitchen", "Plunge Pool", "Yoga Deck"],
-    experiences: ["Farm-to-Table Dining", "Herbal Tea Blending", "Sal Forest Birding", "Pottery Sessions"],
-    nearby: ["Robber's Cave", "Forest Research Institute", "Mussoorie Hills"],
-    locationDesc: "Horrawala, Dehradun, Uttarakhand. Perched in peaceful countryside surroundings.",
+    quote: "A private agricultural oasis nestled in the foothills of Dehradun.",
+    about: "Private luxury farm stay featuring an exclusive villa, outdoor pool, private orchards, and landscaped gardens. Dwell in absolute seclusion surrounded by seasonal harvest fields.",
+    amenities: ["Villa Access", "Private Pool", "Organic Farms", "Personal Chef", "Wi-Fi Access", "Lawn Lounge"],
+    experiences: ["Farm-to-Table Dining", "Fruit Harvesting", "Foothills Cycling", "Private Yoga Sessions"],
+    nearby: ["Robber's Cave", "Forest Research Institute", "Sahastradhara Springs"],
+    locationDesc: "Horrawala, Dehradun, Uttarakhand. Situated on a private agricultural estate.",
+    services: ["Airport Transfers", "Private Cabs", "Local Food Experiences", "Chef-led Baking Sessions", "Village Walks", "Celebration Planning"],
+    reviews: [
+      { guest: "Rohan M.", text: "An absolute oasis of peace. The farm-to-table meals were extraordinary.", rating: "5/5" },
+      { guest: "Kabir S.", text: "Perfect luxury stay. Having the private pool and orchards to ourselves was incredible.", rating: "5/5" }
+    ],
     rooms: [
       {
-        name: "Meadow Suite",
-        occupancy: "2 Guests",
-        inclusions: "Gourmet Breakfast, Farm tour & harvest experience",
-        price: "₹7,500",
-        img: "./ITW/itw_luxury_farm_stay.png"
-      },
-      {
-        name: "Exclusive Orchard Villa",
+        name: "Luxury Foothills Villa",
         occupancy: "4 Guests",
-        inclusions: "All meals included, Private butler, Orchard harvest walk",
-        price: "₹18,000",
+        inclusions: "Exclusive Villa Use, Organic Breakfast, Farm Tour",
+        price: "₹12,500",
         img: "./ITW/itw_luxury_farm_stay.png"
       }
     ]
@@ -436,24 +382,22 @@ const propertiesDb = {
     gallery: [
       "./ITW/itw_camp_cottages_jispa.png"
     ],
-    quote: "Breathe in glacier air on the edge of the Bhaga River.",
-    about: "Cozy mountain cottages and premium luxury camps surrounded by the majestic Himalayas on the Manali–Leh Highway.",
-    amenities: ["Insulated Swiss Domes", "Riverbed Deck", "Heated Blankets", "Local Lahauli Buffet", "Mud Room", "Stargazing Deck"],
-    experiences: ["River Bed Trekking", "Butter Tea Brewing", "Glacier Photography", "Monastery Trails"],
-    nearby: ["Bhaga River Confluence", "Kardang Monastery", "Baralacha La Pass"],
-    locationDesc: "Jispa, Himachal Pradesh. Perged on the scenic Manali-Leh highway.",
+    quote: "Sleep beside the rushing Bhaga River on the Manali-Leh Highway.",
+    about: "Luxury camps and mountain cottages surrounded by the majestic Himalayas. Wake up to raw granite peaks, roaring glacial streams, and high-altitude wilderness.",
+    amenities: ["Riverside Deck", "Heated Tents", "Local Himachali Buffet", "Hot Running Water", "Star Gazing Telescopes"],
+    experiences: ["Bhaga River Treks", "High-Altitude Stargazing", "Angling", "Local Village Curation"],
+    nearby: ["Suraj Tal Lake", "Baralacha La Pass", "Keylong Monastery"],
+    locationDesc: "Jispa, Lahaul Valley, Himachal Pradesh. Located on the banks of the Bhaga River.",
+    services: ["Airport Transfers", "Private Cabs", "Guided Treks", "Hiking Trails", "Camping", "Bonfire"],
+    reviews: [
+      { guest: "Ananya R.", text: "Stunning river views and incredible hospitality. The heated tents were extremely cozy.", rating: "5/5" },
+      { guest: "Vikram P.", text: "A must-stay on the Manali-Leh highway. The mountain backdrop is surreal.", rating: "5/5" }
+    ],
     rooms: [
       {
-        name: "Mountain Vista Cottage",
-        occupancy: "2 Adults",
-        inclusions: "Gourmet Breakfast, Riverbed nature walk",
-        price: "₹9,500",
-        img: "./ITW/itw_camp_cottages_jispa.png"
-      },
-      {
-        name: "Premium Swiss Camp",
-        occupancy: "2 Adults",
-        inclusions: "Breakfast & Dinner included, Stargazing deck access",
+        name: "Glacial River Cottage",
+        occupancy: "2 Guests",
+        inclusions: "Gourmet Dinner & Breakfast, Riverside Walk Guided Tour",
         price: "₹8,200",
         img: "./ITW/itw_camp_cottages_jispa.png"
       }
@@ -469,17 +413,22 @@ const propertiesDb = {
     gallery: [
       "./ITW/itw_mountain_homestay_keylong.png"
     ],
-    quote: "Experience traditional Lahauli life and monastic calm.",
-    about: "Authentic Himalayan homestay offering warm hospitality, traditional cuisine, and breathtaking mountain views.",
-    amenities: ["Charcoal Bukhari", "Local Cuisine", "Terrace view", "Warm hospitality", "Woolen Blankets"],
-    experiences: ["Local Buckwheat Cooking", "Monastery Chanting Walk", "Clay Crafting"],
-    nearby: ["Kardang Monastery", "Keylong Market", "Shashur Monastery"],
-    locationDesc: "Keylong, Himachal Pradesh. Perched on Keylong Ridge, overlooking the Lahaul Valley confluence.",
+    quote: "Authentic Himalayan lifestyle facing the Kardang Monastery.",
+    about: "Authentic Himalayan hospitality with panoramic mountain views. Experience Lahauli warmth, home-cooked local meals, and rooms looking directly out over the Kardang Monastery Ridge.",
+    amenities: ["Monastery Views", "Traditional Bukhari Heater", "Lahauli Home Kitchen", "Library", "Warm Blankets"],
+    experiences: ["Monastery Walk", "Weaving Workshops", "Traditional Tea Curation", "Glacier Hikes"],
+    nearby: ["Kardang Monastery", "Shashur Monastery", "Tandi Confluence"],
+    locationDesc: "Keylong, Lahaul Valley, Himachal Pradesh. Set overlooking the Kardang Monastery.",
+    services: ["Airport Transfers", "Bus Assistance", "Local Food Experiences", "Photography Tours", "Village Walks"],
+    reviews: [
+      { guest: "Siddharth J.", text: "The homestay felt like visiting family. The Lahauli food was pure soul food.", rating: "5/5" },
+      { guest: "Nisha K.", text: "Views of the monastery in the morning are breath-taking. Deeply peaceful.", rating: "5/5" }
+    ],
     rooms: [
       {
-        name: "Traditional Lahauli Room",
-        occupancy: "2 Adults",
-        inclusions: "Traditional family-cooked breakfast & dinner included",
+        name: "Monastery View Room",
+        occupancy: "2 Guests",
+        inclusions: "Traditional Home Breakfast, Guided Monastery Stroll",
         price: "₹5,800",
         img: "./ITW/itw_mountain_homestay_keylong.png"
       }
@@ -493,22 +442,26 @@ const propertiesDb = {
     price: "₹8,000",
     img: "https://images.unsplash.com/photo-1542401886-65d6c61db217?auto=format&fit=crop&w=1200&q=80",
     gallery: [
-      "https://images.unsplash.com/photo-1542401886-65d6c61db217?auto=format&fit=crop&w=600&q=80",
-      "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&fit=crop&w=600&q=80"
+      "https://images.unsplash.com/photo-1542401886-65d6c61db217?auto=format&fit=crop&w=1200&q=80"
     ],
-    quote: "A hand-dressed stone cottage in a cedar glade.",
-    about: "Beautiful duplex cottages nestled among cedar forests, perfect for peaceful mountain escapes.",
-    amenities: ["Woodsmoke Hearth", "Stream Side Patio", "Slate Roof Cabins", "Handmade Wool Linens", "Local Organic Food", "WiFi"],
-    experiences: ["Waterfall Trail Hiking", "Cedar Forest Bathing", "Fireside Acoustic Tunes", "Local Apple Foraging"],
-    nearby: ["Jibhi Waterfall", "Jalori Pass", "Chehni Kothi Tower"],
-    locationDesc: "Jibhi, Himachal Pradesh. Perched next to a rushing stream in a deep pine forest.",
+    quote: "Cozy duplex stone cabins built deep inside pine woods.",
+    about: "Duplex forest cottages nestled among cedar trees in the Tirthan Valley. Built using local stone and cedar-wood, these properties offer ultimate comfort in the heart of nature.",
+    amenities: ["Private Balcony", "Cedar Wood Interiors", "Local Himachali Kitchen", "Wi-Fi Access", "Hammock Area"],
+    experiences: ["Pine Forest Walks", "Waterfall Trekking", "Angling in Tirthan River", "Campfire Music"],
+    nearby: ["Jibhi Waterfall", "Jalori Pass", "Serolsar Lake"],
+    locationDesc: "Jibhi, Tirthan Valley, Himachal Pradesh. Nestled in a private cedar pine forest.",
+    services: ["Airport Transfers", "Private Cabs", "Hiking Trails", "Bonfire", "Village Walks"],
+    reviews: [
+      { guest: "Pooja V.", text: "A fairytale cabin in the woods. Hearing the pine leaves rustling all day was pure meditation.", rating: "5/5" },
+      { guest: "Dev A.", text: "Excellent cedar cabin. Clean, cozy, and beautifully isolated in the forest.", rating: "5/5" }
+    ],
     rooms: [
       {
         name: "Duplex Cedar Cottage",
-        occupancy: "2-3 Adults",
-        inclusions: "Gourmet Breakfast, Waterfall trail excursion",
+        occupancy: "3 Guests",
+        inclusions: "Gourmet Breakfast, Forest Trail Guide",
         price: "₹8,000",
-        img: "https://images.unsplash.com/photo-1542401886-65d6c61db217?auto=format&fit=crop&w=600&q=80"
+        img: "https://images.unsplash.com/photo-1542401886-65d6c61db217?auto=format&fit=crop&w=1200&q=80"
       }
     ]
   },
@@ -520,22 +473,26 @@ const propertiesDb = {
     price: "₹11,500",
     img: "https://images.unsplash.com/photo-1448375240586-882707db888b?auto=format&fit=crop&w=1200&q=80",
     gallery: [
-      "https://images.unsplash.com/photo-1475924156734-496f6cac6ec1?auto=format&fit=crop&w=600&q=80",
-      "https://images.unsplash.com/photo-1510798831971-661eb04b3739?auto=format&fit=crop&w=600&q=80"
+      "https://images.unsplash.com/photo-1448375240586-882707db888b?auto=format&fit=crop&w=1200&q=80"
     ],
-    quote: "Float in the forest canopy, with your private jacuzzi.",
-    about: "Luxury tree house featuring a private jacuzzi, elegant interiors, and panoramic forest views.",
-    amenities: ["Hot Jacuzzi", "Private Cedar Deck", "Glass Canopy Walls", "Espresso Station", "Heated Bedding", "Wi-Fi"],
-    experiences: ["Canopy Stargazing", "Pine Needle Crafting", "High Forest Photography"],
-    nearby: ["Jibhi Stream", "Jalori Pass", "Serolsar Lake"],
-    locationDesc: "Jibhi, Himachal Pradesh. Suspended 35 feet high in the pine and cedar branches.",
+    quote: "Live above the canopy in a high-elevation jacuzzi deck.",
+    about: "Luxury tree house with jacuzzi and panoramic forest views. Hover above the pine canopy in a beautifully engineered wooden tree house featuring floor-to-ceiling glass panes and quiet luxury.",
+    amenities: ["Private Jacuzzi", "Panoramic Deck", "Cedar Wood Bathtub", "Minibar", "Ambient Light System", "Wi-Fi Access"],
+    experiences: ["Canopy Walks", "Stargazing from Jacuzzi", "Forest Birding Trails", "Private BBQ on Deck"],
+    nearby: ["Jalori Pass", "Choi Waterfall", "Great Himalayan National Park"],
+    locationDesc: "Jibhi, Tirthan Valley, Himachal Pradesh. Suspended in a pine forest canopy.",
+    services: ["Airport Transfers", "Private Cabs", "Bonfire", "Photography Tours", "Celebration Planning"],
+    reviews: [
+      { guest: "Aashna S.", text: "Soaking in the private jacuzzi overlooking the snow peaks was the highlight of our year.", rating: "5/5" },
+      { guest: "Neil F.", text: "Unrivalled luxury. The treehouse design is modern, warm, and extremely premium.", rating: "5/5" }
+    ],
     rooms: [
       {
-        name: "Jacuzzi Canopy Treehouse",
-        occupancy: "2 Adults",
-        inclusions: "Gourmet Breakfast & Dinner, Jacuzzi access, Espresso bar",
+        name: "Canopy Jacuzzi Suite",
+        occupancy: "2 Guests",
+        inclusions: "Continental Breakfast, Private BBQ Setup on Deck",
         price: "₹11,500",
-        img: "https://images.unsplash.com/photo-1448375240586-882707db888b?auto=format&fit=crop&w=600&q=80"
+        img: "https://images.unsplash.com/photo-1448375240586-882707db888b?auto=format&fit=crop&w=1200&q=80"
       }
     ]
   },
@@ -549,100 +506,100 @@ const propertiesDb = {
     gallery: [
       "./ITW/itw_frontier_camp.png"
     ],
-    quote: "Sleep on the edge of Turtuk, under the Karakoram stars.",
-    about: "Premium Himalayan luxury camping surrounded by dramatic mountain landscapes and the untouched beauty of Ladakh.",
-    amenities: ["Skylight Dome", "Insulated Bedding", "Hot Copper Showers", "Organic Apricot Orchard", "Balti Dining Hall"],
-    experiences: ["Apricot Foraging", "Balti Culture Circle", "Bactrian Camel Ride", "Gorge Stargazing"],
-    nearby: ["Balti Heritage Museum", "Shyok River bed", "Border View Point"],
-    locationDesc: "Tyakshi, Turtuk, Ladakh. Surrounded by apricot orchards and towering grey granite cliffs of the Karakoram range.",
+    quote: "A luxury dome outpost nestled on the edge of the Shyok River.",
+    about: "Premium Himalayan camping in Turtuk's unforgettable border landscape. Wake up to towering granite walls, organic apricot orchards, and the serene flow of the Shyok River.",
+    amenities: ["Insulated Glamping Dome", "Riverfront Seating", "Organic Apricot Garden Access", "Himalayan Herbal Baths", "Star Gazing Deck"],
+    experiences: ["Balti Village Walk", "Border Outpost Cycling", "Shyok River Trails", "Balti Culinary Curation"],
+    nearby: ["Turtuk Museum", "Line of Control Border Point", "Hunder Sand Dunes"],
+    locationDesc: "Tyakshi, Turtuk, Ladakh. Situated in the northernmost border valley.",
+    services: ["Airport Transfers", "Private Cabs", "Guided Treks", "Camping", "Bonfire", "Photography Tours"],
+    reviews: [
+      { guest: "Pritam D.", text: "Glamping in a dome facing the Shyok River was amazing. Balti dinners were fantastic.", rating: "5/5" },
+      { guest: "Zoya H.", text: "Incredibly remote, but with all the comforts of a five-star stay. Unforgettable.", rating: "5/5" }
+    ],
     rooms: [
       {
-        name: "Apricot Skylight Dome",
+        name: "Frontier Glamping Dome",
         occupancy: "2 Guests",
         inclusions: "Traditional Buffet Breakfast & Dinner, Guided border trail stroll",
         price: "₹7,800",
         img: "./ITW/itw_frontier_camp.png"
       }
     ]
+  },
+  "mountain-huts": {
+    name: "ITW Mountain Huts",
+    dest: "Uttarakhand",
+    loc: "Viratkhai",
+    cat: "Mountain Huts",
+    price: "₹6,500",
+    img: "./ITW/itw_mountain_huts_viratkhai.png",
+    gallery: [
+      "./ITW/itw_mountain_huts_viratkhai.png"
+    ],
+    quote: "Wake up above the clouds inside an ancient oak woodland.",
+    about: "Scenic mountain retreat surrounded by forests and Himalayan views. Built using local stone and wood, these huts offer panoramic Himalayan valley views and deep quietude.",
+    amenities: ["Wood Fireplace", "Stargazing Deck", "Local Garhwali Buffet", "Hot Showers", "Wi-Fi Access", "Nature Trails"],
+    experiences: ["Oak Forest Trails", "Valley Birding", "Charcoal Bukhari Evenings", "Millet Bread Baking"],
+    nearby: ["Tiger Falls", "Chakrata Market", "Budher Caves"],
+    locationDesc: "Viratkhai, Uttarakhand. Perched at 8,100 feet on the boundary ridge.",
+    services: ["Airport Transfers", "Private Cabs", "Guided Treks", "Hiking Trails", "Bonfire"],
+    reviews: [
+      { guest: "Karan T.", text: "The views of the snow peaks are completely unobstructed. Bukhari heaters are wonderful.", rating: "5/5" },
+      { guest: "Aditi G.", text: "Perfect wilderness getaway. The oak forest walks were peaceful and quiet.", rating: "5/5" }
+    ],
+    rooms: [
+      {
+        name: "Deodar Valley Hut",
+        occupancy: "2 Guests",
+        inclusions: "Gourmet Breakfast, Forest walk",
+        price: "₹6,500",
+        img: "./ITW/itw_mountain_huts_viratkhai.png"
+      }
+    ]
+  },
+  "camp-huts": {
+    name: "ITW Camp & Huts",
+    dest: "Uttarakhand",
+    loc: "Viratkhai",
+    cat: "Camp & Huts",
+    price: "₹5,900",
+    img: "./ITW/itw_huts_camp_viratkhai.png",
+    gallery: [
+      "./ITW/itw_huts_camp_viratkhai.png"
+    ],
+    quote: "Dwell under the stars, surrounded by high altitude ridges.",
+    about: "Luxury camps and hillside huts in the heart of nature. Ideal for adventure seekers scaling the high ridges of Chakrata, surrounded by deodar and rhododendron woods.",
+    amenities: ["Insulated Camps", "Woodfire Pit", "Hot Herbal Teas", "Warm Bedding", "Cozy Mud Room"],
+    experiences: ["Ridge Treks", "Milking Local Cows", "Stargazing Circles"],
+    nearby: ["Tiger Falls", "Kanasar Forest Lodge", "Deoban Views"],
+    locationDesc: "Viratkhai, Uttarakhand. Set on a panoramic hillside ridge.",
+    services: ["Airport Transfers", "Private Cabs", "Camping", "Bonfire", "Adventure Activities"],
+    reviews: [
+      { guest: "Rahul S.", text: "Great camps, very warm sleeping bags, and amazing stargazing circles.", rating: "5/5" },
+      { guest: "Tanya M.", text: "Incredibly peaceful hillside location. Perfect for digital detox.", rating: "5/5" }
+    ],
+    rooms: [
+      {
+        name: "Ridge Camp Hut",
+        occupancy: "2 Guests",
+        inclusions: "All meals included, Guided sunset trek",
+        price: "₹5,900",
+        img: "./ITW/itw_huts_camp_viratkhai.png"
+      }
+    ]
   }
 };
 
-// SCENE 3 & 5: DYNAMICALLY RENDER ALL PROPERTIES GRID
+// SCENE 4: BIND EXPLORE DESTINATION BUTTONS TO WIZARD FLOW
 // ==========================================================================
-const allPropertiesContainer = document.getElementById('all-properties-grid-container');
-
-function renderAllProperties(filter = "all") {
-  if (!allPropertiesContainer) return;
-  allPropertiesContainer.innerHTML = "";
-  
-  Object.keys(propertiesDb).forEach(slug => {
-    const data = propertiesDb[slug];
-    if (filter !== "all" && data.dest !== filter) return;
-    
-    const card = document.createElement('div');
-    card.className = "all-property-card animate-on-scroll";
-    card.setAttribute('data-slug', slug);
-    
-    const isComingSoon = data.price === "Coming Soon";
-    const badgeText = data.cat;
-    
-    card.innerHTML = `
-      <div class="all-property-image-box">
-        <img class="all-property-img" src="${data.img}" alt="${data.name}" loading="lazy">
-        <div class="all-property-badge">${badgeText}</div>
-      </div>
-      <div class="all-property-content">
-        <span class="all-property-location">${data.dest} • ${data.loc}</span>
-        <h4 class="all-property-name">${data.name}</h4>
-        <p class="all-property-price">${isComingSoon ? "Opening in Spring 2027" : `Starting at ${data.price} / night`}</p>
-        ${isComingSoon 
-          ? `<button class="view-property-btn disabled" style="opacity: 0.5; pointer-events: none;">Coming Soon</button>` 
-          : `<button class="view-property-btn" data-slug="${slug}">View Property</button>`
-        }
-      </div>
-    `;
-    
-    allPropertiesContainer.appendChild(card);
-  });
-  
-  // Re-observe newly rendered cards for animations
-  allPropertiesContainer.querySelectorAll('.animate-on-scroll').forEach(el => {
-    sceneObserver.observe(el);
-  });
-  
-  // Bind click triggers
-  allPropertiesContainer.querySelectorAll('.view-property-btn').forEach(btn => {
-    btn.addEventListener('click', (e) => {
-      e.stopPropagation();
-      const slug = btn.getAttribute('data-slug');
-      openPropertyOverlay(slug);
-    });
-  });
-}
-
-// Bind Home Filter Tabs
-const filterTabs = document.querySelectorAll('.filter-tab');
-filterTabs.forEach(tab => {
-  tab.addEventListener('click', () => {
-    filterTabs.forEach(t => t.classList.remove('active'));
-    tab.classList.add('active');
-    const filterVal = tab.getAttribute('data-filter');
-    renderAllProperties(filterVal);
-  });
-});
-
-// Explore Destination buttons to slide down and filter All Properties
 document.querySelectorAll('.explore-dest-btn').forEach(btn => {
   btn.addEventListener('click', () => {
     const dest = btn.getAttribute('data-dest');
-    const targetTab = document.querySelector(`.filter-tab[data-filter="${dest}"]`);
-    if (targetTab) {
-      targetTab.click();
-    }
-    const allPropsSec = document.getElementById('scene-all-properties');
-    if (allPropsSec) {
-      allPropsSec.scrollIntoView({ behavior: 'smooth' });
-    }
+    openBookingPortal();
+    bookingState.dest = dest;
+    bookingState.currentStep = 2; // Jump directly to Property Selection (Step 2)
+    renderBookingStep();
   });
 });
 
@@ -770,6 +727,50 @@ function openPropertyOverlay(slug) {
     </section>
   `;
 
+  let customizeHtml = "";
+  if (data.services && data.services.length > 0) {
+    customizeHtml = `
+      <section class="prop-customize-section">
+        <h4 class="prop-customize-title">Customize Your Stay</h4>
+        <p class="prop-customize-desc">Select from our bespoke on-site services to tailor your experience.</p>
+        <div class="prop-services-grid">
+          ${data.services.map(ser => `
+            <div class="service-item">
+              <svg class="service-check" viewBox="0 0 24 24" width="16" height="16" fill="currentColor" style="color: var(--color-copper); margin-right: 0.75rem; flex-shrink: 0;">
+                <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/>
+              </svg>
+              <span>${ser}</span>
+            </div>
+          `).join('')}
+        </div>
+        <div style="margin-top: 2rem;">
+          <button class="prop-direct-book-btn" id="prop-customize-trigger">Enquire Now</button>
+        </div>
+      </section>
+    `;
+  }
+
+  let reviewsHtml = "";
+  if (data.reviews && data.reviews.length > 0) {
+    reviewsHtml = `
+      <section class="prop-reviews-section">
+        <h4 class="prop-reviews-title">Guest Testimonials</h4>
+        <div class="prop-reviews-grid">
+          ${data.reviews.map(rev => `
+            <div class="review-card glass-card" style="padding: 2rem; border-radius: 4px; background: rgba(30, 36, 32, 0.25); border: 1px solid rgba(247, 243, 236, 0.04);">
+              <div class="review-rating-row" style="display: flex; gap: 0.5rem; align-items: center; margin-bottom: 1rem; color: var(--color-copper); font-size: 0.9rem;">
+                <span class="review-rating" style="font-weight: 500;">${rev.rating}</span>
+                <span class="review-stars">★★★★★</span>
+              </div>
+              <p class="review-text" style="font-family: var(--font-serif); font-size: 1.15rem; color: var(--color-stone); font-style: italic; opacity: 0.95; line-height: 1.5; margin-bottom: 1rem;">"${rev.text}"</p>
+              <span class="review-guest" style="font-family: var(--font-sans); font-size: 0.85rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--color-stone); opacity: 0.6;">— ${rev.guest}</span>
+            </div>
+          `).join('')}
+        </div>
+      </section>
+    `;
+  }
+
   const nearbyHtml = `
     <section class="prop-nearby-section">
       <h4 class="prop-nearby-title">Nearby Attractions</h4>
@@ -825,8 +826,10 @@ function openPropertyOverlay(slug) {
     ${roomsHtml}
     ${amenitiesHtml}
     ${experiencesHtml}
+    ${customizeHtml}
     ${nearbyHtml}
     ${mapHtml}
+    ${reviewsHtml}
     
     <div class="prop-booking-cta-bar">
       <h4 class="prop-cta-heading">Ready to step in?</h4>
@@ -838,7 +841,7 @@ function openPropertyOverlay(slug) {
             <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946C.06 5.348 5.397.01 12.008.01c3.202.001 6.212 1.246 8.477 3.514 2.266 2.268 3.507 5.28 3.505 8.484-.004 6.657-5.34 11.997-11.953 11.997-2.005-.001-3.973-.503-5.729-1.46L0 24zm6.59-4.846c1.6.95 3.188 1.449 4.825 1.451 5.436 0 9.86-4.37 9.864-9.799.002-2.63-1.023-5.101-2.885-6.965C16.59 2.01 14.12 1.01 11.5 1.012c-5.443 0-9.87 4.373-9.874 9.803-.001 1.737.478 3.427 1.39 4.938L2.08 21.82l6.236-1.637z" />
             <path d="M16.945 14.73c-.27-.135-1.597-.788-1.845-.878-.248-.09-.43-.135-.61.135-.18.27-.698.878-.855 1.058-.158.18-.315.202-.585.067-.27-.135-1.14-.42-2.17-1.34-.8-.713-1.34-1.597-1.498-1.867-.158-.27-.017-.417.118-.552.12-.122.27-.315.405-.473.135-.157.18-.27.27-.45.09-.18.045-.337-.022-.472-.068-.135-.61-1.467-.835-2.012-.22-.527-.44-.455-.61-.464-.158-.007-.338-.007-.518-.007-.18 0-.472.067-.72.337-.248.27-.945.923-.945 2.25 0 1.328.967 2.61 1.102 2.79.135.18 1.902 2.905 4.608 4.075.643.278 1.144.444 1.534.569.646.205 1.234.176 1.7.106.52-.078 1.597-.652 1.822-1.25.225-.597.225-1.103.158-1.21-.068-.108-.248-.154-.518-.29z"/>
           </svg>
-          Enquire on WhatsApp
+          Book Your Stay
         </button>
       </div>
     </div>
@@ -867,6 +870,14 @@ function openPropertyOverlay(slug) {
     const msg = `Hi ITW Team, I am interested in booking a stay at ${data.name}. Please connect me with a curator.`;
     window.open(`https://wa.me/919999999999?text=${encodeURIComponent(msg)}`, '_blank');
   });
+
+  const customizeTrigger = document.getElementById('prop-customize-trigger');
+  if (customizeTrigger) {
+    customizeTrigger.addEventListener('click', () => {
+      const msg = `Hi ITW Team, I am interested in customizing my stay at ${data.name}. I would like to enquire about: ${data.services.join(', ')}.`;
+      window.open(`https://wa.me/919999999999?text=${encodeURIComponent(msg)}`, '_blank');
+    });
+  }
 }
 
 function closePropertyOverlay() {
@@ -989,15 +1000,15 @@ function renderBookingStep() {
       <div class="booking-choice-list">
         <div class="choice-item ${bookingState.dest === 'Himachal Pradesh' ? 'selected' : ''}" data-val="Himachal Pradesh">
           <span class="choice-label">Himachal Pradesh</span>
-          <span class="choice-meta">4 sanctuaries</span>
+          <span class="choice-meta">4 stays</span>
         </div>
         <div class="choice-item ${bookingState.dest === 'Uttarakhand' ? 'selected' : ''}" data-val="Uttarakhand">
           <span class="choice-label">Uttarakhand</span>
-          <span class="choice-meta">2 sanctuaries</span>
+          <span class="choice-meta">3 stays</span>
         </div>
         <div class="choice-item ${bookingState.dest === 'Ladakh' ? 'selected' : ''}" data-val="Ladakh">
           <span class="choice-label">Ladakh</span>
-          <span class="choice-meta">2 sanctuaries</span>
+          <span class="choice-meta">1 stay</span>
         </div>
       </div>
     `;

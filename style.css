@@ -450,12 +450,12 @@ p {
   width: 100%;
   height: 100%;
   background: linear-gradient(to right, rgba(18,23,20,0.55) 0%, rgba(18,23,20,0) 50%, rgba(18,23,20,0.4) 100%),
-              radial-gradient(circle at 68% 50%, rgba(18,23,20,0) 25%, rgba(18,23,20,0.65) 90%);
+              radial-gradient(circle at 50% 50%, rgba(18,23,20,0) 25%, rgba(18,23,20,0.65) 90%);
   z-index: 2;
   pointer-events: none;
 }
 
-/* Editorial Text Overlays on Hero (Left Aligned - aman/villeneuve style) */
+/* Editorial Text Overlays on Hero (Centered - ITW V3 style) */
 .hero-text-overlay {
   position: absolute;
   top: 0;
@@ -466,19 +466,20 @@ p {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: flex-start;
-  padding: 6rem 8vw;
-  max-width: 48vw; /* locks text to the left side */
+  align-items: center;
+  padding: 2rem;
+  max-width: 100%;
   pointer-events: auto;
   transition: opacity 0.5s cubic-bezier(0.25, 1, 0.5, 1), transform 0.5s cubic-bezier(0.25, 1, 0.5, 1);
-  transform-origin: 67.7% 64.8%; /* synchronizes scaling with portal zoom */
+  transform-origin: center center; /* synchronizes scaling with portal zoom */
 }
 
 .hero-headline {
-  text-align: left;
+  text-align: center;
   margin-bottom: 2rem;
   display: flex;
   flex-direction: column;
+  align-items: center;
   gap: 0.5rem;
 }
 

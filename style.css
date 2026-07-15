@@ -724,6 +724,11 @@ p {
   z-index: 9;
 }
 
+#scene-featured {
+  background-color: var(--color-charcoal);
+  z-index: 10;
+}
+
 .walk-bg-video-container {
   position: absolute;
   top: -10%;

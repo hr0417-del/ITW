@@ -82,8 +82,6 @@ const destinationData = {
 // SCENE 1: LOADER INITIATION & AUDIO INITIALIZATION
 // ==========================================================================
 const loader = document.getElementById('scene-loader');
-const loader1 = document.getElementById('loader-line-1');
-const loader2 = document.getElementById('loader-line-2');
 const loaderLogoBox = document.getElementById('loader-logo-box');
 const enterBtn = document.getElementById('enter-btn');
 const audioToggleBtn = document.getElementById('audio-toggle-btn');
@@ -91,31 +89,12 @@ const iconMute = audioToggleBtn.querySelector('.icon-mute');
 const iconSound = audioToggleBtn.querySelector('.icon-sound');
 
 function runLoaderSequence() {
-  // Loader Text Sequence
-  setTimeout(() => {
-    if (loader1) loader1.classList.add('visible');
-  }, 500);
-
-  setTimeout(() => {
-    if (loader1) loader1.classList.remove('visible');
-  }, 2200);
-
-  setTimeout(() => {
-    if (loader2) loader2.classList.add('visible');
-  }, 3200);
-
-  setTimeout(() => {
-    if (loader2) loader2.classList.remove('visible');
-  }, 4900);
-
-  setTimeout(() => {
-    if (loaderLogoBox) {
-      loaderLogoBox.classList.remove('hidden');
-      setTimeout(() => {
-        loaderLogoBox.classList.add('visible');
-      }, 100);
-    }
-  }, 5900);
+  if (loaderLogoBox) {
+    loaderLogoBox.classList.remove('hidden');
+    setTimeout(() => {
+      loaderLogoBox.classList.add('visible');
+    }, 50);
+  }
 }
 
 if (document.readyState === 'loading') {

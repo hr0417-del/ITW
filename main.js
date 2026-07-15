@@ -1577,8 +1577,14 @@ class WeatherThemeEngine {
   }
   
   _resize() {
-    this.canvas.width = window.innerWidth;
-    this.canvas.height = window.innerHeight;
+    const parent = this.canvas.parentElement;
+    if (parent) {
+      this.canvas.width = parent.clientWidth;
+      this.canvas.height = parent.clientHeight;
+    } else {
+      this.canvas.width = window.innerWidth;
+      this.canvas.height = window.innerHeight;
+    }
   }
   
   _initParticles() {
@@ -1619,8 +1625,8 @@ class WeatherThemeEngine {
       y: randomY ? Math.random() * h : -Math.random() * 60,
       speed: 14 + Math.random() * 10,
       length: 18 + Math.random() * 28,
-      thickness: 0.6 + Math.random() * 0.8,
-      opacity: 0.08 + Math.random() * 0.18,
+      thickness: 0.8 + Math.random() * 1.0,
+      opacity: 0.15 + Math.random() * 0.35,
       wind: windAngle
     };
   }
@@ -1636,7 +1642,7 @@ class WeatherThemeEngine {
       wobbleAmp: 0.3 + Math.random() * 0.8,
       wobbleFreq: 0.01 + Math.random() * 0.02,
       wobblePhase: Math.random() * Math.PI * 2,
-      opacity: 0.15 + Math.random() * 0.45,
+      opacity: 0.3 + Math.random() * 0.5,
       rotation: Math.random() * Math.PI * 2,
       rotSpeed: (Math.random() - 0.5) * 0.02
     };
@@ -1649,7 +1655,7 @@ class WeatherThemeEngine {
       y: Math.random() * h,
       r: 100 + Math.random() * 200,
       vx: 0.08 + Math.random() * 0.18,
-      opacity: 0.02 + Math.random() * 0.05,
+      opacity: 0.06 + Math.random() * 0.09,
       pulsePhase: Math.random() * Math.PI * 2,
       pulseSpeed: 0.003 + Math.random() * 0.006
     };
@@ -1663,7 +1669,7 @@ class WeatherThemeEngine {
       r: 80 + Math.random() * 200,
       vx: (Math.random() - 0.5) * 0.06,
       vy: (Math.random() - 0.5) * 0.04,
-      opacity: 0.02 + Math.random() * 0.04,
+      opacity: 0.06 + Math.random() * 0.08,
       pulsePhase: Math.random() * Math.PI * 2,
       pulseSpeed: 0.003 + Math.random() * 0.007
     };
@@ -1672,8 +1678,8 @@ class WeatherThemeEngine {
   _makeLightShaft(w, h) {
     return {
       x: Math.random() * w,
-      width: 30 + Math.random() * 80,
-      opacity: 0.012 + Math.random() * 0.025,
+      width: 40 + Math.random() * 100,
+      opacity: 0.04 + Math.random() * 0.05,
       angle: -0.15 + Math.random() * 0.3,
       pulsePhase: Math.random() * Math.PI * 2,
       pulseSpeed: 0.002 + Math.random() * 0.004,

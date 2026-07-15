@@ -2549,6 +2549,25 @@ p {
   margin-bottom: 0.4rem;
 }
 
+.property-weather-badge {
+  font-family: var(--font-sans);
+  font-size: 0.75rem;
+  letter-spacing: 0.05em;
+  color: var(--color-stone);
+  opacity: 0.85;
+  margin-bottom: 0.4rem;
+  display: inline-block;
+}
+
+.property-weather-badge .weather-temp {
+  font-weight: 500;
+  color: var(--color-stone);
+}
+
+.property-weather-badge .weather-icon {
+  margin-left: 0.2rem;
+}
+
 .property-name,
 .all-property-name {
   font-family: var(--font-serif);

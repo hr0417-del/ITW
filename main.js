@@ -325,6 +325,8 @@ const propertiesDb = {
     dest: "Uttarakhand",
     loc: "Horrawala, Dehradun",
     cat: "Farm Stay",
+    lat: 30.3165,
+    lon: 78.0322,
     img: "./ITW/itw_luxury_farm_stay.png",
     gallery: [
       "./ITW/itw_luxury_farm_stay.png"
@@ -354,6 +356,8 @@ const propertiesDb = {
     dest: "Himachal Pradesh",
     loc: "Jispa",
     cat: "Camp & Cottages",
+    lat: 32.6285,
+    lon: 77.1896,
     img: "./ITW/itw_camp_cottages_jispa.png",
     gallery: [
       "./ITW/itw_camp_cottages_jispa.png"
@@ -383,6 +387,8 @@ const propertiesDb = {
     dest: "Himachal Pradesh",
     loc: "Keylong",
     cat: "Homestay",
+    lat: 32.5714,
+    lon: 77.0301,
     img: "./ITW/itw_mountain_homestay_keylong.png",
     gallery: [
       "./ITW/itw_mountain_homestay_keylong.png"
@@ -412,6 +418,8 @@ const propertiesDb = {
     dest: "Himachal Pradesh",
     loc: "Jibhi",
     cat: "Forest Cottages",
+    lat: 31.6372,
+    lon: 77.3323,
     img: "https://images.unsplash.com/photo-1542401886-65d6c61db217?auto=format&fit=crop&w=1200&q=80",
     gallery: [
       "https://images.unsplash.com/photo-1542401886-65d6c61db217?auto=format&fit=crop&w=1200&q=80"
@@ -441,6 +449,8 @@ const propertiesDb = {
     dest: "Himachal Pradesh",
     loc: "Jibhi",
     cat: "Luxury Tree House",
+    lat: 31.6372,
+    lon: 77.3323,
     img: "https://images.unsplash.com/photo-1448375240586-882707db888b?auto=format&fit=crop&w=1200&q=80",
     gallery: [
       "https://images.unsplash.com/photo-1448375240586-882707db888b?auto=format&fit=crop&w=1200&q=80"
@@ -470,6 +480,8 @@ const propertiesDb = {
     dest: "Ladakh",
     loc: "Tyakshi, Turtuk",
     cat: "Luxury Camp",
+    lat: 34.8451,
+    lon: 76.8338,
     img: "./ITW/itw_frontier_camp.png",
     gallery: [
       "./ITW/itw_frontier_camp.png"
@@ -499,6 +511,8 @@ const propertiesDb = {
     dest: "Uttarakhand",
     loc: "Viratkhai",
     cat: "Mountain Huts",
+    lat: 30.6139,
+    lon: 77.9042,
     img: "./ITW/itw_mountain_huts_viratkhai.png",
     gallery: [
       "./ITW/itw_mountain_huts_viratkhai.png"
@@ -528,6 +542,8 @@ const propertiesDb = {
     dest: "Uttarakhand",
     loc: "Viratkhai",
     cat: "Camp & Huts",
+    lat: 30.6139,
+    lon: 77.9042,
     img: "./ITW/itw_huts_camp_viratkhai.png",
     gallery: [
       "./ITW/itw_huts_camp_viratkhai.png"
@@ -776,7 +792,7 @@ function openPropertyOverlay(slug) {
       <div class="prop-hero-header">
         <span class="prop-badge-cat">${data.cat}</span>
         <h1 class="prop-hero-title">${data.name}</h1>
-        <p class="prop-hero-loc">${data.dest} • ${data.loc}</p>
+        <p class="prop-hero-loc">${data.dest} • ${data.loc}<span class="details-weather-val" id="details-weather-val"></span></p>
       </div>
     </div>
     
@@ -839,6 +855,15 @@ function openPropertyOverlay(slug) {
     customizeTrigger.addEventListener('click', () => {
       const msg = `Hi ITW Team, I am interested in customizing my stay at ${data.name}. I would like to enquire about: ${data.services.join(', ')}.`;
       window.open(`https://wa.me/919999999999?text=${encodeURIComponent(msg)}`, '_blank');
+    });
+  }
+
+  if (data.lat && data.lon) {
+    getWeatherForProperty(slug, data.lat, data.lon).then(weather => {
+      const weatherValEl = document.getElementById('details-weather-val');
+      if (weatherValEl) {
+        weatherValEl.innerHTML = ` &bull; <span style="color: var(--color-stone);">${weather.temp}&deg;C</span> ${weather.icon} <span style="opacity: 0.6; font-size: 0.9rem; font-family: var(--font-sans); letter-spacing: 0.05em; text-transform: uppercase; margin-left: 0.25rem;">(${weather.desc})</span>`;
+      }
     });
   }
 }
@@ -1342,7 +1367,6 @@ document.querySelectorAll('.scene, .scene-scroll-container').forEach(section => 
 });
 
 // Initialize dynamic lists & snow
-renderAllProperties();
 initSnow();
 animateSnow();
 
@@ -1378,3 +1402,113 @@ if (headerInquireBtn) {
   });
 }
 
+
+// ==========================================================================
+// WEATHER SERVICE INTEGRATION (OPEN-METEO)
+// ==========================================================================
+const weatherCache = {};
+
+// Fallbacks for offline / API failures
+const weatherFallbacks = {
+  "luxury-farm-stay": { temp: 28, icon: "☀️", desc: "Clear Sky" },
+  "camp-cottages": { temp: 14, icon: "🌤️", desc: "Partly Cloudy" },
+  "mountain-homestay": { temp: 15, icon: "🌤️", desc: "Partly Cloudy" },
+  "forest-cottages": { temp: 18, icon: "🌤️", desc: "Partly Cloudy" },
+  "luxury-tree-house": { temp: 18, icon: "🌤️", desc: "Partly Cloudy" },
+  "frontier-camp": { temp: 16, icon: "☀️", desc: "Clear Sky" },
+  "mountain-huts": { temp: 17, icon: "🌤️", desc: "Partly Cloudy" },
+  "camp-huts": { temp: 17, icon: "🌤️", desc: "Partly Cloudy" }
+};
+
+function getWeatherIconAndDesc(code) {
+  switch (code) {
+    case 0: return { icon: "☀️", desc: "Clear Sky" };
+    case 1:
+    case 2:
+    case 3: return { icon: "🌤️", desc: "Partly Cloudy" };
+    case 45:
+    case 48: return { icon: "🌫️", desc: "Foggy" };
+    case 51:
+    case 53:
+    case 55: return { icon: "🌧️", desc: "Drizzle" };
+    case 61:
+    case 63:
+    case 65: return { icon: "🌧️", desc: "Rain" };
+    case 71:
+    case 73:
+    case 75: return { icon: "🌨️", desc: "Snowfall" };
+    case 77: return { icon: "🌨️", desc: "Snow grains" };
+    case 80:
+    case 81:
+    case 82: return { icon: "🌦️", desc: "Rain Showers" };
+    case 85:
+    case 86: return { icon: "🌨️", desc: "Snow Showers" };
+    case 95:
+    case 96:
+    case 99: return { icon: "⛈️", desc: "Thunderstorm" };
+    default: return { icon: "🌤️", desc: "Mild" };
+  }
+}
+
+async function getWeatherForProperty(slug, lat, lon) {
+  if (weatherCache[slug]) {
+    return weatherCache[slug];
+  }
+  
+  try {
+    const controller = new AbortController();
+    const timeoutId = setTimeout(() => controller.abort(), 4000); // 4 seconds timeout
+    
+    const response = await fetch(`https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current_weather=true`, { signal: controller.signal });
+    clearTimeout(timeoutId);
+    
+    if (!response.ok) throw new Error("API error status");
+    const json = await response.json();
+    if (!json.current_weather) throw new Error("No current weather data");
+    
+    const temp = Math.round(json.current_weather.temperature);
+    const code = json.current_weather.weathercode;
+    const cond = getWeatherIconAndDesc(code);
+    
+    const result = { temp, icon: cond.icon, desc: cond.desc };
+    weatherCache[slug] = result;
+    return result;
+  } catch (err) {
+    console.warn(`Weather API failed for ${slug}, using fallback:`, err.message);
+    const fb = weatherFallbacks[slug] || { temp: 18, icon: "🌤️", desc: "Partly Cloudy" };
+    weatherCache[slug] = fb;
+    return fb;
+  }
+}
+
+// Inject weather details to homepage property cards dynamically
+function injectWeatherToCards() {
+  document.querySelectorAll('.property-card').forEach(card => {
+    const slug = card.getAttribute('data-slug');
+    const data = propertiesDb[slug];
+    if (data && data.lat && data.lon) {
+      getWeatherForProperty(slug, data.lat, data.lon).then(weather => {
+        const content = card.querySelector('.property-content');
+        if (content) {
+          let weatherBadge = card.querySelector('.property-weather-badge');
+          if (!weatherBadge) {
+            weatherBadge = document.createElement('span');
+            weatherBadge.className = 'property-weather-badge';
+            const locEl = card.querySelector('.property-location');
+            if (locEl) {
+              locEl.after(weatherBadge);
+            }
+          }
+          weatherBadge.innerHTML = ` &bull; <span class="weather-temp">${weather.temp}&deg;C</span> <span class="weather-icon" title="${weather.desc}">${weather.icon}</span>`;
+        }
+      });
+    }
+  });
+}
+
+// Call on load
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', injectWeatherToCards);
+} else {
+  injectWeatherToCards();
+}

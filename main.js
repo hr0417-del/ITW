@@ -399,13 +399,13 @@ const propertiesDb = {
         name: "Glacial River Cottage",
         occupancy: "2 Guests",
         inclusions: "Gourmet Dinner & Breakfast, Riverside Walk Guided Tour",
-        img: "./properties/camp-cottages/img_1.jpg"
+        img: "./properties/camp-cottages/img_1.webp"
       },
       {
         name: "Luxury Riverside Dome",
         occupancy: "2 Guests",
         inclusions: "Gourmet Dinner & Breakfast, High-Altitude Stargazing Experience",
-        img: "./properties/camp-cottages/img_3.jpg"
+        img: "./properties/camp-cottages/img_3.webp"
       }
     ]
   },

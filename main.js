@@ -466,7 +466,7 @@ const propertiesDb = {
     cat: "Forest Cottages",
     lat: 31.6372,
     lon: 77.3323,
-    img: "./properties/forest-cottages/img_1.jpeg",
+    img: "./properties/forest-cottages/hero.avif",
     gallery: [
       "./properties/forest-cottages/img_1.jpeg",
       "./properties/forest-cottages/img_2.jpeg",
@@ -511,7 +511,7 @@ const propertiesDb = {
     cat: "Luxury Tree House",
     lat: 31.6372,
     lon: 77.3323,
-    img: "./properties/luxury-tree-house/img_1.jpeg",
+    img: "./properties/luxury-tree-house/hero.avif",
     gallery: [
       "./properties/luxury-tree-house/img_1.jpeg",
       "./properties/luxury-tree-house/img_2.jpeg",

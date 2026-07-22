@@ -958,14 +958,14 @@ function openPropertyOverlay(slug) {
   
   document.getElementById('prop-whatsapp-trigger').addEventListener('click', () => {
     const msg = `Hi ITW Team, I am interested in booking a stay at ${data.name}. Please connect me with a curator.`;
-    window.open(`https://wa.me/919999999999?text=${encodeURIComponent(msg)}`, '_blank');
+    window.open(`https://wa.me/917404385783?text=${encodeURIComponent(msg)}`, '_blank');
   });
 
   const customizeTrigger = document.getElementById('prop-customize-trigger');
   if (customizeTrigger) {
     customizeTrigger.addEventListener('click', () => {
       const msg = `Hi ITW Team, I am interested in customizing my stay at ${data.name}. I would like to enquire about: ${data.services.join(', ')}.`;
-      window.open(`https://wa.me/919999999999?text=${encodeURIComponent(msg)}`, '_blank');
+      window.open(`https://wa.me/917404385783?text=${encodeURIComponent(msg)}`, '_blank');
     });
   }
 
@@ -1363,7 +1363,7 @@ function bindWizardControls(container) {
 
 Please confirm availability and sharing details.`;
       
-      const whatsappUrl = `https://wa.me/919999999999?text=${encodeURIComponent(text)}`;
+      const whatsappUrl = `https://wa.me/917404385783?text=${encodeURIComponent(text)}`;
       window.open(whatsappUrl, '_blank');
       closeBookingPortal();
     });

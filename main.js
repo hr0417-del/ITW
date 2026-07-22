@@ -466,11 +466,17 @@ const propertiesDb = {
     cat: "Forest Cottages",
     lat: 31.6372,
     lon: 77.3323,
-    img: "https://images.unsplash.com/photo-1542401886-65d6c61db217?auto=format&fit=crop&w=1200&q=80",
+    img: "./properties/forest-cottages/img_1.jpeg",
     gallery: [
-      "https://images.unsplash.com/photo-1542401886-65d6c61db217?auto=format&fit=crop&w=1200&q=80",
-      "https://images.unsplash.com/photo-1510798831971-661eb04b3739?auto=format&fit=crop&w=800&q=80",
-      "https://images.unsplash.com/photo-1448375240586-882707db888b?auto=format&fit=crop&w=800&q=80"
+      "./properties/forest-cottages/img_1.jpeg",
+      "./properties/forest-cottages/img_2.jpeg",
+      "./properties/forest-cottages/img_3.jpeg",
+      "./properties/forest-cottages/img_4.jpeg",
+      "./properties/forest-cottages/img_5.jpeg",
+      "./properties/forest-cottages/img_6.jpeg",
+      "./properties/forest-cottages/img_7.jpeg",
+      "./properties/forest-cottages/img_8.jpeg",
+      "./properties/forest-cottages/img_9.jpeg"
     ],
     quote: "Cozy duplex stone cabins built deep inside pine woods.",
     about: "Duplex forest cottages nestled among cedar trees in the Tirthan Valley. Built using local stone and cedar-wood, these properties offer ultimate comfort in the heart of nature.",
@@ -488,13 +494,13 @@ const propertiesDb = {
         name: "Duplex Cedar Cottage",
         occupancy: "3 Guests",
         inclusions: "Gourmet Breakfast, Forest Trail Guide",
-        img: "https://images.unsplash.com/photo-1542401886-65d6c61db217?auto=format&fit=crop&w=1200&q=80"
+        img: "./properties/forest-cottages/img_1.jpeg"
       },
       {
         name: "Forest Ridge Suite",
         occupancy: "2 Guests",
         inclusions: "Organic Breakfast, Riverside Walk Guided Tour",
-        img: "https://images.unsplash.com/photo-1510798831971-661eb04b3739?auto=format&fit=crop&w=800&q=80"
+        img: "./properties/forest-cottages/img_3.jpeg"
       }
     ]
   },
@@ -505,11 +511,17 @@ const propertiesDb = {
     cat: "Luxury Tree House",
     lat: 31.6372,
     lon: 77.3323,
-    img: "https://images.unsplash.com/photo-1448375240586-882707db888b?auto=format&fit=crop&w=1200&q=80",
+    img: "./properties/luxury-tree-house/img_1.jpeg",
     gallery: [
-      "https://images.unsplash.com/photo-1448375240586-882707db888b?auto=format&fit=crop&w=1200&q=80",
-      "https://images.unsplash.com/photo-1508193638397-1c4234db14d8?auto=format&fit=crop&w=800&q=80",
-      "https://images.unsplash.com/photo-1542401886-65d6c61db217?auto=format&fit=crop&w=800&q=80"
+      "./properties/luxury-tree-house/img_1.jpeg",
+      "./properties/luxury-tree-house/img_2.jpeg",
+      "./properties/luxury-tree-house/img_3.jpeg",
+      "./properties/luxury-tree-house/img_4.jpeg",
+      "./properties/luxury-tree-house/img_5.jpeg",
+      "./properties/luxury-tree-house/img_6.jpeg",
+      "./properties/luxury-tree-house/img_7.jpeg",
+      "./properties/luxury-tree-house/img_8.jpeg",
+      "./properties/luxury-tree-house/img_9.jpeg"
     ],
     quote: "Live above the canopy in a high-elevation jacuzzi deck.",
     about: "Luxury tree house with jacuzzi and panoramic forest views. Hover above the pine canopy in a beautifully engineered wooden tree house featuring floor-to-ceiling glass panes and quiet luxury.",
@@ -527,13 +539,13 @@ const propertiesDb = {
         name: "Canopy Jacuzzi Suite",
         occupancy: "2 Guests",
         inclusions: "Continental Breakfast, Private BBQ Setup on Deck",
-        img: "https://images.unsplash.com/photo-1448375240586-882707db888b?auto=format&fit=crop&w=1200&q=80"
+        img: "./properties/luxury-tree-house/img_1.jpeg"
       },
       {
         name: "Pine Forest Loft",
         occupancy: "2 Guests",
         inclusions: "Continental Breakfast, Stargazing Telescope Use",
-        img: "https://images.unsplash.com/photo-1508193638397-1c4234db14d8?auto=format&fit=crop&w=800&q=80"
+        img: "./properties/luxury-tree-house/img_3.jpeg"
       }
     ]
   },

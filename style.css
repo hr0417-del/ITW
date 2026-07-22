@@ -3810,6 +3810,130 @@ p {
     grid-template-columns: 1fr; /* 1 column on Mobile */
     gap: 1.5rem;
   }
+
+  /* Property Page mobile styling */
+  .prop-hero {
+    height: 50vh;
+  }
+  .prop-hero-title {
+    font-size: 2.2rem;
+  }
+  .prop-hero-header {
+    padding: 0 1.25rem 2rem;
+  }
+  .prop-tagline-quote {
+    font-size: 1.4rem;
+    margin-bottom: 1.5rem;
+  }
+  .prop-description-body {
+    font-size: 1rem;
+    line-height: 1.7;
+  }
+  .prop-gallery-section,
+  .prop-rooms-section,
+  .prop-amenities-section {
+    margin-top: 4rem;
+    padding: 0 1.25rem;
+  }
+  .prop-gallery-item {
+    height: 250px;
+  }
+  .prop-gallery-title,
+  .prop-rooms-title,
+  .prop-amenities-title,
+  .prop-customize-title,
+  .prop-reviews-title {
+    font-size: 1.6rem;
+    margin-bottom: 2rem;
+  }
+  .room-name {
+    font-size: 1.6rem;
+  }
+  .room-details-box {
+    padding: 1.5rem;
+  }
+  .prop-amenities-grid {
+    grid-template-columns: 1fr;
+    gap: 1.25rem;
+  }
+  .amenity-item {
+    font-size: 0.95rem;
+  }
+  .prop-booking-cta-bar {
+    margin-top: 4rem;
+    padding: 2.5rem 1.25rem;
+  }
+  .prop-cta-heading {
+    font-size: 1.8rem;
+  }
+  .prop-cta-btns-row {
+    gap: 1rem;
+  }
+  .prop-direct-book-btn,
+  .prop-whatsapp-btn {
+    padding: 1rem 1.5rem;
+    font-size: 0.8rem;
+    width: 100%;
+    justify-content: center;
+  }
+
+  /* Booking portal mobile adjustments */
+  .booking-portal-content {
+    padding: 2rem 1rem;
+  }
+  .booking-wizard-step {
+    padding: 2.2rem 1.5rem;
+  }
+  .step-question {
+    font-size: 1.6rem;
+    margin-bottom: 2rem;
+  }
+  .booking-date-input,
+  .booking-select-input {
+    font-size: 1rem;
+    padding: 0.9rem 1.1rem;
+  }
+  .choice-item {
+    padding: 1rem;
+  }
+  .choice-label {
+    font-size: 0.95rem;
+  }
+  .wizard-nav-footer {
+    margin-top: 2.5rem;
+    gap: 1rem;
+    flex-direction: column-reverse;
+  }
+  .wizard-back-btn,
+  .wizard-next-btn {
+    width: 100%;
+    padding: 0.9rem 1.5rem;
+  }
+  .booking-results-container {
+    max-height: 48vh;
+    padding-right: 0;
+  }
+  .result-details-box {
+    padding: 1.5rem;
+  }
+  .result-room-name {
+    font-size: 1.4rem;
+  }
+  .result-price-cta-row {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 1rem;
+  }
+  .result-cta-btn {
+    width: 100%;
+    text-align: center;
+  }
+  .close-overlay-btn {
+    top: 1rem;
+    right: 1rem;
+    width: 40px;
+    height: 40px;
+  }
 }
 
 @media (max-width: 768px) {

@@ -327,17 +327,26 @@ const propertiesDb = {
     cat: "Farm Stay",
     lat: 30.3165,
     lon: 78.0322,
-    img: "./ITW/itw_luxury_farm_stay.png",
+    img: "./properties/luxury-farm-stay/hero_enhanced.png",
     gallery: [
-      "./ITW/itw_luxury_farm_stay.png"
+      "./properties/luxury-farm-stay/hero_enhanced.png",
+      "./properties/luxury-farm-stay/img_1.jpeg",
+      "./properties/luxury-farm-stay/img_2.jpeg",
+      "./properties/luxury-farm-stay/img_3.jpeg",
+      "./properties/luxury-farm-stay/img_4.jpeg",
+      "./properties/luxury-farm-stay/img_5.jpeg",
+      "./properties/luxury-farm-stay/img_6.jpeg",
+      "./properties/luxury-farm-stay/img_7.jpeg",
+      "./properties/luxury-farm-stay/img_8.jpeg",
+      "./properties/luxury-farm-stay/img_9.jpeg"
     ],
     quote: "A private agricultural oasis nestled in the foothills of Dehradun.",
-    about: "Private luxury farm stay featuring an exclusive villa, outdoor pool, private orchards, and landscaped gardens. Dwell in absolute seclusion surrounded by seasonal harvest fields.",
-    amenities: ["Villa Access", "Private Pool", "Organic Farms", "Personal Chef", "Wi-Fi Access", "Lawn Lounge"],
-    experiences: ["Farm-to-Table Dining", "Fruit Harvesting", "Foothills Cycling", "Private Yoga Sessions"],
-    nearby: ["Robber's Cave", "Forest Research Institute", "Sahastradhara Springs"],
+    about: "A private luxury farm stay featuring an exclusive villa, outdoor pool, private fruit orchards, and lush landscaped gardens. Dwell in absolute seclusion surrounded by seasonal harvest fields, where still morning air meets luxury living.",
+    amenities: ["Villa Access", "Private Pool", "Organic Farms", "Personal Chef", "Wi-Fi Access", "Lawn Lounge", "Bukhari Fireplace", "Heritage Orchard Access"],
+    experiences: ["Farm-to-Table Dining", "Fruit Harvesting", "Foothills Cycling", "Private Yoga Sessions", "Traditional Cooking Class"],
+    nearby: ["Robber's Cave", "Forest Research Institute", "Sahastradhara Springs", "Mindrolling Monastery"],
     locationDesc: "Horrawala, Dehradun, Uttarakhand. Situated on a private agricultural estate.",
-    services: ["Airport Transfers", "Private Cabs", "Local Food Experiences", "Chef-led Baking Sessions", "Village Walks", "Celebration Planning"],
+    services: ["Airport Transfers", "Private Cabs", "Local Food Experiences", "Chef-led Baking Sessions", "Village Walks", "Celebration Planning", "Private Sommelier"],
     reviews: [
       { guest: "Rohan M.", text: "An absolute oasis of peace. The farm-to-table meals were extraordinary.", rating: "5/5" },
       { guest: "Kabir S.", text: "Perfect luxury stay. Having the private pool and orchards to ourselves was incredible.", rating: "5/5" }
@@ -346,8 +355,14 @@ const propertiesDb = {
       {
         name: "Luxury Foothills Villa",
         occupancy: "4 Guests",
-        inclusions: "Exclusive Villa Use, Organic Breakfast, Farm Tour",
-        img: "./ITW/itw_luxury_farm_stay.png"
+        inclusions: "Exclusive Villa Use, Organic Breakfast, Farm Tour, Airport Transfer",
+        img: "./properties/luxury-farm-stay/img_1.jpeg"
+      },
+      {
+        name: "Heritage Orchard Suite",
+        occupancy: "2 Guests",
+        inclusions: "Organic Breakfast, Chef-led Fruit Baking Session, Orchard Walk",
+        img: "./properties/luxury-farm-stay/img_3.jpeg"
       }
     ]
   },
@@ -358,17 +373,25 @@ const propertiesDb = {
     cat: "Camp & Cottages",
     lat: 32.6285,
     lon: 77.1896,
-    img: "./ITW/itw_camp_cottages_jispa.png",
+    img: "./properties/camp-cottages/hero_enhanced.png",
     gallery: [
-      "./ITW/itw_camp_cottages_jispa.png"
+      "./properties/camp-cottages/hero_enhanced.png",
+      "./properties/camp-cottages/img_1.jpg",
+      "./properties/camp-cottages/img_2.webp",
+      "./properties/camp-cottages/img_3.jpg",
+      "./properties/camp-cottages/img_4.webp",
+      "./properties/camp-cottages/img_5.jpg",
+      "./properties/camp-cottages/img_6.webp",
+      "./properties/camp-cottages/img_7.webp",
+      "./properties/camp-cottages/img_8.webp"
     ],
     quote: "Sleep beside the rushing Bhaga River on the Manali-Leh Highway.",
-    about: "Luxury camps and mountain cottages surrounded by the majestic Himalayas. Wake up to raw granite peaks, roaring glacial streams, and high-altitude wilderness.",
-    amenities: ["Riverside Deck", "Heated Tents", "Local Himachali Buffet", "Hot Running Water", "Star Gazing Telescopes"],
-    experiences: ["Bhaga River Treks", "High-Altitude Stargazing", "Angling", "Local Village Curation"],
-    nearby: ["Suraj Tal Lake", "Baralacha La Pass", "Keylong Monastery"],
+    about: "Luxury camps and mountain cottages surrounded by the majestic Himalayas. Wake up to raw granite peaks, roaring glacial streams, and high-altitude wilderness, with warm hospitality in the cold desert.",
+    amenities: ["Riverside Deck", "Heated Tents", "Local Himachali Buffet", "Hot Running Water", "Star Gazing Telescopes", "Cozy Fire Pit", "Alpine Library"],
+    experiences: ["Bhaga River Treks", "High-Altitude Stargazing", "Angling", "Local Village Curation", "Glacier Trail Hike"],
+    nearby: ["Suraj Tal Lake", "Baralacha La Pass", "Keylong Monastery", "Deepak Tal Lake"],
     locationDesc: "Jispa, Lahaul Valley, Himachal Pradesh. Located on the banks of the Bhaga River.",
-    services: ["Airport Transfers", "Private Cabs", "Guided Treks", "Hiking Trails", "Camping", "Bonfire"],
+    services: ["Airport Transfers", "Private Cabs", "Guided Treks", "Hiking Trails", "Camping", "Bonfire", "Motorcycle Servicing Guide"],
     reviews: [
       { guest: "Ananya R.", text: "Stunning river views and incredible hospitality. The heated tents were extremely cozy.", rating: "5/5" },
       { guest: "Vikram P.", text: "A must-stay on the Manali-Leh highway. The mountain backdrop is surreal.", rating: "5/5" }
@@ -378,7 +401,13 @@ const propertiesDb = {
         name: "Glacial River Cottage",
         occupancy: "2 Guests",
         inclusions: "Gourmet Dinner & Breakfast, Riverside Walk Guided Tour",
-        img: "./ITW/itw_camp_cottages_jispa.png"
+        img: "./properties/camp-cottages/img_2.webp"
+      },
+      {
+        name: "Luxury Riverside Dome",
+        occupancy: "2 Guests",
+        inclusions: "Gourmet Dinner & Breakfast, High-Altitude Stargazing Experience",
+        img: "./properties/camp-cottages/img_4.webp"
       }
     ]
   },
@@ -389,17 +418,31 @@ const propertiesDb = {
     cat: "Homestay",
     lat: 32.5714,
     lon: 77.0301,
-    img: "./ITW/itw_mountain_homestay_keylong.png",
+    img: "./properties/mountain-homestay/hero_enhanced.png",
     gallery: [
-      "./ITW/itw_mountain_homestay_keylong.png"
+      "./properties/mountain-homestay/hero_enhanced.png",
+      "./properties/mountain-homestay/img_1.webp",
+      "./properties/mountain-homestay/img_2.webp",
+      "./properties/mountain-homestay/img_3.webp",
+      "./properties/mountain-homestay/img_4.webp",
+      "./properties/mountain-homestay/img_5.webp",
+      "./properties/mountain-homestay/img_6.jpg",
+      "./properties/mountain-homestay/img_7.jpg",
+      "./properties/mountain-homestay/img_8.jpg",
+      "./properties/mountain-homestay/img_9.jpg",
+      "./properties/mountain-homestay/img_10.webp",
+      "./properties/mountain-homestay/img_11.jpeg",
+      "./properties/mountain-homestay/img_12.jpeg",
+      "./properties/mountain-homestay/img_13.jpeg",
+      "./properties/mountain-homestay/img_14.jpeg"
     ],
     quote: "Authentic Himalayan lifestyle facing the Kardang Monastery.",
-    about: "Authentic Himalayan hospitality with panoramic mountain views. Experience Lahauli warmth, home-cooked local meals, and rooms looking directly out over the Kardang Monastery Ridge.",
-    amenities: ["Monastery Views", "Traditional Bukhari Heater", "Lahauli Home Kitchen", "Library", "Warm Blankets"],
-    experiences: ["Monastery Walk", "Weaving Workshops", "Traditional Tea Curation", "Glacier Hikes"],
-    nearby: ["Kardang Monastery", "Shashur Monastery", "Tandi Confluence"],
+    about: "Authentic Himalayan hospitality with panoramic mountain views. Experience Lahauli warmth, home-cooked local meals, and rooms looking directly out over the Kardang Monastery Ridge. A home deep in the mountains.",
+    amenities: ["Monastery Views", "Traditional Bukhari Heater", "Lahauli Home Kitchen", "Library", "Warm Blankets", "Tea Room", "Rooftop Terrace"],
+    experiences: ["Monastery Walk", "Weaving Workshops", "Traditional Tea Curation", "Glacier Hikes", "Lahauli Language Intro"],
+    nearby: ["Kardang Monastery", "Shashur Monastery", "Tandi Confluence", "Tayul Monastery"],
     locationDesc: "Keylong, Lahaul Valley, Himachal Pradesh. Set overlooking the Kardang Monastery.",
-    services: ["Airport Transfers", "Bus Assistance", "Local Food Experiences", "Photography Tours", "Village Walks"],
+    services: ["Airport Transfers", "Bus Assistance", "Local Food Experiences", "Photography Tours", "Village Walks", "Prayer Flags Workshop"],
     reviews: [
       { guest: "Siddharth J.", text: "The homestay felt like visiting family. The Lahauli food was pure soul food.", rating: "5/5" },
       { guest: "Nisha K.", text: "Views of the monastery in the morning are breath-taking. Deeply peaceful.", rating: "5/5" }
@@ -409,7 +452,13 @@ const propertiesDb = {
         name: "Monastery View Room",
         occupancy: "2 Guests",
         inclusions: "Traditional Home Breakfast, Guided Monastery Stroll",
-        img: "./ITW/itw_mountain_homestay_keylong.png"
+        img: "./properties/mountain-homestay/img_1.webp"
+      },
+      {
+        name: "High-Altitude Attic Suite",
+        occupancy: "2 Guests",
+        inclusions: "Traditional Bukhari Setup, Local Herbal Teas, Home Cooked Dinners",
+        img: "./properties/mountain-homestay/img_3.webp"
       }
     ]
   },
@@ -422,11 +471,13 @@ const propertiesDb = {
     lon: 77.3323,
     img: "https://images.unsplash.com/photo-1542401886-65d6c61db217?auto=format&fit=crop&w=1200&q=80",
     gallery: [
-      "https://images.unsplash.com/photo-1542401886-65d6c61db217?auto=format&fit=crop&w=1200&q=80"
+      "https://images.unsplash.com/photo-1542401886-65d6c61db217?auto=format&fit=crop&w=1200&q=80",
+      "https://images.unsplash.com/photo-1510798831971-661eb04b3739?auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1448375240586-882707db888b?auto=format&fit=crop&w=800&q=80"
     ],
     quote: "Cozy duplex stone cabins built deep inside pine woods.",
     about: "Duplex forest cottages nestled among cedar trees in the Tirthan Valley. Built using local stone and cedar-wood, these properties offer ultimate comfort in the heart of nature.",
-    amenities: ["Private Balcony", "Cedar Wood Interiors", "Local Himachali Kitchen", "Wi-Fi Access", "Hammock Area"],
+    amenities: ["Private Balcony", "Cedar Wood Interiors", "Local Himachali Kitchen", "Wi-Fi Access", "Hammock Area", "Fireplace"],
     experiences: ["Pine Forest Walks", "Waterfall Trekking", "Angling in Tirthan River", "Campfire Music"],
     nearby: ["Jibhi Waterfall", "Jalori Pass", "Serolsar Lake"],
     locationDesc: "Jibhi, Tirthan Valley, Himachal Pradesh. Nestled in a private cedar pine forest.",
@@ -441,6 +492,12 @@ const propertiesDb = {
         occupancy: "3 Guests",
         inclusions: "Gourmet Breakfast, Forest Trail Guide",
         img: "https://images.unsplash.com/photo-1542401886-65d6c61db217?auto=format&fit=crop&w=1200&q=80"
+      },
+      {
+        name: "Forest Ridge Suite",
+        occupancy: "2 Guests",
+        inclusions: "Organic Breakfast, Riverside Walk Guided Tour",
+        img: "https://images.unsplash.com/photo-1510798831971-661eb04b3739?auto=format&fit=crop&w=800&q=80"
       }
     ]
   },
@@ -453,7 +510,9 @@ const propertiesDb = {
     lon: 77.3323,
     img: "https://images.unsplash.com/photo-1448375240586-882707db888b?auto=format&fit=crop&w=1200&q=80",
     gallery: [
-      "https://images.unsplash.com/photo-1448375240586-882707db888b?auto=format&fit=crop&w=1200&q=80"
+      "https://images.unsplash.com/photo-1448375240586-882707db888b?auto=format&fit=crop&w=1200&q=80",
+      "https://images.unsplash.com/photo-1508193638397-1c4234db14d8?auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1542401886-65d6c61db217?auto=format&fit=crop&w=800&q=80"
     ],
     quote: "Live above the canopy in a high-elevation jacuzzi deck.",
     about: "Luxury tree house with jacuzzi and panoramic forest views. Hover above the pine canopy in a beautifully engineered wooden tree house featuring floor-to-ceiling glass panes and quiet luxury.",
@@ -472,6 +531,12 @@ const propertiesDb = {
         occupancy: "2 Guests",
         inclusions: "Continental Breakfast, Private BBQ Setup on Deck",
         img: "https://images.unsplash.com/photo-1448375240586-882707db888b?auto=format&fit=crop&w=1200&q=80"
+      },
+      {
+        name: "Pine Forest Loft",
+        occupancy: "2 Guests",
+        inclusions: "Continental Breakfast, Stargazing Telescope Use",
+        img: "https://images.unsplash.com/photo-1508193638397-1c4234db14d8?auto=format&fit=crop&w=800&q=80"
       }
     ]
   },
@@ -482,17 +547,22 @@ const propertiesDb = {
     cat: "Luxury Camp",
     lat: 34.8451,
     lon: 76.8338,
-    img: "./ITW/itw_frontier_camp.png",
+    img: "./properties/frontier-camp/hero_enhanced.png",
     gallery: [
-      "./ITW/itw_frontier_camp.png"
+      "./properties/frontier-camp/hero_enhanced.png",
+      "./properties/frontier-camp/img_1.jpeg",
+      "./properties/frontier-camp/img_2.jpeg",
+      "./properties/frontier-camp/img_3.jpeg",
+      "./properties/frontier-camp/img_4.jpeg",
+      "./properties/frontier-camp/img_5.jpeg"
     ],
     quote: "A luxury dome outpost nestled on the edge of the Shyok River.",
     about: "Premium Himalayan camping in Turtuk's unforgettable border landscape. Wake up to towering granite walls, organic apricot orchards, and the serene flow of the Shyok River.",
-    amenities: ["Insulated Glamping Dome", "Riverfront Seating", "Organic Apricot Garden Access", "Himalayan Herbal Baths", "Star Gazing Deck"],
-    experiences: ["Balti Village Walk", "Border Outpost Cycling", "Shyok River Trails", "Balti Culinary Curation"],
-    nearby: ["Turtuk Museum", "Line of Control Border Point", "Hunder Sand Dunes"],
+    amenities: ["Insulated Glamping Dome", "Riverfront Seating", "Organic Apricot Garden Access", "Himalayan Herbal Baths", "Star Gazing Deck", "Traditional Floor Seating", "Bukhari Heaters"],
+    experiences: ["Balti Village Walk", "Border Outpost Cycling", "Shyok River Trails", "Balti Culinary Curation", "Turtuk Monastery Hike"],
+    nearby: ["Turtuk Museum", "Line of Control Border Point", "Hunder Sand Dunes", "Yagshoor Historic Fort"],
     locationDesc: "Tyakshi, Turtuk, Ladakh. Situated in the northernmost border valley.",
-    services: ["Airport Transfers", "Private Cabs", "Guided Treks", "Camping", "Bonfire", "Photography Tours"],
+    services: ["Airport Transfers", "Private Cabs", "Guided Treks", "Camping", "Bonfire", "Photography Tours", "Local Language Translation Guide"],
     reviews: [
       { guest: "Pritam D.", text: "Glamping in a dome facing the Shyok River was amazing. Balti dinners were fantastic.", rating: "5/5" },
       { guest: "Zoya H.", text: "Incredibly remote, but with all the comforts of a five-star stay. Unforgettable.", rating: "5/5" }
@@ -502,7 +572,13 @@ const propertiesDb = {
         name: "Frontier Glamping Dome",
         occupancy: "2 Guests",
         inclusions: "Traditional Buffet Breakfast & Dinner, Guided border trail stroll",
-        img: "./ITW/itw_frontier_camp.png"
+        img: "./properties/frontier-camp/img_1.jpeg"
+      },
+      {
+        name: "Shyok Riverfront Dome",
+        occupancy: "2 Guests",
+        inclusions: "Traditional Buffet Breakfast & Dinner, Balti Culinary Curation Experience",
+        img: "./properties/frontier-camp/img_3.jpeg"
       }
     ]
   },
@@ -513,17 +589,27 @@ const propertiesDb = {
     cat: "Mountain Huts",
     lat: 30.6139,
     lon: 77.9042,
-    img: "./ITW/itw_mountain_huts_viratkhai.png",
+    img: "./properties/mountain-huts/hero_enhanced.png",
     gallery: [
-      "./ITW/itw_mountain_huts_viratkhai.png"
+      "./properties/mountain-huts/hero_enhanced.png",
+      "./properties/mountain-huts/img_1.jpg",
+      "./properties/mountain-huts/img_2.jpeg",
+      "./properties/mountain-huts/img_3.jpeg",
+      "./properties/mountain-huts/img_4.jpeg",
+      "./properties/mountain-huts/img_5.jpeg",
+      "./properties/mountain-huts/img_6.jpeg",
+      "./properties/mountain-huts/img_7.jpeg",
+      "./properties/mountain-huts/img_8.jpeg",
+      "./properties/mountain-huts/img_9.jpeg",
+      "./properties/mountain-huts/img_10.jpeg"
     ],
     quote: "Wake up above the clouds inside an ancient oak woodland.",
     about: "Scenic mountain retreat surrounded by forests and Himalayan views. Built using local stone and wood, these huts offer panoramic Himalayan valley views and deep quietude.",
-    amenities: ["Wood Fireplace", "Stargazing Deck", "Local Garhwali Buffet", "Hot Showers", "Wi-Fi Access", "Nature Trails"],
-    experiences: ["Oak Forest Trails", "Valley Birding", "Charcoal Bukhari Evenings", "Millet Bread Baking"],
-    nearby: ["Tiger Falls", "Chakrata Market", "Budher Caves"],
+    amenities: ["Wood Fireplace", "Stargazing Deck", "Local Garhwali Buffet", "Hot Showers", "Wi-Fi Access", "Nature Trails", "Trekking Gear Provision"],
+    experiences: ["Oak Forest Trails", "Valley Birding", "Charcoal Bukhari Evenings", "Millet Bread Baking", "Ancient Caves Visit"],
+    nearby: ["Tiger Falls", "Chakrata Market", "Budher Caves", "Kanasar Forest Lodge"],
     locationDesc: "Viratkhai, Uttarakhand. Perched at 8,100 feet on the boundary ridge.",
-    services: ["Airport Transfers", "Private Cabs", "Guided Treks", "Hiking Trails", "Bonfire"],
+    services: ["Airport Transfers", "Private Cabs", "Guided Treks", "Hiking Trails", "Bonfire", "Mountain Climbing Orientation"],
     reviews: [
       { guest: "Karan T.", text: "The views of the snow peaks are completely unobstructed. Bukhari heaters are wonderful.", rating: "5/5" },
       { guest: "Aditi G.", text: "Perfect wilderness getaway. The oak forest walks were peaceful and quiet.", rating: "5/5" }
@@ -532,8 +618,14 @@ const propertiesDb = {
       {
         name: "Deodar Valley Hut",
         occupancy: "2 Guests",
-        inclusions: "Gourmet Breakfast, Forest walk",
-        img: "./ITW/itw_mountain_huts_viratkhai.png"
+        inclusions: "Gourmet Breakfast, Forest walk, Telescope Session",
+        img: "./properties/mountain-huts/img_1.jpg"
+      },
+      {
+        name: "Ridge View Stone Cabin",
+        occupancy: "2 Guests",
+        inclusions: "Gourmet Breakfast, Bukhari Heater Setup, Private Guide",
+        img: "./properties/mountain-huts/img_3.jpeg"
       }
     ]
   },
@@ -544,17 +636,24 @@ const propertiesDb = {
     cat: "Camp & Huts",
     lat: 30.6139,
     lon: 77.9042,
-    img: "./ITW/itw_huts_camp_viratkhai.png",
+    img: "./properties/camp-huts/hero_enhanced.png",
     gallery: [
-      "./ITW/itw_huts_camp_viratkhai.png"
+      "./properties/camp-huts/hero_enhanced.png",
+      "./properties/camp-huts/img_1.avif",
+      "./properties/camp-huts/img_2.jpg",
+      "./properties/camp-huts/img_3.jpg",
+      "./properties/camp-huts/img_4.jpeg",
+      "./properties/camp-huts/img_5.jpeg",
+      "./properties/camp-huts/img_6.jpeg",
+      "./properties/camp-huts/img_7.jpeg"
     ],
     quote: "Dwell under the stars, surrounded by high altitude ridges.",
     about: "Luxury camps and hillside huts in the heart of nature. Ideal for adventure seekers scaling the high ridges of Chakrata, surrounded by deodar and rhododendron woods.",
-    amenities: ["Insulated Camps", "Woodfire Pit", "Hot Herbal Teas", "Warm Bedding", "Cozy Mud Room"],
-    experiences: ["Ridge Treks", "Milking Local Cows", "Stargazing Circles"],
-    nearby: ["Tiger Falls", "Kanasar Forest Lodge", "Deoban Views"],
+    amenities: ["Insulated Camps", "Woodfire Pit", "Hot Herbal Teas", "Warm Bedding", "Cozy Mud Room", "Outdoor Hammocks", "Shower Blocks"],
+    experiences: ["Ridge Treks", "Milking Local Cows", "Stargazing Circles", "Local Harvest Picnic"],
+    nearby: ["Tiger Falls", "Kanasar Forest Lodge", "Deoban Views", "Kailas Temple"],
     locationDesc: "Viratkhai, Uttarakhand. Set on a panoramic hillside ridge.",
-    services: ["Airport Transfers", "Private Cabs", "Camping", "Bonfire", "Adventure Activities"],
+    services: ["Airport Transfers", "Private Cabs", "Camping", "Bonfire", "Adventure Activities", "Outdoor Archery Curation"],
     reviews: [
       { guest: "Rahul S.", text: "Great camps, very warm sleeping bags, and amazing stargazing circles.", rating: "5/5" },
       { guest: "Tanya M.", text: "Incredibly peaceful hillside location. Perfect for digital detox.", rating: "5/5" }
@@ -563,8 +662,14 @@ const propertiesDb = {
       {
         name: "Ridge Camp Hut",
         occupancy: "2 Guests",
-        inclusions: "All meals included, Guided sunset trek",
-        img: "./ITW/itw_huts_camp_viratkhai.png"
+        inclusions: "All meals included, Guided sunset ridge trek",
+        img: "./properties/camp-huts/img_1.avif"
+      },
+      {
+        name: "High Forest Safari Tent",
+        occupancy: "2 Guests",
+        inclusions: "All meals included, Stargazing Circle Curation",
+        img: "./properties/camp-huts/img_4.jpeg"
       }
     ]
   }

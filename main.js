@@ -399,13 +399,13 @@ const propertiesDb = {
         name: "Glacial River Cottage",
         occupancy: "2 Guests",
         inclusions: "Gourmet Dinner & Breakfast, Riverside Walk Guided Tour",
-        img: "./properties/camp-cottages/img_2.webp"
+        img: "./properties/camp-cottages/img_1.jpg"
       },
       {
         name: "Luxury Riverside Dome",
         occupancy: "2 Guests",
         inclusions: "Gourmet Dinner & Breakfast, High-Altitude Stargazing Experience",
-        img: "./properties/camp-cottages/img_4.webp"
+        img: "./properties/camp-cottages/img_3.jpg"
       }
     ]
   },
@@ -669,13 +669,13 @@ const propertiesDb = {
         name: "Ridge Camp Hut",
         occupancy: "2 Guests",
         inclusions: "All meals included, Guided sunset ridge trek",
-        img: "./properties/camp-huts/img_1.avif"
+        img: "./properties/camp-huts/img_1.jpg"
       },
       {
         name: "High Forest Safari Tent",
         occupancy: "2 Guests",
         inclusions: "All meals included, Stargazing Circle Curation",
-        img: "./properties/camp-huts/img_4.jpeg"
+        img: "./properties/camp-huts/img_3.jpeg"
       }
     ]
   }

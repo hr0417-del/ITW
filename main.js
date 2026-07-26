@@ -374,10 +374,13 @@ const propertiesDb = {
     lon: 77.1896,
     img: "./ITW/itw_camp_cottages_jispa.png",
     gallery: [
-          "./properties/camp-cottages/img_1.webp",
-          "./properties/camp-cottages/img_2.jpg",
-          "./properties/camp-cottages/img_3.webp",
-          "./properties/camp-cottages/img_4.webp"
+          "./properties/camp-cottages/img_1.png",
+          "./properties/camp-cottages/img_2.png",
+          "./properties/camp-cottages/img_3.png",
+          "./properties/camp-cottages/img_4.png",
+          "./properties/camp-cottages/img_5.png",
+          "./properties/camp-cottages/img_6.png",
+          "./properties/camp-cottages/img_7.png"
     ],
     quote: "Sleep beside the rushing Bhaga River on the Manali-Leh Highway.",
     about: "Luxury camps and mountain cottages surrounded by the majestic Himalayas. Wake up to raw granite peaks, roaring glacial streams, and high-altitude wilderness, with warm hospitality in the cold desert.",
@@ -395,13 +398,13 @@ const propertiesDb = {
         name: "Glacial River Cottage",
         occupancy: "2 Guests",
         inclusions: "Gourmet Dinner & Breakfast, Riverside Walk Guided Tour",
-        img: "./properties/camp-cottages/img_1.webp"
+        img: "./properties/camp-cottages/img_1.png"
       },
       {
         name: "Luxury Riverside Dome",
         occupancy: "2 Guests",
         inclusions: "Gourmet Dinner & Breakfast, High-Altitude Stargazing Experience",
-        img: "./properties/camp-cottages/img_3.webp"
+        img: "./properties/camp-cottages/img_3.png"
       }
     ]
   },

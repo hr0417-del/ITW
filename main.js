@@ -672,7 +672,7 @@ const propertiesDb = {
         name: "Ridge Camp Hut",
         occupancy: "2 Guests",
         inclusions: "All meals included, Guided sunset ridge trek",
-        img: "./properties/camp-huts/img_1.jpg"
+        img: "./properties/camp-huts/stone-cottages-terrace.webp"
       },
       {
         name: "High Forest Safari Tent",

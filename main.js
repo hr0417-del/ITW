@@ -606,11 +606,10 @@ const propertiesDb = {
     lon: 77.9042,
     img: "./ITW/itw_mountain_huts_viratkhai.png",
     gallery: [
-          "./properties/mountain-huts/img_1.jpg",
+          "./properties/mountain-huts/dining-pavilion.webp",
           "./properties/mountain-huts/img_2.jpeg",
           "./properties/mountain-huts/img_3.jpeg",
           "./properties/mountain-huts/img_4.jpeg",
-          "./properties/mountain-huts/img_5.jpeg",
           "./properties/mountain-huts/img_6.jpeg",
           "./properties/mountain-huts/img_7.jpeg",
           "./properties/mountain-huts/img_8.jpeg",
@@ -652,12 +651,10 @@ const propertiesDb = {
     lon: 77.9042,
     img: "./ITW/itw_huts_camp_viratkhai.png",
     gallery: [
-          "./properties/camp-huts/img_1.jpg",
-          "./properties/camp-huts/img_2.jpg",
-          "./properties/camp-huts/img_3.jpeg",
+          "./properties/camp-huts/stone-cottages-terrace.webp",
+          "./properties/camp-huts/stone-pathway-gardens.webp",
           "./properties/camp-huts/img_4.jpeg",
-          "./properties/camp-huts/img_5.jpeg",
-          "./properties/camp-huts/img_6.jpeg"
+          "./properties/camp-huts/img_5.jpeg"
     ],
     quote: "Dwell under the stars, surrounded by high altitude ridges.",
     about: "Luxury camps and hillside huts in the heart of nature. Ideal for adventure seekers scaling the high ridges of Chakrata, surrounded by deodar and rhododendron woods.",

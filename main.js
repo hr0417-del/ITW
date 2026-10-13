@@ -505,21 +505,14 @@ const propertiesDb = {
     lon: 77.3323,
     img: "./properties/luxury-tree-house/hero.avif",
     gallery: [
-          "./properties/luxury-tree-house/img_1.jpeg",
-          "./properties/luxury-tree-house/img_2.jpeg",
-          "./properties/luxury-tree-house/img_3.jpeg",
-          "./properties/luxury-tree-house/img_4.jpeg",
-          "./properties/luxury-tree-house/img_5.jpeg",
-          "./properties/luxury-tree-house/img_6.jpeg",
-          "./properties/luxury-tree-house/img_7.jpeg",
-          "./properties/luxury-tree-house/img_8.jpeg",
-          "./properties/luxury-tree-house/img_9.jpeg",
-          "./properties/luxury-tree-house/img_10.jpeg",
-          "./properties/luxury-tree-house/img_11.jpeg",
-          "./properties/luxury-tree-house/img_12.jpeg",
-          "./properties/luxury-tree-house/img_13.jpeg",
-          "./properties/luxury-tree-house/img_14.jpeg",
-          "./properties/luxury-tree-house/img_15.jpeg"
+      "./properties/luxury-tree-house/tree-trunk-canopy-bedroom.webp",
+      "./properties/luxury-tree-house/valley-view-balcony-deck.webp",
+      "./properties/luxury-tree-house/cedar-loft-bedroom.webp",
+      "./properties/luxury-tree-house/upper-balcony-canopy-lounge.webp",
+      "./properties/luxury-tree-house/treehouse-duplex-staircase.webp",
+      "./properties/luxury-tree-house/panoramic-mountain-window.webp",
+      "./properties/luxury-tree-house/alpine-balcony-seating.webp",
+      "./properties/luxury-tree-house/canopy-tree-craft-ornament.webp"
     ],
     quote: "Live above the canopy in a high-elevation jacuzzi deck.",
     about: "Luxury tree house with jacuzzi and panoramic forest views. Hover above the pine canopy in a beautifully engineered wooden tree house featuring floor-to-ceiling glass panes and quiet luxury.",
@@ -537,13 +530,13 @@ const propertiesDb = {
         name: "Canopy Jacuzzi Suite",
         occupancy: "2 Guests",
         inclusions: "Continental Breakfast, Private BBQ Setup on Deck",
-        img: "./properties/luxury-tree-house/img_1.jpeg"
+        img: "./properties/luxury-tree-house/tree-trunk-canopy-bedroom.webp"
       },
       {
         name: "Pine Forest Loft",
         occupancy: "2 Guests",
         inclusions: "Continental Breakfast, Stargazing Telescope Use",
-        img: "./properties/luxury-tree-house/img_3.jpeg"
+        img: "./properties/luxury-tree-house/cedar-loft-bedroom.webp"
       }
     ]
   },
@@ -556,11 +549,11 @@ const propertiesDb = {
     lon: 76.8338,
     img: "./ITW/itw_frontier_camp.png",
     gallery: [
-          "./properties/frontier-camp/img_1.jpeg",
-          "./properties/frontier-camp/img_2.jpeg",
-          "./properties/frontier-camp/img_3.jpeg",
-          "./properties/frontier-camp/img_4.jpeg",
-          "./properties/frontier-camp/img_5.jpeg"
+      "./properties/frontier-camp/luxury-glamping-tent-interior.webp",
+      "./properties/frontier-camp/balti-majlis-communal-lounge.webp",
+      "./properties/frontier-camp/camp-marigold-pathway.webp",
+      "./properties/frontier-camp/illuminated-camp-night-pathway.webp",
+      "./properties/frontier-camp/turtuk-camp-hospitality.webp"
     ],
     quote: "A luxury dome outpost nestled on the edge of the Shyok River.",
     about: "Premium Himalayan camping in Turtuk's unforgettable border landscape. Wake up to towering granite walls, organic apricot orchards, and the serene flow of the Shyok River.",
@@ -578,13 +571,13 @@ const propertiesDb = {
         name: "Frontier Glamping Dome",
         occupancy: "2 Guests",
         inclusions: "Traditional Buffet Breakfast & Dinner, Guided border trail stroll",
-        img: "./properties/frontier-camp/img_1.jpeg"
+        img: "./properties/frontier-camp/luxury-glamping-tent-interior.webp"
       },
       {
         name: "Shyok Riverfront Dome",
         occupancy: "2 Guests",
         inclusions: "Traditional Buffet Breakfast & Dinner, Balti Culinary Curation Experience",
-        img: "./properties/frontier-camp/img_3.jpeg"
+        img: "./properties/frontier-camp/camp-marigold-pathway.webp"
       }
     ]
   },

@@ -329,15 +329,15 @@ const propertiesDb = {
     lon: 78.0322,
     img: "./ITW/itw_luxury_farm_stay.png",
     gallery: [
-          "./properties/luxury-farm-stay/img_1.jpeg",
-          "./properties/luxury-farm-stay/img_2.jpeg",
-          "./properties/luxury-farm-stay/img_3.jpeg",
-          "./properties/luxury-farm-stay/img_4.jpeg",
-          "./properties/luxury-farm-stay/img_5.jpeg",
-          "./properties/luxury-farm-stay/img_6.jpeg",
-          "./properties/luxury-farm-stay/img_7.jpeg",
-          "./properties/luxury-farm-stay/img_8.jpeg",
-          "./properties/luxury-farm-stay/img_9.jpeg"
+      "./properties/luxury-farm-stay/pool-villa-loungers.webp",
+      "./properties/luxury-farm-stay/stone-cottage-porch.webp",
+      "./properties/luxury-farm-stay/veranda-coffee-terrace.webp",
+      "./properties/luxury-farm-stay/estate-twilight-villa.webp",
+      "./properties/luxury-farm-stay/teak-bedroom-suite.webp",
+      "./properties/luxury-farm-stay/duplex-loft-suite.webp",
+      "./properties/luxury-farm-stay/attic-mezzanine-room.webp",
+      "./properties/luxury-farm-stay/bedroom-garden-view.webp",
+      "./properties/luxury-farm-stay/evening-bbq-bonfire.webp"
     ],
     quote: "A private agricultural oasis nestled in the foothills of Dehradun.",
     about: "A private luxury farm stay featuring an exclusive villa, outdoor pool, private fruit orchards, and lush landscaped gardens. Dwell in absolute seclusion surrounded by seasonal harvest fields, where still morning air meets luxury living.",
@@ -355,13 +355,13 @@ const propertiesDb = {
         name: "Luxury Foothills Villa",
         occupancy: "4 Guests",
         inclusions: "Exclusive Villa Use, Organic Breakfast, Farm Tour, Airport Transfer",
-        img: "./properties/luxury-farm-stay/img_1.jpeg"
+        img: "./properties/luxury-farm-stay/pool-villa-loungers.webp"
       },
       {
         name: "Heritage Orchard Suite",
         occupancy: "2 Guests",
         inclusions: "Organic Breakfast, Chef-led Fruit Baking Session, Orchard Walk",
-        img: "./properties/luxury-farm-stay/img_3.jpeg"
+        img: "./properties/luxury-farm-stay/teak-bedroom-suite.webp"
       }
     ]
   },
@@ -374,13 +374,15 @@ const propertiesDb = {
     lon: 77.1896,
     img: "./ITW/itw_camp_cottages_jispa.png",
     gallery: [
-          "./properties/camp-cottages/img_1.png",
-          "./properties/camp-cottages/img_2.png",
-          "./properties/camp-cottages/img_3.png",
-          "./properties/camp-cottages/img_4.png",
-          "./properties/camp-cottages/img_5.png",
-          "./properties/camp-cottages/img_6.png",
-          "./properties/camp-cottages/img_7.png"
+      "./properties/camp-cottages/snow-peaks-mountain-chalets.webp",
+      "./properties/camp-cottages/red-chalets-prayer-flags.webp",
+      "./properties/camp-cottages/chalets-lawn-guests.webp",
+      "./properties/camp-cottages/deluxe-timber-suite.webp",
+      "./properties/camp-cottages/cottage-stone-bedroom.webp",
+      "./properties/camp-cottages/blue-chalets-alpine-lawn.webp",
+      "./properties/camp-cottages/pine-cottage-bedroom.webp",
+      "./properties/camp-cottages/baralacha-pass-travelers.webp",
+      "./properties/camp-cottages/illuminated-chalets-night.webp"
     ],
     quote: "Sleep beside the rushing Bhaga River on the Manali-Leh Highway.",
     about: "Luxury camps and mountain cottages surrounded by the majestic Himalayas. Wake up to raw granite peaks, roaring glacial streams, and high-altitude wilderness, with warm hospitality in the cold desert.",
@@ -398,13 +400,13 @@ const propertiesDb = {
         name: "Glacial River Cottage",
         occupancy: "2 Guests",
         inclusions: "Gourmet Dinner & Breakfast, Riverside Walk Guided Tour",
-        img: "./properties/camp-cottages/img_1.png"
+        img: "./properties/camp-cottages/cottage-stone-bedroom.webp"
       },
       {
         name: "Luxury Riverside Dome",
         occupancy: "2 Guests",
         inclusions: "Gourmet Dinner & Breakfast, High-Altitude Stargazing Experience",
-        img: "./properties/camp-cottages/img_3.png"
+        img: "./properties/camp-cottages/deluxe-timber-suite.webp"
       }
     ]
   },

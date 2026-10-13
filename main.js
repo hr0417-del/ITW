@@ -419,12 +419,12 @@ const propertiesDb = {
     lon: 77.0301,
     img: "./ITW/itw_mountain_homestay_keylong.png",
     gallery: [
-          "./properties/mountain-homestay/img_1.webp",
-          "./properties/mountain-homestay/img_2.webp",
-          "./properties/mountain-homestay/img_3.webp",
-          "./properties/mountain-homestay/img_4.webp",
-          "./properties/mountain-homestay/img_5.jpeg",
-          "./properties/mountain-homestay/img_6.jpeg"
+      "./properties/mountain-homestay/garden-cafe-canopy.webp",
+      "./properties/mountain-homestay/rooftop-terrace-panoramic.webp",
+      "./properties/mountain-homestay/valley-view-balcony.webp",
+      "./properties/mountain-homestay/lahauli-attic-bedroom.webp",
+      "./properties/mountain-homestay/homestay-pine-lounge.webp",
+      "./properties/mountain-homestay/deluxe-bedroom-suite.webp"
     ],
     quote: "Authentic Himalayan lifestyle facing the Kardang Monastery.",
     about: "Authentic Himalayan hospitality with panoramic mountain views. Experience Lahauli warmth, home-cooked local meals, and rooms looking directly out over the Kardang Monastery Ridge. A home deep in the mountains.",
@@ -442,13 +442,13 @@ const propertiesDb = {
         name: "Monastery View Room",
         occupancy: "2 Guests",
         inclusions: "Traditional Home Breakfast, Guided Monastery Stroll",
-        img: "./properties/mountain-homestay/img_1.webp"
+        img: "./properties/mountain-homestay/lahauli-attic-bedroom.webp"
       },
       {
         name: "High-Altitude Attic Suite",
         occupancy: "2 Guests",
         inclusions: "Traditional Bukhari Setup, Local Herbal Teas, Home Cooked Dinners",
-        img: "./properties/mountain-homestay/img_3.webp"
+        img: "./properties/mountain-homestay/deluxe-bedroom-suite.webp"
       }
     ]
   },
@@ -461,25 +461,14 @@ const propertiesDb = {
     lon: 77.3323,
     img: "./properties/forest-cottages/hero.avif",
     gallery: [
-          "./properties/forest-cottages/img_1.jpeg",
-          "./properties/forest-cottages/img_2.jpeg",
-          "./properties/forest-cottages/img_3.jpeg",
-          "./properties/forest-cottages/img_4.jpeg",
-          "./properties/forest-cottages/img_5.jpeg",
-          "./properties/forest-cottages/img_6.jpeg",
-          "./properties/forest-cottages/img_7.jpeg",
-          "./properties/forest-cottages/img_8.jpeg",
-          "./properties/forest-cottages/img_9.jpeg",
-          "./properties/forest-cottages/img_10.jpeg",
-          "./properties/forest-cottages/img_11.jpeg",
-          "./properties/forest-cottages/img_12.jpeg",
-          "./properties/forest-cottages/img_13.jpeg",
-          "./properties/forest-cottages/img_14.jpeg",
-          "./properties/forest-cottages/img_15.jpeg",
-          "./properties/forest-cottages/img_16.jpeg",
-          "./properties/forest-cottages/img_17.jpeg",
-          "./properties/forest-cottages/img_18.jpeg",
-          "./properties/forest-cottages/img_19.jpeg"
+      "./properties/forest-cottages/duplex-loft-stairs.webp",
+      "./properties/forest-cottages/attic-loft-bedroom.webp",
+      "./properties/forest-cottages/cedar-suite-bedroom.webp",
+      "./properties/forest-cottages/forest-veranda-lounge.webp",
+      "./properties/forest-cottages/pine-forest-veranda-view.webp",
+      "./properties/forest-cottages/forest-sunburst-canopy.webp",
+      "./properties/forest-cottages/forest-canopy-corridor.webp",
+      "./properties/forest-cottages/loft-overlook-suite.webp"
     ],
     quote: "Cozy duplex stone cabins built deep inside pine woods.",
     about: "Duplex forest cottages nestled among cedar trees in the Tirthan Valley. Built using local stone and cedar-wood, these properties offer ultimate comfort in the heart of nature.",
@@ -497,13 +486,13 @@ const propertiesDb = {
         name: "Duplex Cedar Cottage",
         occupancy: "3 Guests",
         inclusions: "Gourmet Breakfast, Forest Trail Guide",
-        img: "./properties/forest-cottages/img_1.jpeg"
+        img: "./properties/forest-cottages/duplex-loft-stairs.webp"
       },
       {
         name: "Forest Ridge Suite",
         occupancy: "2 Guests",
         inclusions: "Organic Breakfast, Riverside Walk Guided Tour",
-        img: "./properties/forest-cottages/img_3.jpeg"
+        img: "./properties/forest-cottages/attic-loft-bedroom.webp"
       }
     ]
   },

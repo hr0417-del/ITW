@@ -443,16 +443,18 @@ ${propertySlugs.map(slug => `  <url>
     fs.mkdirSync(path.join(__dirname, 'public'), { recursive: true });
   }
   fs.writeFileSync(path.join(__dirname, 'public', 'sitemap.xml'), sitemapXml, 'utf8');
-  console.log('Generated: public/sitemap.xml');
+  fs.writeFileSync(path.join(__dirname, 'sitemap.xml'), sitemapXml, 'utf8');
+  console.log('Generated: public/sitemap.xml & sitemap.xml');
 
-  // 4. Generate public/robots.txt
+  // 4. Generate public/robots.txt and robots.txt
   const robotsTxt = `User-agent: *
 Allow: /
 
 Sitemap: ${BASE_URL}/sitemap.xml
 `;
   fs.writeFileSync(path.join(__dirname, 'public', 'robots.txt'), robotsTxt, 'utf8');
-  console.log('Generated: public/robots.txt');
+  fs.writeFileSync(path.join(__dirname, 'robots.txt'), robotsTxt, 'utf8');
+  console.log('Generated: public/robots.txt & robots.txt');
 }
 
 generate().catch(err => {

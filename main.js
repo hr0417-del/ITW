@@ -1,5 +1,14 @@
 import { audioEngine } from './audio.js';
-import { propertiesDb } from './properties-data.js';
+import {
+  propertiesDb,
+  propertySlugs,
+  getProperty,
+  calculateNights,
+  formatDisplayDate,
+  getNextDayDateString,
+  buildEnquiryWhatsAppMessage,
+  buildEnquiryWhatsAppUrl
+} from './properties-data.js';
 
 // ==========================================================================
 // DATA: DESTINATION DICTIONARY FOR THE MAP FLY-ZOOMS
@@ -792,57 +801,79 @@ function checkHashRouting() {
 
 
 // ==========================================================================
-// INTERACTIVE MULTI-STEP BOOKING PORTAL STATE MACHINE
+// INTERACTIVE MULTI-STEP BOOKING PORTAL STATE MACHINE (Phase BF-1)
 // ==========================================================================
 const bookingPortal = document.getElementById('booking-portal-overlay');
 const closeBookingBtn = document.getElementById('close-booking-overlay');
 const bookingWizard = document.getElementById('booking-portal-wizard');
+
+let lastFocusedElement = null;
 
 const bookingState = {
   dest: "",
   propertySlug: "",
   checkIn: "",
   checkOut: "",
-  guests: "1 Guest",
-  roomType: "",
-  currentStep: 1
+  nights: 0,
+  adults: 2,
+  children: 0,
+  rooms: 1,
+  roomType: "any",
+  currentStep: 1,
+  presetSlug: ""
 };
 
 function openBookingPortal(presetPropertySlug = "") {
-  // Reset booking state
+  lastFocusedElement = document.activeElement;
   bookingState.dest = "";
   bookingState.propertySlug = presetPropertySlug;
+  bookingState.presetSlug = presetPropertySlug;
   bookingState.checkIn = "";
   bookingState.checkOut = "";
-  bookingState.guests = "1 Guest";
-  bookingState.roomType = "";
+  bookingState.nights = 0;
+  bookingState.adults = 2;
+  bookingState.children = 0;
+  bookingState.rooms = 1;
+  bookingState.roomType = "any";
   bookingState.currentStep = 1;
-  
+
   if (presetPropertySlug && propertiesDb[presetPropertySlug]) {
     bookingState.dest = propertiesDb[presetPropertySlug].dest;
-    bookingState.currentStep = 3; // Jump directly to Date Selection (Step 3) if property is preset!
+    bookingState.roomType = propertiesDb[presetPropertySlug].rooms?.[0]?.name || "any";
+    bookingState.currentStep = 3; // Start directly at Dates when property is preset
   }
-  
+
   renderBookingStep();
   bookingPortal.classList.add('active');
+  bookingPortal.setAttribute('aria-hidden', 'false');
   document.body.style.overflow = "hidden";
+
+  setTimeout(() => {
+    const firstInput = bookingWizard.querySelector('input, button, .choice-item');
+    if (firstInput) firstInput.focus();
+  }, 50);
 }
 
 function closeBookingPortal() {
-  bookingPortal.classList.remove('active');
-  document.body.style.overflow = "";
+  if (bookingPortal) {
+    bookingPortal.classList.remove('active');
+    bookingPortal.setAttribute('aria-hidden', 'true');
+    document.body.style.overflow = "";
+    if (lastFocusedElement && typeof lastFocusedElement.focus === 'function') {
+      lastFocusedElement.focus();
+    }
+  }
 }
 
-closeBookingBtn.addEventListener('click', closeBookingPortal);
+if (closeBookingBtn) closeBookingBtn.addEventListener('click', closeBookingPortal);
 
-// Close on backdrop
-bookingPortal.addEventListener('click', (e) => {
-  if (e.target === bookingPortal) {
-    closeBookingPortal();
-  }
-});
+if (bookingPortal) {
+  bookingPortal.addEventListener('click', (e) => {
+    if (e.target === bookingPortal) closeBookingPortal();
+  });
+}
 
-// floating button trigger
+// Floating button trigger
 const bookingPill = document.getElementById('booking-pill-trigger');
 if (bookingPill) {
   bookingPill.addEventListener('click', () => {
@@ -851,55 +882,56 @@ if (bookingPill) {
 }
 
 function renderBookingStep() {
+  if (!bookingWizard) return;
   bookingWizard.innerHTML = "";
   const step = bookingState.currentStep;
-  
+
   const stepContainer = document.createElement('div');
-  stepContainer.className = `booking-wizard-step active ${step === 7 ? 'results-step' : ''}`;
-  
+  stepContainer.className = 'booking-wizard-step active';
+  stepContainer.setAttribute('role', 'region');
+  stepContainer.setAttribute('aria-label', `Booking Step ${step} of 5`);
+
   let stepContent = "";
   let navButtonsHtml = `
     <div class="wizard-nav-footer">
-      ${step > 1 ? `<button class="wizard-back-btn" id="wizard-prev-btn">Back</button>` : ''}
-      ${step < 7 ? `<button class="wizard-next-btn" id="wizard-next-btn">Next Step</button>` : ''}
+      ${step > 1 ? '<button type="button" class="wizard-back-btn" id="wizard-prev-btn">Back</button>' : ''}
+      ${step < 5 ? '<button type="button" class="wizard-next-btn" id="wizard-next-btn">Next Step</button>' : ''}
     </div>
   `;
-  
+
   if (step === 1) {
     // Choose Destination
     stepContent = `
-      <span class="step-indicator">Step 1 of 6</span>
-      <h3 class="step-question">Where does your journey lead?</h3>
-      <div class="booking-choice-list">
-        <div class="choice-item ${bookingState.dest === 'Himachal Pradesh' ? 'selected' : ''}" data-val="Himachal Pradesh">
+      <span class="wizard-step-indicator">Step 1 of 5 • Destination</span>
+      <h3 class="step-question" style="margin-bottom: 2rem;">Where does your journey lead?</h3>
+      <div class="booking-choice-list" role="radiogroup" aria-label="Himalayan Regions">
+        <div class="choice-item ${bookingState.dest === 'Himachal Pradesh' ? 'selected' : ''}" data-val="Himachal Pradesh" role="radio" aria-checked="${bookingState.dest === 'Himachal Pradesh'}" tabindex="0">
           <span class="choice-label">Himachal Pradesh</span>
-          <span class="choice-meta">4 stays</span>
+          <span class="choice-meta">4 sanctuaries</span>
         </div>
-        <div class="choice-item ${bookingState.dest === 'Uttarakhand' ? 'selected' : ''}" data-val="Uttarakhand">
+        <div class="choice-item ${bookingState.dest === 'Uttarakhand' ? 'selected' : ''}" data-val="Uttarakhand" role="radio" aria-checked="${bookingState.dest === 'Uttarakhand'}" tabindex="0">
           <span class="choice-label">Uttarakhand</span>
-          <span class="choice-meta">3 stays</span>
+          <span class="choice-meta">3 sanctuaries</span>
         </div>
-        <div class="choice-item ${bookingState.dest === 'Ladakh' ? 'selected' : ''}" data-val="Ladakh">
+        <div class="choice-item ${bookingState.dest === 'Ladakh' ? 'selected' : ''}" data-val="Ladakh" role="radio" aria-checked="${bookingState.dest === 'Ladakh'}" tabindex="0">
           <span class="choice-label">Ladakh</span>
-          <span class="choice-meta">1 stay</span>
+          <span class="choice-meta">1 sanctuary</span>
         </div>
       </div>
     `;
-    navButtonsHtml = ""; // Auto-advance on click!
-  } 
-  
-  else if (step === 2) {
+    navButtonsHtml = ""; // Auto-advances on selection
+  } else if (step === 2) {
     // Choose Property
     const destinationProperties = Object.keys(propertiesDb).filter(slug => {
       return propertiesDb[slug].dest === bookingState.dest;
     });
-    
+
     stepContent = `
-      <span class="step-indicator">Step 2 of 6</span>
-      <h3 class="step-question">Select your mountain dwell</h3>
-      <div class="booking-choice-list">
+      <span class="wizard-step-indicator">Step 2 of 5 • Sanctuary</span>
+      <h3 class="step-question" style="margin-bottom: 2rem;">Select your mountain dwell</h3>
+      <div class="booking-choice-list" role="radiogroup" aria-label="Sanctuaries in ${bookingState.dest}">
         ${destinationProperties.map(slug => `
-          <div class="choice-item ${bookingState.propertySlug === slug ? 'selected' : ''}" data-val="${slug}">
+          <div class="choice-item ${bookingState.propertySlug === slug ? 'selected' : ''}" data-val="${slug}" role="radio" aria-checked="${bookingState.propertySlug === slug}" tabindex="0">
             <span class="choice-label">${propertiesDb[slug].name}</span>
             <span class="choice-meta">${propertiesDb[slug].loc}</span>
           </div>
@@ -908,233 +940,410 @@ function renderBookingStep() {
     `;
     navButtonsHtml = `
       <div class="wizard-nav-footer">
-        <button class="wizard-back-btn" id="wizard-prev-btn">Back</button>
+        <button type="button" class="wizard-back-btn" id="wizard-prev-btn">Back</button>
       </div>
-    `; // Auto-advance on click, but keep back button
-  } 
-  
-  else if (step === 3) {
-    // Check-in Date
+    `;
+  } else if (step === 3) {
+    // Dates (Combined Check-in & Check-out)
+    const propData = propertiesDb[bookingState.propertySlug] || null;
+    const propTitle = propData ? propData.name : "Sanctuary";
     const today = new Date().toISOString().split('T')[0];
+    const minCheckout = bookingState.checkIn ? getNextDayDateString(bookingState.checkIn) : today;
+    const nights = calculateNights(bookingState.checkIn, bookingState.checkOut);
+    bookingState.nights = nights;
+
+    let durationHtml = '';
+    if (nights > 0 && bookingState.checkIn && bookingState.checkOut) {
+      durationHtml = `Stay duration: <span class="duration-highlight">${nights} night${nights > 1 ? 's' : ''}</span> (${formatDisplayDate(bookingState.checkIn)} &rarr; ${formatDisplayDate(bookingState.checkOut)})`;
+    } else {
+      durationHtml = 'Select check-in and check-out to calculate duration. Availability confirmed upon enquiry.';
+    }
+
     stepContent = `
-      <span class="step-indicator">Step 3 of 6</span>
-      <h3 class="step-question">Select your check-in date</h3>
-      <div class="booking-input-wrapper">
-        <input type="date" min="${today}" value="${bookingState.checkIn}" id="checkin-date-picker" class="booking-date-input">
+      <div class="wizard-header">
+        <span class="wizard-step-indicator">Step 3 of 5 • Journey Dates</span>
+        <h3 class="wizard-title">${propTitle}</h3>
+        <p class="wizard-subtitle">Select your intended dates of sanctuary. Availability will be confirmed by ITW.</p>
       </div>
-    `;
-  } 
-  
-  else if (step === 4) {
-    // Check-out Date
-    const minCheckout = bookingState.checkIn ? bookingState.checkIn : new Date().toISOString().split('T')[0];
-    stepContent = `
-      <span class="step-indicator">Step 4 of 6</span>
-      <h3 class="step-question">Select your check-out date</h3>
-      <div class="booking-input-wrapper">
-        <input type="date" min="${minCheckout}" value="${bookingState.checkOut}" id="checkout-date-picker" class="booking-date-input">
+      <div class="wizard-dates-row">
+        <div class="wizard-form-group">
+          <label for="wizard-checkin" class="wizard-label">Check-in Date</label>
+          <input type="date" id="wizard-checkin" class="wizard-input-date" min="${today}" value="${bookingState.checkIn}">
+        </div>
+        <div class="wizard-form-group">
+          <label for="wizard-checkout" class="wizard-label">Check-out Date</label>
+          <input type="date" id="wizard-checkout" class="wizard-input-date" min="${minCheckout}" value="${bookingState.checkOut}">
+        </div>
       </div>
-    `;
-  } 
-  
-  else if (step === 5) {
-    // Guest Count
-    stepContent = `
-      <span class="step-indicator">Step 5 of 6</span>
-      <h3 class="step-question">How many travelers?</h3>
-      <div class="booking-choice-list">
-        ${["1 Guest", "2 Guests", "3 Guests", "4+ Guests"].map(g => `
-          <div class="choice-item ${bookingState.guests === g ? 'selected' : ''}" data-val="${g}">
-            <span class="choice-label">${g}</span>
-          </div>
-        `).join('')}
+      <div class="wizard-duration-badge ${nights > 0 ? '' : 'empty-state'}" id="wizard-duration-badge" aria-live="polite">
+        ${durationHtml}
       </div>
+      <div class="wizard-inline-error" id="wizard-date-error" role="alert" aria-live="assertive"></div>
     `;
-    navButtonsHtml = ""; // Auto-advance
-  } 
-  
-  else if (step === 6) {
-    // Choose Room Type
+  } else if (step === 4) {
+    // Travelers & Accommodation
     const propData = propertiesDb[bookingState.propertySlug];
+    const roomsList = propData ? propData.rooms || [] : [];
+
     stepContent = `
-      <span class="step-indicator">Step 6 of 6</span>
-      <h3 class="step-question">Select your preferred space</h3>
-      <div class="booking-choice-list">
-        <div class="choice-item ${bookingState.roomType === 'any' ? 'selected' : ''}" data-val="any">
+      <div class="wizard-header">
+        <span class="wizard-step-indicator">Step 4 of 5 • Party & Dwelling</span>
+        <h3 class="wizard-title">Who is journeying?</h3>
+        <p class="wizard-subtitle">Intimate spaces designed for solitude, companionship, or shared reflection.</p>
+      </div>
+
+      <div class="booking-counters-grid">
+        <div class="counter-control-group">
+          <div class="counter-label-wrap">
+            <span class="counter-label" id="label-adults">Adults</span>
+            <span class="counter-sublabel">Ages 12+</span>
+          </div>
+          <div class="counter-buttons-wrap">
+            <button type="button" class="counter-btn" data-action="dec" data-type="adults" aria-label="Decrease Adults" ${bookingState.adults <= 1 ? 'disabled' : ''}>-</button>
+            <span class="counter-value" id="val-adults" aria-labelledby="label-adults">${bookingState.adults}</span>
+            <button type="button" class="counter-btn" data-action="inc" data-type="adults" aria-label="Increase Adults" ${bookingState.adults >= 10 ? 'disabled' : ''}>+</button>
+          </div>
+        </div>
+
+        <div class="counter-control-group">
+          <div class="counter-label-wrap">
+            <span class="counter-label" id="label-children">Children</span>
+            <span class="counter-sublabel">Ages 0–11</span>
+          </div>
+          <div class="counter-buttons-wrap">
+            <button type="button" class="counter-btn" data-action="dec" data-type="children" aria-label="Decrease Children" ${bookingState.children <= 0 ? 'disabled' : ''}>-</button>
+            <span class="counter-value" id="val-children" aria-labelledby="label-children">${bookingState.children}</span>
+            <button type="button" class="counter-btn" data-action="inc" data-type="children" aria-label="Increase Children" ${bookingState.children >= 6 ? 'disabled' : ''}>+</button>
+          </div>
+        </div>
+
+        <div class="counter-control-group">
+          <div class="counter-label-wrap">
+            <span class="counter-label" id="label-rooms">Rooms</span>
+            <span class="counter-sublabel">Dwellings</span>
+          </div>
+          <div class="counter-buttons-wrap">
+            <button type="button" class="counter-btn" data-action="dec" data-type="rooms" aria-label="Decrease Rooms" ${bookingState.rooms <= 1 ? 'disabled' : ''}>-</button>
+            <span class="counter-value" id="val-rooms" aria-labelledby="label-rooms">${bookingState.rooms}</span>
+            <button type="button" class="counter-btn" data-action="inc" data-type="rooms" aria-label="Increase Rooms" ${bookingState.rooms >= 5 ? 'disabled' : ''}>+</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="wizard-header" style="margin-top: 1rem; margin-bottom: 1rem;">
+        <span class="wizard-label" style="text-align: center; display: block;">Select Preferred Dwelling</span>
+      </div>
+
+      <div class="wizard-choices-grid" role="radiogroup" aria-label="Dwelling Choices">
+        <div class="wizard-choice-card ${bookingState.roomType === 'any' ? 'selected' : ''}" data-room="any" role="radio" aria-checked="${bookingState.roomType === 'any'}" tabindex="0">
           <span class="choice-label">Any Available Space</span>
-          <span class="choice-meta">Best availability</span>
+          <span class="choice-meta">Best availability & flexible options</span>
         </div>
-        ${propData.rooms.map(room => `
-          <div class="choice-item ${bookingState.roomType === room.name ? 'selected' : ''}" data-val="${room.name}">
-            <span class="choice-label">${room.name}</span>
-            <span class="choice-meta">Pricing: By Enquiry</span>
+        ${roomsList.map(r => `
+          <div class="wizard-choice-card ${bookingState.roomType === r.name ? 'selected' : ''}" data-room="${r.name}" role="radio" aria-checked="${bookingState.roomType === r.name}" tabindex="0">
+            <span class="choice-label">${r.name}</span>
+            <span class="choice-meta">${r.occupancy} • ${r.inclusions}</span>
           </div>
         `).join('')}
       </div>
     `;
-    navButtonsHtml = ""; // Auto-advance
-  } 
-  
-  else if (step === 7) {
-    // Results
+  } else if (step === 5) {
+    // Review Enquiry & WhatsApp Handoff
     const propData = propertiesDb[bookingState.propertySlug];
-    const checkinFormatted = formatDate(bookingState.checkIn);
-    const checkoutFormatted = formatDate(bookingState.checkOut);
-    
-    // Filter rooms if a specific one was selected
-    const displayRooms = bookingState.roomType === "any" 
-      ? propData.rooms 
-      : propData.rooms.filter(r => r.name === bookingState.roomType);
-      
+    const checkinF = formatDisplayDate(bookingState.checkIn) || 'Flexible / To Be Decided';
+    const checkoutF = formatDisplayDate(bookingState.checkOut) || 'Flexible / To Be Decided';
+    const nights = calculateNights(bookingState.checkIn, bookingState.checkOut);
+    const nightsText = nights > 0 ? `${nights} night${nights > 1 ? 's' : ''}` : 'Flexible';
+
+    let partyText = `${bookingState.adults} Adult${bookingState.adults > 1 ? 's' : ''}`;
+    if (bookingState.children > 0) {
+      partyText += `, ${bookingState.children} Child${bookingState.children > 1 ? 'ren' : ''}`;
+    }
+    partyText += ` • ${bookingState.rooms} Room${bookingState.rooms > 1 ? 's' : ''}`;
+
+    const selectedRoomObj = propData ? (propData.rooms || []).find(r => r.name === bookingState.roomType) : null;
+    const roomDisplayName = bookingState.roomType === 'any' ? 'Any Available Space' : bookingState.roomType;
+
     stepContent = `
-      <span class="step-indicator">Availability Results</span>
-      <h3 class="step-question" style="font-size:2rem; margin-bottom:1.5rem;">Available Spaces at ${propData.name}</h3>
-      <p style="font-family:var(--font-sans); color:var(--color-stone); opacity:0.6; margin-bottom:2.5rem;">
-        Dates: ${checkinFormatted} to ${checkoutFormatted} • ${bookingState.guests}
-      </p>
-      
-      <div class="booking-results-container">
-        <div class="booking-room-results-grid">
-          ${displayRooms.map(room => `
-            <div class="room-result-card">
-              <div class="result-img-box">
-                <img class="result-img" src="${room.img}" alt="${room.name}">
-              </div>
-              <div class="result-details-box">
-                <h5 class="result-room-name">${room.name}</h5>
-                <span class="result-occupancy">Max Occupancy: ${room.occupancy}</span>
-                <span class="result-inclusions">Includes: ${room.inclusions}</span>
-                <div class="result-price-cta-row">
-                  <div class="result-price-wrap">
-                    <span class="result-price-label">Pricing</span>
-                    <span class="result-price-val" style="font-size: 0.95rem; letter-spacing: 0.05em; text-transform: uppercase; color: var(--color-copper);">By Enquiry</span>
-                  </div>
-                  <button class="result-cta-btn" data-room="${room.name}">Get Bespoke Quote</button>
-                </div>
-              </div>
-            </div>
-          `).join('')}
+      <div class="wizard-header">
+        <span class="wizard-step-indicator">Step 5 of 5 • Review & Transmit Enquiry</span>
+        <h3 class="wizard-title">Review Your Enquiry</h3>
+        <p class="wizard-subtitle">Connect directly with our experience curator on WhatsApp to confirm availability and receive a custom quotation.</p>
+      </div>
+
+      <div class="wizard-summary-card glass-card">
+        <div class="summary-row">
+          <span class="summary-label">Sanctuary</span>
+          <span class="summary-value">${propData ? propData.name : 'ITW Sanctuary'} <small>(${propData ? propData.loc : ''})</small></span>
+        </div>
+        <div class="summary-row">
+          <span class="summary-label">Dwelling</span>
+          <span class="summary-value">${roomDisplayName}</span>
+        </div>
+        <div class="summary-row">
+          <span class="summary-label">Journey Dates</span>
+          <span class="summary-value">${checkinF} &rarr; ${checkoutF} (${nightsText})</span>
+        </div>
+        <div class="summary-row">
+          <span class="summary-label">Party</span>
+          <span class="summary-value">${partyText}</span>
+        </div>
+        ${selectedRoomObj && selectedRoomObj.inclusions ? `
+        <div class="summary-row">
+          <span class="summary-label">Inclusions</span>
+          <span class="summary-value">${selectedRoomObj.inclusions}</span>
+        </div>` : ''}
+        <div class="summary-row">
+          <span class="summary-label">Pricing</span>
+          <span class="summary-value copper-text">By Enquiry (Personalized Curation)</span>
         </div>
       </div>
-    `;
-    navButtonsHtml = `
-      <div class="wizard-nav-footer">
-        <button class="wizard-back-btn" id="wizard-prev-btn" style="width:100%;">Change Search Parameters</button>
+
+      <div class="wizard-disclaimer-box">
+        <div class="disclaimer-title">Booking Enquiry Notice</div>
+        <ul class="disclaimer-list">
+          <li>This is an enquiry for availability and quotation, not a confirmed reservation.</li>
+          <li>Live availability, seasonal rates, and meal plans will be confirmed by ITW.</li>
+          <li>Clicking below opens WhatsApp with your prefilled enquiry. Please tap <strong>Send</strong> in WhatsApp to transmit.</li>
+        </ul>
+      </div>
+
+      <div class="wizard-action-wrap">
+        <button type="button" class="wizard-submit-whatsapp-btn" id="confirm-whatsapp-submit">
+          <svg class="whatsapp-icon" viewBox="0 0 24 24" width="22" height="22" aria-hidden="true">
+            <path fill="currentColor" d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946C.06 5.348 5.397.01 12.008.01c3.202.001 6.212 1.246 8.477 3.514 2.266 2.268 3.507 5.28 3.505 8.484-.004 6.657-5.34 11.997-11.953 11.997-2.005-.001-3.973-.503-5.729-1.46L0 24zm6.59-4.846c1.6.95 3.188 1.449 4.825 1.451 5.436 0 9.86-4.37 9.864-9.799.002-2.63-1.023-5.101-2.885-6.965C16.59 2.01 14.12 1.01 11.5 1.012c-5.443 0-9.87 4.373-9.874 9.803-.001 1.737.478 3.427 1.39 4.938L2.08 21.82l6.236-1.637z"/>
+            <path fill="currentColor" d="M16.945 14.73c-.27-.135-1.597-.788-1.845-.878-.248-.09-.43-.135-.61.135-.18.27-.698.878-.855 1.058-.158.18-.315.202-.585.067-.27-.135-1.14-.42-2.17-1.34-.8-.713-1.34-1.597-1.498-1.867-.158-.27-.017-.417.118-.552.12-.122.27-.315.405-.473.135-.157.18-.27.27-.45.09-.18.045-.337-.022-.472-.068-.135-.61-1.467-.835-2.012-.22-.527-.44-.455-.61-.464-.158-.007-.338-.007-.518-.007-.18 0-.472.067-.72.337-.248.27-.945.923-.945 2.25 0 1.328.967 2.61 1.102 2.79.135.18 1.902 2.905 4.608 4.075.643.278 1.144.444 1.534.569.646.205 1.234.176 1.7.106.52-.078 1.597-.652 1.822-1.25.225-.597.225-1.103.158-1.21-.068-.108-.248-.154-.518-.29z"/>
+          </svg>
+          Send Enquiry via WhatsApp
+        </button>
+        <button type="button" class="wizard-back-btn" id="wizard-edit-btn" style="width: 100%; text-align: center;">Edit Selections</button>
       </div>
     `;
   }
-  
+
   stepContainer.innerHTML = stepContent + navButtonsHtml;
   bookingWizard.appendChild(stepContainer);
-  
-  // Attach event bindings
+
   bindWizardControls(stepContainer);
 }
 
 function bindWizardControls(container) {
-  // Choice selections (Step 1, 2, 5, 6)
+  const step = bookingState.currentStep;
+
+  // Destination & Property Choices (Step 1, 2)
   const choices = container.querySelectorAll('.choice-item');
   choices.forEach(choice => {
-    choice.addEventListener('click', () => {
+    const handleSelect = () => {
       const val = choice.getAttribute('data-val');
-      const step = bookingState.currentStep;
-      
       if (step === 1) {
-        bookingState.dest = val;
+        if (bookingState.dest !== val) {
+          bookingState.dest = val;
+          bookingState.propertySlug = "";
+          bookingState.roomType = "any";
+        }
         bookingState.currentStep = 2;
         renderBookingStep();
       } else if (step === 2) {
-        bookingState.propertySlug = val;
+        if (bookingState.propertySlug !== val) {
+          bookingState.propertySlug = val;
+          bookingState.roomType = "any";
+        }
         bookingState.currentStep = 3;
         renderBookingStep();
-      } else if (step === 5) {
-        bookingState.guests = val;
-        bookingState.currentStep = 6;
-        renderBookingStep();
-      } else if (step === 6) {
-        bookingState.roomType = val;
-        bookingState.currentStep = 7;
-        renderBookingStep();
+      }
+    };
+
+    choice.addEventListener('click', handleSelect);
+    choice.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        handleSelect();
       }
     });
   });
-  
-  // Back & Next triggers
+
+  // Back & Next buttons
   const prevBtn = container.querySelector('#wizard-prev-btn');
   if (prevBtn) {
     prevBtn.addEventListener('click', () => {
-      // If we jumped to step 3 because property was preset, go back to step 1
-      if (bookingState.currentStep === 3 && window.location.hash.startsWith('#property-')) {
-        closeBookingPortal();
-      } else {
+      if (bookingState.currentStep > 1) {
         bookingState.currentStep--;
         renderBookingStep();
       }
     });
   }
-  
+
+  const editBtn = container.querySelector('#wizard-edit-btn');
+  if (editBtn) {
+    editBtn.addEventListener('click', () => {
+      bookingState.currentStep = 4;
+      renderBookingStep();
+    });
+  }
+
   const nextBtn = container.querySelector('#wizard-next-btn');
   if (nextBtn) {
     nextBtn.addEventListener('click', () => {
-      const step = bookingState.currentStep;
-      
       if (step === 3) {
-        const checkinVal = container.querySelector('#checkin-date-picker').value;
-        if (!checkinVal) {
-          alert("Please select a check-in date.");
+        const cinInput = container.querySelector('#wizard-checkin');
+        const coutInput = container.querySelector('#wizard-checkout');
+        const errEl = container.querySelector('#wizard-date-error');
+
+        const cin = cinInput ? cinInput.value : '';
+        const cout = coutInput ? coutInput.value : '';
+
+        function showErr(msg, focusEl) {
+          if (errEl) {
+            errEl.innerHTML = `<span aria-hidden="true">⚠</span> ${msg}`;
+            errEl.classList.add('visible');
+          }
+          if (focusEl) focusEl.focus();
+        }
+
+        if (!cin) {
+          showErr('Please select your check-in date.', cinInput);
           return;
         }
-        bookingState.checkIn = checkinVal;
+        if (!cout) {
+          showErr('Please select your check-out date.', coutInput);
+          return;
+        }
+        if (cout <= cin) {
+          showErr('Check-out date must be after check-in date.', coutInput);
+          return;
+        }
+
+        bookingState.checkIn = cin;
+        bookingState.checkOut = cout;
+        bookingState.nights = calculateNights(cin, cout);
         bookingState.currentStep = 4;
         renderBookingStep();
       } else if (step === 4) {
-        const checkoutVal = container.querySelector('#checkout-date-picker').value;
-        if (!checkoutVal) {
-          alert("Please select a check-out date.");
-          return;
-        }
-        if (new Date(checkoutVal) <= new Date(bookingState.checkIn)) {
-          alert("Check-out date must be after check-in date.");
-          return;
-        }
-        bookingState.checkOut = checkoutVal;
         bookingState.currentStep = 5;
         renderBookingStep();
       }
     });
   }
-  
-  // WhatsApp submission click (Step 7)
-  const resultsCta = container.querySelectorAll('.result-cta-btn');
-  resultsCta.forEach(btn => {
-    btn.addEventListener('click', () => {
-      const roomName = btn.getAttribute('data-room');
-      const propData = propertiesDb[bookingState.propertySlug];
-      const checkinF = formatDate(bookingState.checkIn);
-      const checkoutF = formatDate(bookingState.checkOut);
-      
-      const text = `Hi Into The Wild team, I'd like to make a booking enquiry for:
-- Property: ${propData.name}
-- Room: ${roomName}
-- Dates: ${checkinF} to ${checkoutF}
-- Guests: ${bookingState.guests}
 
-Please confirm availability and sharing details.`;
-      
-      const whatsappUrl = `https://wa.me/917404385783?text=${encodeURIComponent(text)}`;
-      window.open(whatsappUrl, '_blank');
+  // Live Date changes (Step 3)
+  if (step === 3) {
+    const cinInput = container.querySelector('#wizard-checkin');
+    const coutInput = container.querySelector('#wizard-checkout');
+    const badgeEl = container.querySelector('#wizard-duration-badge');
+    const errEl = container.querySelector('#wizard-date-error');
+
+    function updateDateCalculation() {
+      const cin = cinInput.value;
+      const cout = coutInput.value;
+      bookingState.checkIn = cin;
+      bookingState.checkOut = cout;
+
+      if (errEl) {
+        errEl.classList.remove('visible');
+        errEl.innerHTML = '';
+      }
+
+      if (cin) {
+        const nextDay = getNextDayDateString(cin);
+        coutInput.min = nextDay;
+        if (cout && cout <= cin) {
+          coutInput.value = '';
+          bookingState.checkOut = '';
+          if (errEl) {
+            errEl.innerHTML = `<span aria-hidden="true">ℹ</span> Please select a check-out date after check-in.`;
+            errEl.classList.add('visible');
+          }
+        }
+      }
+
+      const nights = calculateNights(cinInput.value, coutInput.value);
+      bookingState.nights = nights;
+      if (badgeEl) {
+        if (nights > 0 && cinInput.value && coutInput.value) {
+          badgeEl.classList.remove('empty-state');
+          badgeEl.innerHTML = `Stay duration: <span class="duration-highlight">${nights} night${nights > 1 ? 's' : ''}</span> (${formatDisplayDate(cinInput.value)} &rarr; ${formatDisplayDate(coutInput.value)})`;
+        } else {
+          badgeEl.classList.add('empty-state');
+          badgeEl.innerHTML = 'Select check-in and check-out to calculate duration. Availability confirmed upon enquiry.';
+        }
+      }
+    }
+
+    if (cinInput) cinInput.addEventListener('change', updateDateCalculation);
+    if (coutInput) coutInput.addEventListener('change', updateDateCalculation);
+  }
+
+  // Counters & Room cards (Step 4)
+  if (step === 4) {
+    container.querySelectorAll('.counter-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const action = btn.getAttribute('data-action');
+        const type = btn.getAttribute('data-type');
+
+        if (type === 'adults') {
+          if (action === 'inc' && bookingState.adults < 10) bookingState.adults++;
+          if (action === 'dec' && bookingState.adults > 1) bookingState.adults--;
+        } else if (type === 'children') {
+          if (action === 'inc' && bookingState.children < 6) bookingState.children++;
+          if (action === 'dec' && bookingState.children > 0) bookingState.children--;
+        } else if (type === 'rooms') {
+          if (action === 'inc' && bookingState.rooms < 5) bookingState.rooms++;
+          if (action === 'dec' && bookingState.rooms > 1) bookingState.rooms--;
+        }
+        renderBookingStep();
+      });
+    });
+
+    const cards = container.querySelectorAll('.wizard-choice-card');
+    cards.forEach(card => {
+      const selectRoom = () => {
+        const room = card.getAttribute('data-room');
+        bookingState.roomType = room;
+        cards.forEach(c => {
+          c.classList.remove('selected');
+          c.setAttribute('aria-checked', 'false');
+        });
+        card.classList.add('selected');
+        card.setAttribute('aria-checked', 'true');
+      };
+
+      card.addEventListener('click', selectRoom);
+      card.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          selectRoom();
+        }
+      });
+    });
+  }
+
+  // Final WhatsApp submission (Step 5)
+  const finalBtn = container.querySelector('#confirm-whatsapp-submit');
+  if (finalBtn) {
+    finalBtn.addEventListener('click', () => {
+      const propData = propertiesDb[bookingState.propertySlug];
+      const whatsappUrl = buildEnquiryWhatsAppUrl({
+        propertyName: propData ? propData.name : 'ITW Sanctuary',
+        propertyLoc: propData ? propData.loc : '',
+        roomType: bookingState.roomType,
+        checkIn: bookingState.checkIn,
+        checkOut: bookingState.checkOut,
+        nights: bookingState.nights,
+        adults: bookingState.adults,
+        children: bookingState.children,
+        rooms: bookingState.rooms
+      });
+
+      window.open(whatsappUrl, '_blank', 'noopener,noreferrer');
       closeBookingPortal();
     });
-  });
+  }
 }
 
+// Preserve formatDate for any external consumers
 function formatDate(dateStr) {
-  if (!dateStr) return "";
-  const d = new Date(dateStr);
-  const options = { day: 'numeric', month: 'short', year: 'numeric' };
-  return d.toLocaleDateString('en-US', options);
+  return formatDisplayDate(dateStr);
 }
-
 
 // ==========================================================================
 // SCENE 7: PARTNER WITH ITW FORM SUBMISSION

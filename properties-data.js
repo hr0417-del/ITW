@@ -346,10 +346,89 @@ export const propertiesDb = {
       }
     ]
   }
-};;
+};
 
 export const propertySlugs = Object.keys(propertiesDb);
 
 export function getProperty(slug) {
   return propertiesDb[slug] || null;
 }
+
+export function calculateNights(checkInStr, checkOutStr) {
+  if (!checkInStr || !checkOutStr) return 0;
+  const inParts = checkInStr.split('-').map(Number);
+  const outParts = checkOutStr.split('-').map(Number);
+  if (inParts.length !== 3 || outParts.length !== 3) return 0;
+  const dIn = new Date(inParts[0], inParts[1] - 1, inParts[2]);
+  const dOut = new Date(outParts[0], outParts[1] - 1, outParts[2]);
+  const diffTime = dOut.getTime() - dIn.getTime();
+  const diffDays = Math.round(diffTime / (1000 * 60 * 60 * 24));
+  return diffDays > 0 ? diffDays : 0;
+}
+
+export function formatDisplayDate(dateStr) {
+  if (!dateStr) return '';
+  const parts = dateStr.split('-').map(Number);
+  if (parts.length === 3) {
+    const d = new Date(parts[0], parts[1] - 1, parts[2]);
+    return d.toLocaleDateString('en-US', { day: 'numeric', month: 'short', year: 'numeric' });
+  }
+  const d = new Date(dateStr);
+  return isNaN(d.getTime()) ? dateStr : d.toLocaleDateString('en-US', { day: 'numeric', month: 'short', year: 'numeric' });
+}
+
+export function getNextDayDateString(dateStr) {
+  if (!dateStr) return '';
+  const parts = dateStr.split('-').map(Number);
+  if (parts.length !== 3) return '';
+  const d = new Date(parts[0], parts[1] - 1, parts[2]);
+  d.setDate(d.getDate() + 1);
+  const y = d.getFullYear();
+  const m = String(d.getMonth() + 1).padStart(2, '0');
+  const day = String(d.getDate()).padStart(2, '0');
+  return `${y}-${m}-${day}`;
+}
+
+export function buildEnquiryWhatsAppMessage({
+  propertyName,
+  propertyLoc,
+  roomType,
+  checkIn,
+  checkOut,
+  nights,
+  adults = 2,
+  children = 0,
+  rooms = 1
+}) {
+  const safeProp = propertyName || 'ITW Sanctuary';
+  const safeLoc = propertyLoc ? ` (${propertyLoc})` : '';
+  const safeRoom = roomType && roomType !== 'any' ? roomType : 'Any Available Space';
+  
+  const cinF = formatDisplayDate(checkIn) || 'Flexible / To Be Decided';
+  const coutF = formatDisplayDate(checkOut) || 'Flexible / To Be Decided';
+  const calcNights = nights !== undefined && nights !== null && nights > 0 ? nights : calculateNights(checkIn, checkOut);
+  const durationText = calcNights > 0 ? ` (${calcNights} night${calcNights > 1 ? 's' : ''})` : '';
+  
+  let travelersStr = `${adults} Adult${adults > 1 ? 's' : ''}`;
+  if (children > 0) {
+    travelersStr += `, ${children} Child${children > 1 ? 'ren' : ''}`;
+  }
+  travelersStr += ` • ${rooms} Room${rooms > 1 ? 's' : ''}`;
+
+  return [
+    `Hi Into The Wild team, I would like to make a booking enquiry for:`,
+    ``,
+    `• Sanctuary: ${safeProp}${safeLoc}`,
+    `• Dwelling: ${safeRoom}`,
+    `• Dates: ${cinF} to ${coutF}${durationText}`,
+    `• Travelers: ${travelersStr}`,
+    ``,
+    `Please confirm availability and share bespoke pricing and itinerary details.`
+  ].join('\n');
+}
+
+export function buildEnquiryWhatsAppUrl(params) {
+  const message = buildEnquiryWhatsAppMessage(params);
+  return `https://wa.me/917404385783?text=${encodeURIComponent(message)}`;
+}
+

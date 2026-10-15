@@ -5,6 +5,44 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>ITW | Into The Wild - The Art of Experiential Travel</title>
   <meta name="description" content="An immersive cinematic journey to premium mountain retreats. Experience quiet luxury, editorial hospitality, and the soul of the Himalayas.">
+  <link rel="canonical" href="https://hr0417-del.github.io/ITW/">
+  <link rel="icon" type="image/svg+xml" href="./favicon.svg">
+
+  <!-- Open Graph / WhatsApp / Facebook -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="ITW | Into The Wild">
+  <meta property="og:title" content="ITW | Into The Wild - The Art of Experiential Travel">
+  <meta property="og:description" content="An immersive cinematic journey to premium mountain retreats. Experience quiet luxury, editorial hospitality, and the soul of the Himalayas.">
+  <meta property="og:url" content="https://hr0417-del.github.io/ITW/">
+  <meta property="og:image" content="https://hr0417-del.github.io/ITW/ITW/itw_luxury_farm_stay.png">
+  <meta property="og:image:alt" content="ITW Into The Wild - Himalayan Sanctuaries">
+
+  <!-- Twitter / X -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="ITW | Into The Wild - The Art of Experiential Travel">
+  <meta name="twitter:description" content="An immersive cinematic journey to premium mountain retreats. Experience quiet luxury, editorial hospitality, and the soul of the Himalayas.">
+  <meta name="twitter:image" content="https://hr0417-del.github.io/ITW/ITW/itw_luxury_farm_stay.png">
+
+  <!-- Schema.org Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "TravelAgency",
+    "name": "Into The Wild",
+    "alternateName": "ITW",
+    "url": "https://hr0417-del.github.io/ITW/",
+    "logo": "https://hr0417-del.github.io/ITW/favicon.svg",
+    "description": "An immersive cinematic journey to premium mountain retreats. Experience quiet luxury, editorial hospitality, and the soul of the Himalayas.",
+    "telephone": "+91-74043-85783",
+    "contactPoint": {
+      "@type": "ContactPoint",
+      "telephone": "+91-74043-85783",
+      "contactType": "reservations",
+      "availableLanguage": ["English", "Hindi"]
+    }
+  }
+  </script>
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
@@ -121,7 +159,7 @@
           </defs>
           <path d="M 0,70 L 0,0 L 60,0 L 60,70 L 50,60 L 50,10 L 10,10 L 10,60 Z" fill="url(#loaderGoldGrad)" />
         </svg>
-        <h1 class="loader-logo">ITW</h1>
+        <div class="loader-logo">ITW</div>
         <p class="loader-subtitle">INTO THE WILD</p>
         <button class="enter-btn" id="enter-btn">ENTER THE PORTAL</button>
       </div>
@@ -150,9 +188,9 @@
 
       <!-- Hero Text Content (Editorial Layout matching updated copy) -->
       <div class="hero-text-overlay" id="hero-text-overlay">
-        <h2 class="hero-headline">
+        <h1 class="hero-headline">
           <span class="hl-top">GO INTO THE WILD</span>
-        </h2>
+        </h1>
         <div class="hero-cta-box">
           <button class="begin-journey-btn" id="scroll-to-map-btn">
             <span class="btn-shine"></span>
@@ -200,7 +238,7 @@
       <!-- Card 1 -->
       <a href="./properties/luxury-farm-stay/" class="property-card animate-on-scroll" data-slug="luxury-farm-stay">
         <div class="property-image-box">
-          <img class="property-img" src="./ITW/itw_luxury_farm_stay.png" alt="ITW Luxury Farm Stay" loading="lazy">
+          <img class="property-img" src="./properties/luxury-farm-stay/hero.webp" alt="ITW Luxury Farm Stay" width="1280" height="590" loading="lazy">
           <div class="property-badge">Farm Stay</div>
         </div>
         <div class="property-content">
@@ -213,7 +251,7 @@
       <!-- Card 2 -->
       <a href="./properties/camp-cottages/" class="property-card animate-on-scroll" data-slug="camp-cottages">
         <div class="property-image-box">
-          <img class="property-img" src="./ITW/itw_camp_cottages_jispa.png" alt="ITW Camp & Cottages" loading="lazy">
+          <img class="property-img" src="./properties/camp-cottages/hero.webp" alt="ITW Camp & Cottages" width="1280" height="853" loading="lazy">
           <div class="property-badge">Camp & Cottages</div>
         </div>
         <div class="property-content">
@@ -226,7 +264,7 @@
       <!-- Card 3 -->
       <a href="./properties/mountain-homestay/" class="property-card animate-on-scroll" data-slug="mountain-homestay">
         <div class="property-image-box">
-          <img class="property-img" src="./ITW/itw_mountain_homestay_keylong.png" alt="ITW Mountain Homestay" loading="lazy">
+          <img class="property-img" src="./properties/mountain-homestay/hero.webp" alt="ITW Mountain Homestay" width="1280" height="960" loading="lazy">
           <div class="property-badge">Homestay</div>
         </div>
         <div class="property-content">
@@ -239,7 +277,7 @@
       <!-- Card 4 -->
       <a href="./properties/forest-cottages/" class="property-card animate-on-scroll" data-slug="forest-cottages">
         <div class="property-image-box">
-          <img class="property-img" src="./properties/forest-cottages/hero.avif" alt="ITW Forest Cottages" loading="lazy">
+          <img class="property-img" src="./properties/forest-cottages/hero.avif" alt="ITW Forest Cottages" width="1200" height="801" loading="lazy">
           <div class="property-badge">Forest Cottages</div>
         </div>
         <div class="property-content">
@@ -252,7 +290,7 @@
       <!-- Card 5 -->
       <a href="./properties/luxury-tree-house/" class="property-card animate-on-scroll" data-slug="luxury-tree-house">
         <div class="property-image-box">
-          <img class="property-img" src="./properties/luxury-tree-house/hero.avif" alt="ITW Luxury Tree House" loading="lazy">
+          <img class="property-img" src="./properties/luxury-tree-house/hero.avif" alt="ITW Luxury Tree House" width="1280" height="853" loading="lazy">
           <div class="property-badge">Luxury Tree House</div>
         </div>
         <div class="property-content">
@@ -265,7 +303,7 @@
       <!-- Card 6 -->
       <a href="./properties/frontier-camp/" class="property-card animate-on-scroll" data-slug="frontier-camp">
         <div class="property-image-box">
-          <img class="property-img" src="./ITW/itw_frontier_camp.png" alt="ITW Frontier Camp" loading="lazy">
+          <img class="property-img" src="./properties/frontier-camp/hero.webp" alt="ITW Frontier Camp" width="960" height="1280" loading="lazy">
           <div class="property-badge">Luxury Camp</div>
         </div>
         <div class="property-content">
@@ -278,7 +316,7 @@
       <!-- Card 7 -->
       <a href="./properties/mountain-huts/" class="property-card animate-on-scroll" data-slug="mountain-huts">
         <div class="property-image-box">
-          <img class="property-img" src="./ITW/itw_mountain_huts_viratkhai.png" alt="ITW Mountain Huts" loading="lazy">
+          <img class="property-img" src="./properties/mountain-huts/hero.webp" alt="ITW Mountain Huts" width="1024" height="1280" loading="lazy">
           <div class="property-badge">Mountain Huts</div>
         </div>
         <div class="property-content">
@@ -291,7 +329,7 @@
       <!-- Card 8 -->
       <a href="./properties/camp-huts/" class="property-card animate-on-scroll" data-slug="camp-huts">
         <div class="property-image-box">
-          <img class="property-img" src="./ITW/itw_huts_camp_viratkhai.png" alt="ITW Camp & Huts" loading="lazy">
+          <img class="property-img" src="./properties/camp-huts/hero.webp" alt="ITW Camp & Huts" width="1280" height="960" loading="lazy">
           <div class="property-badge">Camp & Huts</div>
         </div>
         <div class="property-content">

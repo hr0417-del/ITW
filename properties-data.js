@@ -7,7 +7,7 @@ export const propertiesDb = {
     cat: "Farm Stay",
     lat: 30.3165,
     lon: 78.0322,
-    img: "./ITW/itw_luxury_farm_stay.png",
+    img: "./properties/luxury-farm-stay/hero.webp",
     gallery: [
       "./properties/luxury-farm-stay/pool-villa-loungers.webp",
       "./properties/luxury-farm-stay/stone-cottage-porch.webp",
@@ -52,7 +52,7 @@ export const propertiesDb = {
     cat: "Camp & Cottages",
     lat: 32.6285,
     lon: 77.1896,
-    img: "./ITW/itw_camp_cottages_jispa.png",
+    img: "./properties/camp-cottages/hero.webp",
     gallery: [
       "./properties/camp-cottages/snow-peaks-mountain-chalets.webp",
       "./properties/camp-cottages/red-chalets-prayer-flags.webp",
@@ -97,7 +97,7 @@ export const propertiesDb = {
     cat: "Homestay",
     lat: 32.5714,
     lon: 77.0301,
-    img: "./ITW/itw_mountain_homestay_keylong.png",
+    img: "./properties/mountain-homestay/hero.webp",
     gallery: [
       "./properties/mountain-homestay/garden-cafe-canopy.webp",
       "./properties/mountain-homestay/rooftop-terrace-panoramic.webp",
@@ -227,7 +227,7 @@ export const propertiesDb = {
     cat: "Luxury Camp",
     lat: 34.8451,
     lon: 76.8338,
-    img: "./ITW/itw_frontier_camp.png",
+    img: "./properties/frontier-camp/hero.webp",
     gallery: [
       "./properties/frontier-camp/luxury-glamping-tent-interior.webp",
       "./properties/frontier-camp/balti-majlis-communal-lounge.webp",
@@ -268,7 +268,7 @@ export const propertiesDb = {
     cat: "Mountain Huts",
     lat: 30.6139,
     lon: 77.9042,
-    img: "./ITW/itw_mountain_huts_viratkhai.png",
+    img: "./properties/mountain-huts/hero.webp",
     gallery: [
           "./properties/mountain-huts/dining-pavilion.webp",
           "./properties/mountain-huts/img_2.jpeg",
@@ -313,7 +313,7 @@ export const propertiesDb = {
     cat: "Camp & Huts",
     lat: 30.6139,
     lon: 77.9042,
-    img: "./ITW/itw_huts_camp_viratkhai.png",
+    img: "./properties/camp-huts/hero.webp",
     gallery: [
           "./properties/camp-huts/stone-cottages-terrace.webp",
           "./properties/camp-huts/stone-pathway-gardens.webp",

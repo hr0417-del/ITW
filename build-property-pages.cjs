@@ -22,6 +22,16 @@ async function generate() {
     const cleanHero = data.img.replace('./', '');
     const cleanDesc = (data.about || data.quote || '').replace(/"/g, '&quot;');
 
+    function getDescriptiveAlt(imgPath, propName, index) {
+      const filename = imgPath.split('/').pop().replace(/\.[^.]+$/, '');
+      if (filename && !filename.startsWith('img_')) {
+        const readable = filename.replace(/-/g, ' ');
+        const capitalized = readable.charAt(0).toUpperCase() + readable.slice(1);
+        return `${capitalized} at ${propName}`;
+      }
+      return `${propName} - sanctuary photography ${index + 1}`;
+    }
+
     // Build Other Stays Cards
     const otherStaysHtml = propertySlugs
       .filter(s => s !== slug)
@@ -31,7 +41,7 @@ async function generate() {
         return `
           <a href="../${otherSlug}/" class="property-card" data-slug="${otherSlug}">
             <div class="property-image-box">
-              <img class="property-img" src="../../${otherImg}" alt="${otherData.name}" loading="lazy">
+              <img class="property-img" src="../../${otherImg}" alt="${otherData.name}" width="1280" height="720" loading="lazy">
               <div class="property-badge">${otherData.cat}</div>
             </div>
             <div class="property-content">
@@ -52,6 +62,8 @@ async function generate() {
   <title>${data.name} | ${data.loc} | Into The Wild</title>
   <meta name="description" content="${cleanDesc}">
   <link rel="canonical" href="${BASE_URL}/properties/${slug}/">
+  <link rel="icon" type="image/svg+xml" href="../../favicon.svg">
+  <link rel="preload" as="image" href="../../${cleanHero}" fetchpriority="high">
   
   <!-- Open Graph / WhatsApp / Facebook -->
   <meta property="og:type" content="website">
@@ -77,6 +89,8 @@ async function generate() {
     "description": data.about || data.quote,
     "url": `${BASE_URL}/properties/${slug}/`,
     "image": `${BASE_URL}/${cleanHero}`,
+    "telephone": "+91-74043-85783",
+    "priceRange": "By Enquiry",
     "geo": {
       "@type": "GeoCoordinates",
       "latitude": data.lat,
@@ -239,7 +253,7 @@ async function generate() {
       <div class="prop-gallery-grid">
         ${(data.gallery || []).map((img, i) => `
           <div class="prop-gallery-item">
-            <img class="prop-gallery-img" src="../../${img.replace('./', '')}" alt="${data.name} - sanctuary photography ${i + 1}" loading="lazy">
+            <img class="prop-gallery-img" src="../../${img.replace('./', '')}" alt="${getDescriptiveAlt(img, data.name, i)}" width="1280" height="853" loading="lazy">
           </div>
         `).join('')}
       </div>
@@ -253,7 +267,7 @@ async function generate() {
         ${data.rooms.map(room => `
           <div class="prop-room-card">
             <div class="room-img-box">
-              <img class="room-img" src="../../${room.img.replace('./', '')}" alt="${room.name}" loading="lazy">
+              <img class="room-img" src="../../${room.img.replace('./', '')}" alt="${room.name}" width="600" height="400" loading="lazy">
             </div>
             <div class="room-details-box">
               <h3 class="room-name">${room.name}</h3>
@@ -446,6 +460,7 @@ async function generate() {
   <title>Sanctuary Not Found | Into The Wild</title>
   <meta name="description" content="The sanctuary path you are seeking is uncharted or has been moved.">
   <link rel="canonical" href="${BASE_URL}/404.html">
+  <link rel="icon" type="image/svg+xml" href="./favicon.svg">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">

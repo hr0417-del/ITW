@@ -332,6 +332,115 @@ document.querySelectorAll('.explore-dest-btn').forEach(btn => {
 });
 
 // ==========================================================================
+// MOBILE NAVIGATION DRAWER CONTROLLER
+// ==========================================================================
+const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+const mobileNavDrawer = document.getElementById('mobile-nav-drawer');
+const closeMobileNavBtn = document.getElementById('close-mobile-nav-btn');
+const mobileNavBackdrop = document.getElementById('mobile-nav-backdrop');
+const mobileNavItems = document.querySelectorAll('.mobile-nav-item');
+const mobileNavInquireBtn = document.getElementById('mobile-nav-inquire-btn');
+
+function openMobileNav() {
+  if (!mobileNavDrawer) return;
+  mobileNavDrawer.classList.add('active');
+  mobileNavDrawer.setAttribute('aria-hidden', 'false');
+  if (mobileMenuBtn) {
+    mobileMenuBtn.classList.add('active');
+    mobileMenuBtn.setAttribute('aria-expanded', 'true');
+  }
+  document.body.style.overflow = "hidden";
+}
+
+function closeMobileNav() {
+  if (!mobileNavDrawer) return;
+  mobileNavDrawer.classList.remove('active');
+  mobileNavDrawer.setAttribute('aria-hidden', 'true');
+  if (mobileMenuBtn) {
+    mobileMenuBtn.classList.remove('active');
+    mobileMenuBtn.setAttribute('aria-expanded', 'false');
+  }
+  // Restore body overflow only if other modals aren't active
+  const isAnyModalActive = document.querySelector('.property-detail-overlay.active, .booking-portal-overlay.active, .lightbox-overlay.active, .inquiry-drawer-overlay.active');
+  if (!isAnyModalActive) {
+    document.body.style.overflow = "";
+  }
+}
+
+if (mobileMenuBtn) {
+  mobileMenuBtn.addEventListener('click', () => {
+    if (mobileNavDrawer && mobileNavDrawer.classList.contains('active')) {
+      closeMobileNav();
+    } else {
+      openMobileNav();
+    }
+  });
+}
+
+if (closeMobileNavBtn) {
+  closeMobileNavBtn.addEventListener('click', closeMobileNav);
+}
+
+if (mobileNavBackdrop) {
+  mobileNavBackdrop.addEventListener('click', closeMobileNav);
+}
+
+// Section navigation from mobile drawer with smooth scrolling
+mobileNavItems.forEach(item => {
+  item.addEventListener('click', (e) => {
+    const targetId = item.getAttribute('data-target');
+    if (targetId) {
+      const targetEl = document.getElementById(targetId);
+      if (targetEl) {
+        e.preventDefault();
+        closeMobileNav();
+        setTimeout(() => {
+          targetEl.scrollIntoView({ behavior: 'smooth' });
+        }, 320);
+      }
+    } else {
+      closeMobileNav();
+    }
+  });
+});
+
+if (mobileNavInquireBtn) {
+  mobileNavInquireBtn.addEventListener('click', () => {
+    closeMobileNav();
+    openBookingPortal();
+  });
+}
+
+// Automatically close mobile menu if viewport expands beyond 768px
+window.addEventListener('resize', () => {
+  if (window.innerWidth > 768 && mobileNavDrawer && mobileNavDrawer.classList.contains('active')) {
+    closeMobileNav();
+  }
+});
+
+// Escape key listener for all modals and overlays
+window.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape') {
+    if (mobileNavDrawer && mobileNavDrawer.classList.contains('active')) {
+      closeMobileNav();
+      return;
+    }
+    if (galleryLightbox && galleryLightbox.classList.contains('active')) {
+      closeLightbox();
+      return;
+    }
+    if (bookingPortal && bookingPortal.classList.contains('active')) {
+      closeBookingPortal();
+      return;
+    }
+    if (propertyOverlay && propertyOverlay.classList.contains('active')) {
+      closePropertyOverlay();
+      return;
+    }
+  }
+});
+
+// ==========================================================================
 // SPA PROPERTY DETAILS OVERLAY CONTROL (DYNAMICS & DETAILS DRAWER)
 // ==========================================================================
 

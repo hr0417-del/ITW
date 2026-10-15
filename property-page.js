@@ -33,16 +33,23 @@ const lightboxImg = document.getElementById('lightbox-img');
 const closeLightboxBtn = document.getElementById('close-lightbox');
 
 function openLightbox(src) {
-  if (lightbox && lightboxImg) {
-    lightboxImg.src = src;
-    lightbox.classList.remove('hidden');
-    document.body.style.overflow = 'hidden';
-  }
+  if (!lightbox || !lightboxImg) return;
+  lightboxImg.src = src;
+  lightbox.classList.remove('hidden');
+  lightbox.offsetWidth; // Force reflow
+  lightbox.classList.add('active');
+  document.body.style.overflow = 'hidden';
 }
 
 function closeLightbox() {
-  if (lightbox) {
-    lightbox.classList.add('hidden');
+  if (!lightbox) return;
+  lightbox.classList.remove('active');
+  setTimeout(() => {
+    if (!lightbox.classList.contains('active')) {
+      lightbox.classList.add('hidden');
+    }
+  }, 400);
+  if (!bookingPortal || !bookingPortal.classList.contains('active')) {
     document.body.style.overflow = '';
   }
 }
@@ -59,8 +66,70 @@ if (lightbox) {
   });
 }
 
+// 2b. Mobile Navigation Drawer Controller
+const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+const mobileNavDrawer = document.getElementById('mobile-nav-drawer');
+const closeMobileNavBtn = document.getElementById('close-mobile-nav-btn');
+const mobileNavBackdrop = document.getElementById('mobile-nav-backdrop');
+const mobileNavInquireBtn = document.getElementById('mobile-nav-inquire-btn');
+
+function openMobileNav() {
+  if (!mobileNavDrawer) return;
+  mobileNavDrawer.classList.add('active');
+  mobileNavDrawer.setAttribute('aria-hidden', 'false');
+  if (mobileMenuBtn) {
+    mobileMenuBtn.classList.add('active');
+    mobileMenuBtn.setAttribute('aria-expanded', 'true');
+  }
+  document.body.style.overflow = 'hidden';
+}
+
+function closeMobileNav() {
+  if (!mobileNavDrawer) return;
+  mobileNavDrawer.classList.remove('active');
+  mobileNavDrawer.setAttribute('aria-hidden', 'true');
+  if (mobileMenuBtn) {
+    mobileMenuBtn.classList.remove('active');
+    mobileMenuBtn.setAttribute('aria-expanded', 'false');
+  }
+  const isAnyModalActive = document.querySelector('.booking-portal-overlay.active, .lightbox-overlay.active');
+  if (!isAnyModalActive) {
+    document.body.style.overflow = '';
+  }
+}
+
+if (mobileMenuBtn) {
+  mobileMenuBtn.addEventListener('click', () => {
+    if (mobileNavDrawer && mobileNavDrawer.classList.contains('active')) {
+      closeMobileNav();
+    } else {
+      openMobileNav();
+    }
+  });
+}
+
+if (closeMobileNavBtn) closeMobileNavBtn.addEventListener('click', closeMobileNav);
+if (mobileNavBackdrop) mobileNavBackdrop.addEventListener('click', closeMobileNav);
+
+if (mobileNavInquireBtn) {
+  mobileNavInquireBtn.addEventListener('click', () => {
+    closeMobileNav();
+    openBookingPortal();
+  });
+}
+
+window.addEventListener('resize', () => {
+  if (window.innerWidth > 768 && mobileNavDrawer && mobileNavDrawer.classList.contains('active')) {
+    closeMobileNav();
+  }
+});
+
 window.addEventListener('keydown', (e) => {
   if (e.key === 'Escape') {
+    if (mobileNavDrawer && mobileNavDrawer.classList.contains('active')) {
+      closeMobileNav();
+      return;
+    }
     closeLightbox();
     closeBookingPortal();
   }

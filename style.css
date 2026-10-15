@@ -4520,4 +4520,478 @@ a.property-card {
   margin-bottom: 2.5rem;
 }
 
+/* ==========================================================================
+   PHASE 3: MOBILE NAVIGATION, TOUCH INTERACTIONS & RESPONSIVE USABILITY
+   ========================================================================== */
+
+/* 1. Mobile Menu Button (Header Trigger) */
+.mobile-menu-btn {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+  width: 44px;
+  height: 44px;
+  min-width: 44px;
+  min-height: 44px;
+  background: transparent;
+  border: 1px solid rgba(247, 243, 236, 0.12);
+  border-radius: 4px;
+  cursor: pointer;
+  padding: 0;
+  color: var(--color-stone);
+  transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+  -webkit-tap-highlight-color: transparent;
+  z-index: 1002;
+}
+
+.mobile-menu-btn:hover,
+.mobile-menu-btn:focus-visible {
+  border-color: var(--color-copper);
+  background: rgba(184, 121, 59, 0.12);
+  outline: none;
+}
+
+.hamburger-bar {
+  display: block;
+  width: 20px;
+  height: 2px;
+  background-color: var(--color-stone);
+  border-radius: 1px;
+  transition: transform 0.35s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.25s ease;
+  transform-origin: center;
+}
+
+.mobile-menu-btn.active .hamburger-bar:nth-child(1) {
+  transform: translateY(7px) rotate(45deg);
+  background-color: var(--color-copper);
+}
+
+.mobile-menu-btn.active .hamburger-bar:nth-child(2) {
+  opacity: 0;
+  transform: scaleX(0);
+}
+
+.mobile-menu-btn.active .hamburger-bar:nth-child(3) {
+  transform: translateY(-7px) rotate(-45deg);
+  background-color: var(--color-copper);
+}
+
+/* 2. Mobile Navigation Drawer Overlay */
+.mobile-nav-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  width: 100dvw;
+  height: 100vh;
+  height: 100dvh;
+  z-index: 2500;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity 0.4s cubic-bezier(0.25, 1, 0.5, 1), visibility 0.4s;
+}
+
+.mobile-nav-overlay.active {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+}
+
+.mobile-nav-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(12, 16, 14, 0.78);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+.mobile-nav-panel {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: min(340px, 86vw);
+  height: 100%;
+  height: 100dvh;
+  background: rgba(18, 23, 20, 0.98);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border-left: 1px solid rgba(184, 121, 59, 0.25);
+  padding: 1.5rem 1.5rem 2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  transform: translateX(100%);
+  transition: transform 0.4s cubic-bezier(0.25, 1, 0.3, 1);
+  box-shadow: -15px 0 45px rgba(0, 0, 0, 0.7);
+  overscroll-behavior: contain;
+  -webkit-overflow-scrolling: touch;
+  overflow-y: auto;
+  box-sizing: border-box;
+}
+
+.mobile-nav-overlay.active .mobile-nav-panel {
+  transform: translateX(0);
+}
+
+.mobile-nav-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 1.25rem;
+  border-bottom: 1px solid rgba(247, 243, 236, 0.08);
+}
+
+.close-mobile-nav-btn {
+  width: 44px;
+  height: 44px;
+  min-width: 44px;
+  min-height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(30, 36, 32, 0.5);
+  border: 1px solid rgba(247, 243, 236, 0.1);
+  border-radius: 50%;
+  color: var(--color-stone);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.close-mobile-nav-btn:hover,
+.close-mobile-nav-btn:focus-visible {
+  background: rgba(184, 121, 59, 0.2);
+  border-color: var(--color-copper);
+  color: var(--color-stone);
+  outline: none;
+}
+
+.mobile-nav-links {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  margin: 1.5rem 0;
+}
+
+.mobile-nav-item {
+  min-height: 52px;
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+  padding: 0.75rem 0.5rem;
+  text-decoration: none;
+  border-bottom: 1px solid rgba(247, 243, 236, 0.04);
+  transition: all 0.3s ease;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.mobile-nav-item:hover,
+.mobile-nav-item:focus {
+  padding-left: 1rem;
+  background: rgba(184, 121, 59, 0.08);
+  border-radius: 4px;
+}
+
+.mobile-nav-num {
+  font-family: var(--font-serif);
+  font-size: 0.85rem;
+  color: var(--color-copper);
+  font-weight: 500;
+}
+
+.mobile-nav-text {
+  font-family: var(--font-sans);
+  font-size: 0.95rem;
+  font-weight: 400;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--color-stone);
+}
+
+.mobile-nav-footer {
+  padding-top: 1.5rem;
+  border-top: 1px solid rgba(247, 243, 236, 0.08);
+}
+
+.mobile-nav-inquire-btn {
+  width: 100%;
+  min-height: 48px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  background: var(--color-copper);
+  color: var(--color-charcoal);
+  border: 1px solid var(--color-copper);
+  border-radius: 4px;
+  font-family: var(--font-sans);
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.mobile-nav-inquire-btn:hover,
+.mobile-nav-inquire-btn:focus-visible {
+  background: #c98848;
+  border-color: #c98848;
+  outline: none;
+}
+
+.mobile-nav-tagline {
+  font-family: var(--font-serif);
+  font-size: 0.75rem;
+  font-style: italic;
+  color: rgba(247, 243, 236, 0.45);
+  text-align: center;
+  margin-top: 1rem;
+}
+
+/* 3. Property Page Booking Wizard Component Styles */
+.wizard-header {
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+.wizard-step-indicator {
+  font-family: var(--font-sans);
+  font-size: 0.75rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--color-copper);
+  display: block;
+  margin-bottom: 0.75rem;
+}
+
+.wizard-title {
+  font-family: var(--font-serif);
+  font-size: clamp(1.8rem, 4vw, 2.4rem);
+  color: var(--color-stone);
+  margin-bottom: 0.5rem;
+  font-weight: 400;
+}
+
+.wizard-subtitle {
+  font-family: var(--font-sans);
+  font-size: 0.95rem;
+  color: rgba(247, 243, 236, 0.65);
+  max-width: 500px;
+  margin: 0 auto;
+  line-height: 1.6;
+}
+
+.wizard-form-group {
+  width: 100%;
+  max-width: 480px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  text-align: left;
+}
+
+.wizard-label {
+  font-family: var(--font-sans);
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--color-copper);
+}
+
+.wizard-input-date {
+  width: 100%;
+  box-sizing: border-box;
+  background: rgba(30, 36, 32, 0.6);
+  border: 1px solid rgba(247, 243, 236, 0.12);
+  border-radius: 4px;
+  padding: 1rem 1.25rem;
+  font-family: var(--font-sans);
+  font-size: 1rem;
+  color: var(--color-stone);
+  min-height: 48px;
+  transition: border-color 0.3s ease;
+  -webkit-appearance: none;
+}
+
+.wizard-input-date:focus {
+  outline: none;
+  border-color: var(--color-copper);
+  background: rgba(30, 36, 32, 0.85);
+}
+
+.wizard-choices-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1rem;
+  width: 100%;
+  max-width: 600px;
+  margin: 1.5rem auto 0;
+}
+
+.wizard-choice-card {
+  background: rgba(30, 36, 32, 0.45);
+  border: 1px solid rgba(247, 243, 236, 0.08);
+  border-radius: 4px;
+  padding: 1.25rem 1.5rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  min-height: 54px;
+  justify-content: center;
+  text-align: left;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.wizard-choice-card:hover {
+  border-color: rgba(184, 121, 59, 0.4);
+  background: rgba(184, 121, 59, 0.08);
+  transform: translateY(-2px);
+}
+
+.wizard-choice-card.selected {
+  border-color: var(--color-copper);
+  background: rgba(184, 121, 59, 0.15);
+  box-shadow: 0 0 20px rgba(184, 121, 59, 0.2);
+}
+
+.wizard-choice-card .choice-label {
+  font-family: var(--font-sans);
+  font-size: 1rem;
+  font-weight: 500;
+  color: var(--color-stone);
+}
+
+.wizard-choice-card .choice-meta {
+  font-family: var(--font-sans);
+  font-size: 0.8rem;
+  color: rgba(247, 243, 236, 0.55);
+}
+
+/* 4. Touch Targets & Scroll Chaining Containment */
+.property-detail-scroll-content,
+.booking-portal-content,
+.inquiry-drawer,
+.mobile-nav-panel {
+  overscroll-behavior: contain;
+  -webkit-overflow-scrolling: touch;
+}
+
+.audio-toggle,
+.close-drawer-btn,
+.close-overlay-btn,
+.close-lightbox-btn {
+  min-width: 44px;
+  min-height: 44px;
+}
+
+/* 5. Responsive Overrides for <= 768px */
+@media (max-width: 768px) {
+  .mobile-menu-btn {
+    display: flex;
+  }
+
+  .main-header {
+    padding: 0 1.5rem;
+  }
+
+  .header-actions {
+    gap: 1rem;
+  }
+
+  /* Prevent iOS Safari Automatic Zoom on Inputs */
+  .form-input,
+  .form-select,
+  .form-textarea,
+  .booking-date-input,
+  .booking-select-input,
+  .wizard-input-date {
+    font-size: 16px !important;
+  }
+
+  /* Bottom Content Clearance for Floating Booking Pill */
+  .property-page-main {
+    padding-bottom: 7.5rem;
+  }
+
+  .prop-booking-cta-bar {
+    margin-bottom: 2rem;
+  }
+}
+
+/* 6. Fine-grained Mobile Overrides for <= 480px */
+@media (max-width: 480px) {
+  .main-header {
+    padding: 0 1rem;
+    height: 70px;
+  }
+
+  .header-logo-container {
+    gap: 0.6rem;
+  }
+
+  .header-logo-svg {
+    width: 20px;
+    height: 24px;
+  }
+
+  .logo-title {
+    font-size: 1.15rem;
+  }
+
+  .logo-subtitle {
+    font-size: 0.5rem;
+    letter-spacing: 0.2em;
+  }
+
+  .header-actions {
+    gap: 0.6rem;
+  }
+
+  .inquire-btn {
+    padding: 0.5rem 1rem;
+    font-size: 0.7rem;
+    letter-spacing: 0.12em;
+  }
+
+  .prop-page-breadcrumb-bar {
+    padding: 5.5rem 1rem 1rem;
+  }
+
+  .property-page-main {
+    padding: 0 1rem 7.5rem;
+  }
+
+  .prop-hero-header {
+    padding: 0 1rem 1.5rem;
+  }
+
+  .prop-hero-title {
+    font-size: clamp(1.8rem, 7vw, 2.4rem);
+  }
+
+  .wizard-choices-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* 7. Narrow Viewport Protection for <= 380px */
+@media (max-width: 380px) {
+  .main-header .inquire-btn {
+    display: none;
+  }
+  
+  .header-actions {
+    gap: 0.4rem;
+  }
+}
+
+
 

@@ -4892,6 +4892,15 @@ a.property-card {
   min-height: 44px;
 }
 
+/* Accessible Keyboard Focus Indicators */
+.nav-link:focus-visible,
+.nav-item:focus-visible,
+.inquire-btn:focus-visible,
+.audio-toggle:focus-visible {
+  outline: 2px solid var(--color-copper);
+  outline-offset: 3px;
+}
+
 /* 5. Responsive Overrides for <= 768px */
 @media (max-width: 768px) {
   .mobile-menu-btn {
@@ -4910,6 +4919,8 @@ a.property-card {
   .form-input,
   .form-select,
   .form-textarea,
+  .partner-input,
+  .partner-textarea,
   .booking-date-input,
   .booking-select-input,
   .wizard-input-date {

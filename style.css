@@ -4334,3 +4334,190 @@ p {
   }
 }
 
+/* ==========================================================================
+   PHASE 2: DEDICATED PROPERTY PAGES & SEO EXTENSIONS
+   ========================================================================== */
+
+/* Ensure anchor property cards retain visual design without link styling */
+a.property-card {
+  text-decoration: none;
+  color: inherit;
+}
+
+/* Property Page Body & Container */
+.property-page-body {
+  background-color: var(--color-charcoal);
+  color: var(--color-ivory);
+  font-family: var(--font-sans);
+  min-height: 100vh;
+  position: relative;
+  overflow-x: hidden;
+}
+
+.prop-page-breadcrumb-bar {
+  position: relative;
+  z-index: 10;
+  padding: 6.5rem 2rem 1.5rem;
+  background: linear-gradient(to bottom, rgba(18, 23, 20, 0.98), rgba(18, 23, 20, 0.85));
+  border-bottom: 1px solid rgba(247, 243, 236, 0.05);
+}
+
+.breadcrumb-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  font-family: var(--font-sans);
+  font-size: 0.85rem;
+}
+
+.breadcrumb-inner .back-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--color-copper);
+  text-decoration: none;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  transition: opacity 0.3s ease;
+}
+
+.breadcrumb-inner .back-link:hover {
+  opacity: 0.8;
+}
+
+.crumb-separator {
+  color: rgba(247, 243, 236, 0.25);
+  font-size: 0.8rem;
+}
+
+.crumb-dest {
+  color: var(--color-stone);
+  opacity: 0.7;
+}
+
+.crumb-current {
+  color: var(--color-stone);
+  opacity: 0.95;
+  font-weight: 500;
+}
+
+.property-page-main {
+  position: relative;
+  z-index: 2;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 2rem 4rem;
+}
+
+.property-page-main .prop-hero {
+  border-radius: 4px;
+  overflow: hidden;
+  margin-top: 1.5rem;
+}
+
+.property-page-main .prop-intro-section,
+.property-page-main .prop-gallery-section,
+.property-page-main .prop-rooms-section,
+.property-page-main .prop-amenities-section,
+.property-page-main .prop-experiences-section,
+.property-page-main .prop-customize-section,
+.property-page-main .prop-map-section,
+.property-page-main .prop-reviews-section {
+  max-width: 100%;
+}
+
+.prop-direct-page-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.85rem 1.5rem;
+  font-family: var(--font-sans);
+  font-size: 0.85rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-stone);
+  border: 1px solid rgba(247, 243, 236, 0.15);
+  border-radius: 4px;
+  text-decoration: none;
+  background: rgba(30, 36, 32, 0.4);
+  transition: all 0.3s ease;
+}
+
+.prop-direct-page-btn:hover {
+  border-color: var(--color-copper);
+  color: var(--color-copper);
+  background: rgba(184, 121, 59, 0.1);
+}
+
+.prop-other-stays-section {
+  margin-top: 6rem;
+  padding-top: 4rem;
+  border-top: 1px solid rgba(247, 243, 236, 0.06);
+}
+
+/* 404 Page Styling */
+.not-found-body {
+  background-color: var(--color-charcoal);
+  color: var(--color-ivory);
+  font-family: var(--font-sans);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.not-found-wrap {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.not-found-header {
+  padding: 2rem;
+  display: flex;
+  justify-content: center;
+}
+
+.not-found-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 2rem;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.not-found-code {
+  font-family: var(--font-sans);
+  font-size: 0.85rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--color-copper);
+  margin-bottom: 1.5rem;
+}
+
+.not-found-title {
+  font-family: var(--font-serif);
+  font-size: clamp(2.2rem, 5vw, 3.5rem);
+  font-weight: 400;
+  color: var(--color-ivory);
+  line-height: 1.2;
+  margin-bottom: 1.5rem;
+}
+
+.not-found-desc {
+  font-family: var(--font-sans);
+  font-size: 1.05rem;
+  color: var(--color-stone);
+  opacity: 0.85;
+  line-height: 1.6;
+  margin-bottom: 2.5rem;
+}
+
+

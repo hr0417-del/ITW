@@ -5,7 +5,9 @@
   "type": "module",
   "scripts": {
     "dev": "vite --host",
-    "build": "vite build",
+    "generate": "node build-property-pages.cjs",
+    "build": "node build-property-pages.cjs && vite build",
+    "validate": "node validate_phase2.cjs && node verify_http_routes.cjs",
     "preview": "vite preview"
   },
   "devDependencies": {
